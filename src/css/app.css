@@ -22,11 +22,20 @@ a:hover { text-decoration: none;}
   margin: 10px;
   flex: auto !important;
   flex-grow: 0 !important;
+  cursor: pointer;
 }
 
 .card-deck .card-body {
   text-align: center;
   padding: 0 !important;
+}
+
+.card-back {
+  background-color: #303F9F;
+}
+
+.card-back img {
+  display: none;
 }
 
 /* ----- Footer ----- */

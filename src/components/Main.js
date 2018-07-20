@@ -1,5 +1,5 @@
 import React      from 'react';
-import CardDeck   from './CardDeck';
+import Card   from './Card';
 import { robots } from './../robots';
 
 const shuffle = (robots) => {
@@ -13,16 +13,26 @@ class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      shuffledBots: shuffle(robots)
-    }
+      shuffledBots: shuffle(robots),
+      isFaceUp: false
+    };
+    this.handleFlip = this.handleFlip.bind(this);
   }
 
   reShuffle(bots) {
     this.setState({ shuffledBots: shuffle(bots)});
   }
 
+  handleFlip(e, id) {
+    const {isFaceUp} = this.state;
+    e.preventDefault;
+    console.log('id', id);
+    this.setState({ isFaceUp: !isFaceUp })
+  }
+
   render() {
-    const {shuffledBots} = this.state;
+    const {shuffledBots, isFaceUp} = this.state;
+
 
     return (
       <main className="container-fluid">
@@ -32,7 +42,13 @@ class App extends React.Component {
           className="btn btn-raised btn-success">
           Shuffle
         </button>
-        <CardDeck robots={shuffledBots}/>
+        <div className="card-deck">
+          {shuffledBots.map((robot, i) => {
+            return(
+            <Card id={robot.id} i={i} isFaceUp={isFaceUp} handleFlip={this.handleFlip} />
+            );
+          })}
+        </div>
       </main>
     );
   }

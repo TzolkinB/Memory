@@ -1,17 +1,13 @@
 import React     from 'react';
 import PropTypes from 'prop-types';
-import Card      from './shared/Card';
+//import Card      from './Card';
 
 const CardDeck = props => {
-  const {robots} = props;
+  const {robots, isFaceUp, handleFlip} = props;
+
 
   return (
-    <div className="card-deck">
-      {robots.map((robot, i) => {
-        return(
-          <Card
-            key={i}
-            id={robot.id} />
+          </div>
         );
       })}
     </div>
