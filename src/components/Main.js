@@ -2,20 +2,37 @@ import React      from 'react';
 import CardDeck   from './CardDeck';
 import { robots } from './../robots';
 
+const shuffle = (robots) => {
+  robots.sort(() => {
+    return 0.5 - Math.random()
+  });
+  return robots;
+};
+
 class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      robots: robots
+      shuffledBots: shuffle(robots)
     }
   }
 
+  reShuffle(bots) {
+    this.setState({ shuffledBots: shuffle(bots)});
+  }
+
   render() {
-    const {searchTerm, robots} = this.state;
+    const {shuffledBots} = this.state;
 
     return (
       <main className="container-fluid">
-        <CardDeck robots={robots}/>
+        <button
+          type="button"
+          onClick={e => this.reShuffle(shuffledBots)}
+          className="btn btn-raised btn-success">
+          Shuffle
+        </button>
+        <CardDeck robots={shuffledBots}/>
       </main>
     );
   }
