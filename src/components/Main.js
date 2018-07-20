@@ -45,7 +45,11 @@ class App extends React.Component {
         <div className="card-deck">
           {shuffledBots.map((robot, i) => {
             return(
-            <Card id={robot.id} i={i} isFaceUp={isFaceUp} handleFlip={this.handleFlip} />
+              <div className='card' key={i} onClick={e => handleFlip(id)}>
+                <div className={`card-body ${isFaceUp ? '' : 'card-back'}`}>
+                  <img role='presentation' src={`https://robohash.org/${id}`} height="150" width="150" />
+                </div>
+              </div>
             );
           })}
         </div>
