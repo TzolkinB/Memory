@@ -14,24 +14,38 @@ class App extends React.Component {
     super(props)
     this.state = {
       shuffledBots: shuffle(robots),
-      isFaceUp: false
+      firstCard: null,
+      secondCard: null
     };
-    this.handleFlip = this.handleFlip.bind(this);
+    this.handleMatch = this.handleMatch.bind(this);
   }
 
   reShuffle(bots) {
     this.setState({ shuffledBots: shuffle(bots)});
   }
 
-  handleFlip(e, id) {
-    const {isFaceUp} = this.state;
-    e.preventDefault;
-    console.log('id', id);
-    this.setState({ isFaceUp: !isFaceUp })
+  handleMatch(id, i, isFaceUp) {
+    const {shuffledBots, firstCard, secondCard} = this.state;
+    console.log(id, i, isFaceUp);
+    //if(shuffledBots.id === id) {
+    //    this.setState({ isFaceUp: true });
+    //  }
+    if(!firstCard) {
+      this.setState({ firstCard: i })
+    }
   }
 
+  //getCard(id) {
+  //  for(let i=0; i < 2*this.NUM_IMAGES; i++) {
+  //    if (this.cards[i].id === id) {
+  //      return this.cards[i];
+  //    }
+  //  };
+  //}
+
   render() {
-    const {shuffledBots, isFaceUp} = this.state;
+    const {shuffledBots} = this.state;
+    let isFaceUp = false;
 
 
     return (
@@ -45,11 +59,7 @@ class App extends React.Component {
         <div className="card-deck">
           {shuffledBots.map((robot, i) => {
             return(
-              <div className='card' key={i} onClick={e => handleFlip(id)}>
-                <div className={`card-body ${isFaceUp ? '' : 'card-back'}`}>
-                  <img role='presentation' src={`https://robohash.org/${id}`} height="150" width="150" />
-                </div>
-              </div>
+              <Card robot={robot} i={i} isFaceUp={isFaceUp} handleFlip={this.handleMatch} />
             );
           })}
         </div>
@@ -59,3 +69,8 @@ class App extends React.Component {
 }
 
 export default App;
+              //<div className='card' key={i} onClick={e => handleFlip(id)}>
+              //  <div className={`card-body ${isFaceUp ? '' : 'card-back'}`}>
+              //    <img role='presentation' src={`https://robohash.org/${id}`} height="150" width="150" />
+              //  </div>
+              //</div>
