@@ -13,55 +13,37 @@ class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      shuffledBots: shuffle(robots),
+      shuffleBots: shuffle(robots),
       firstCard: null,
       secondCard: null
     };
-    this.handleMatch = this.handleMatch.bind(this);
   }
 
   reShuffle(bots) {
-    this.setState({ shuffledBots: shuffle(bots)});
+    this.setState({ shuffleBots: shuffle(bots)});
+    this.state.shuffleBots.forEach(bot => bot.isFaceUp = false);
   }
-
-  handleMatch(id, i, isFaceUp) {
-    const {shuffledBots, firstCard, secondCard} = this.state;
-    console.log(id, i, isFaceUp);
-    //if(shuffledBots.id === id) {
-    //    this.setState({ isFaceUp: true });
-    //  }
-    if(!firstCard) {
-      this.setState({ firstCard: i })
-    }
-  }
-
-  //getCard(id) {
-  //  for(let i=0; i < 2*this.NUM_IMAGES; i++) {
-  //    if (this.cards[i].id === id) {
-  //      return this.cards[i];
-  //    }
-  //  };
-  //}
 
   render() {
-    const {shuffledBots} = this.state;
-    let isFaceUp = false;
+    const {shuffleBots} = this.state;
 
+    const handleMatch = (id, index) => {
+      const {shuffleBots, firstCard, secondCard} = this.state;
+      this.setState({ firstCard: index });
+      console.log('fc2', firstCard);
+      return shuffleBots[index].isFaceUp = true;
+    }
 
     return (
       <main className="container-fluid">
         <button
           type="button"
-          onClick={e => this.reShuffle(shuffledBots)}
+          onClick={e => this.reShuffle(shuffleBots)}
           className="btn btn-raised btn-success">
           Shuffle
         </button>
         <div className="card-deck">
-          {shuffledBots.map((robot, i) => {
-            return(
-              <Card robot={robot} i={i} isFaceUp={isFaceUp} handleFlip={this.handleMatch} />
-            );
-          })}
+          <Card shuffleBots={shuffleBots} handleFlip={handleMatch} />
         </div>
       </main>
     );
