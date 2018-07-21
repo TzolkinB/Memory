@@ -30,8 +30,11 @@ class App extends React.Component {
     const handleMatch = (id, index) => {
       const {shuffleBots, firstCard, secondCard} = this.state;
       this.setState({ firstCard: index });
-      console.log('fc2', firstCard);
-      return shuffleBots[index].isFaceUp = true;
+      //let card = () =>  {shuffleBots[index].isFaceUp};
+      if(!shuffleBots[index].isFaceUp) {
+        return shuffleBots[index].isFaceUp = true;
+      }
+      return;
     }
 
     return (
@@ -51,8 +54,3 @@ class App extends React.Component {
 }
 
 export default App;
-              //<div className='card' key={i} onClick={e => handleFlip(id)}>
-              //  <div className={`card-body ${isFaceUp ? '' : 'card-back'}`}>
-              //    <img role='presentation' src={`https://robohash.org/${id}`} height="150" width="150" />
-              //  </div>
-              //</div>
