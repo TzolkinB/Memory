@@ -27,12 +27,38 @@ class App extends React.Component {
   render() {
     const {shuffleBots} = this.state;
 
-    const handleMatch = (id, index) => {
+    const handleFlip = (id, index) => {
       const {shuffleBots, firstCard, secondCard} = this.state;
-      this.setState({ firstCard: index });
-      //let card = () =>  {shuffleBots[index].isFaceUp};
-      if(!shuffleBots[index].isFaceUp) {
-        return shuffleBots[index].isFaceUp = true;
+      if(!firstCard) {
+        return(
+          this.setState({ firstCard: index }),
+          shuffleBots[index].isFaceUp = true
+        );
+      }
+      if(firstCard && !secondCard) {
+        return( 
+          this.setState({ secondCard: index }),
+          shuffleBots[index].isFaceUp = true
+        );
+        if(firstCard && secondCard) {
+          handleMatch()
+        };
+      }
+      console.log('aready faceup');
+      console.log(firstCard, secondCard);
+      return;
+    }
+
+    const handleMatch = () => {
+      const {shuffleBots, firstCard, secondCard} = this.state;
+      console.log('a', firstCard, secondCard);
+      if(firstCard != secondCard) {
+        return(
+          shuffleBots[firstCard].isFaceUp = false,
+          shuffleBots[secondCard].isFaceUp = false,
+          this.setState({ firstCard: null, secondCard: null })
+        );
+        console.log('reset', firstCard, secondCard);
       }
       return;
     }
@@ -46,7 +72,7 @@ class App extends React.Component {
           Shuffle
         </button>
         <div className="card-deck">
-          <Card shuffleBots={shuffleBots} handleFlip={handleMatch} />
+          <Card shuffleBots={shuffleBots} handleFlip={handleFlip} />
         </div>
       </main>
     );
