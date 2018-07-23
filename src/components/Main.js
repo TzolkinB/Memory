@@ -35,44 +35,49 @@ class App extends React.Component {
     const {shuffleBots, selected, firstCard, secondCard}= this.state;
 
     const handleFlip = (robot, index) => {
+      console.log('flip');
       let id = robot.id;
       shuffleBots[index].isFaceUp = true;
-      console.log('index', index, robot.id);
       if(selected && selected.length < 2) {
+        console.log('index', index, robot.id, selected.length);
         this.setState(
           (prevState) => ({
             selected: [...prevState.selected, id]
           })
         );
       }
-      if(selected.length === 2) {
-        console.log('checkMatch', selected);
-        if(selected[0] === selected[1]) {
-          console.log('they match!');
-          return;
+        if(selected.length === 2) {
+          console.log('checkMatch', selected, selected.length),
+          handleMatch()
         }
-        if(selected[0] != selected[1]) {
-          //this.setState({ selected: [] }),
-          shuffleBots.forEach(bot => bot.isFaceUp = false)
-        }
-      }
      return;
     }
 
     const handleMatch = () => {
-      const {shuffleBots, firstCard, secondCard} = this.state;
-      console.log('a', firstCard, secondCard);
-      if(shuffleBots[firstCard].id === shuffleBots[secondCard].id) {
-        console.log('matched');
-      }
-      return(
-        shuffleBots[firstCard].isFaceUp = false,
-        shuffleBots[secondCard].isFaceUp = false,
-        this.setState({ firstCard: null, secondCard: null }),
-        console.log('reset', firstCard, secondCard)
-      );
-      console.log('b', firstCard, secondCard);
+      const {shuffleBots, selected} = this.state;
+        if(selected[0] === selected[1]) {
+          console.log('they match!'),
+          this.setState({ selected: [] })
+        }
+        if(selected[0] != selected[1]) {
+          this.setState({ selected: [] }),
+          shuffleBots.forEach(bot => bot.isFaceUp = false)
+        }
     }
+
+    //  const {shuffleBots, firstCard, secondCard} = this.state;
+    //  console.log('a', firstCard, secondCard);
+    //  if(shuffleBots[firstCard].id === shuffleBots[secondCard].id) {
+    //    console.log('matched');
+    //  }
+    //  return(
+    //    shuffleBots[firstCard].isFaceUp = false,
+    //    shuffleBots[secondCard].isFaceUp = false,
+    //    this.setState({ firstCard: null, secondCard: null }),
+    //    console.log('reset', firstCard, secondCard)
+    //  );
+    //  console.log('b', firstCard, secondCard);
+    //}
 
     return (
       <main className="container-fluid">
