@@ -21,7 +21,7 @@ class App extends React.Component {
   }
 
   reShuffle(bots) {
-    const {shuffleBots, firstCard, secondCard} = this.state;
+    const {shuffleBots, firstCard, secondCard, selected} = this.state;
     this.setState({
       shuffleBots: shuffle(bots,
       firstCard: null,
@@ -35,46 +35,29 @@ class App extends React.Component {
     const {shuffleBots, selected, firstCard, secondCard}= this.state;
 
     const handleFlip = (robot, index) => {
+      let id = robot.id;
       shuffleBots[index].isFaceUp = true;
       console.log('index', index, robot.id);
-      //if(selected && selected.length < 2) {
-      //  console.log('id', robot.id);
-      //  this.setState({ selected: {...selected, robot} });
-      //}
-      //if(selected.length === 2) {
-      //  console.log('match', selected);
-      //}
-      //return;
-      // if(!firstCard) {
-      //   console.log('one');
-      //  this.setState({ firstCard: index });
-      // }
-      // if(firstCard && !secondCard) {
-      //   this.setState({ secondCard: index }, () => {
-      //     handleMatch();
-      //   })
-      // }
+      if(selected && selected.length < 2) {
+        this.setState(
+          (prevState) => ({
+            selected: [...prevState.selected, id]
+          })
+        );
+      }
+      if(selected.length === 2) {
+        console.log('checkMatch', selected);
+        if(selected[0] === selected[1]) {
+          console.log('they match!');
+          return;
+        }
+        if(selected[0] != selected[1]) {
+          //this.setState({ selected: [] }),
+          shuffleBots.forEach(bot => bot.isFaceUp = false)
+        }
+      }
      return;
     }
-selectNumber = (numberIndex) => {
-  if (this.state.gameStatus !== 'playing') {
-    return;
-  }
-  this.setState(
-    (prevState) => ({
-      selectedIds: [...prevState.selectedIds, numberIndex],
-      gameStatus: this.calcGameStatus([
-        ...prevState.selectedIds,
-        numberIndex,
-      ]),
-    }),
-    () => {
-      if (this.state.gameStatus !== 'playing') {
-        clearInterval(this.intervalId);
-      }
-    }
-  );
-};
 
     const handleMatch = () => {
       const {shuffleBots, firstCard, secondCard} = this.state;
