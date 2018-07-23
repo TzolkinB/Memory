@@ -15,52 +15,80 @@ class App extends React.Component {
     this.state = {
       shuffleBots: shuffle(robots),
       firstCard: null,
-      secondCard: null
+      secondCard: null,
+      selected: []
     };
   }
 
   reShuffle(bots) {
-    this.setState({ shuffleBots: shuffle(bots)});
-    this.state.shuffleBots.forEach(bot => bot.isFaceUp = false);
+    const {shuffleBots, firstCard, secondCard} = this.state;
+    this.setState({
+      shuffleBots: shuffle(bots,
+      firstCard: null,
+      secondCard: null,
+      selected: []
+    )});
+    shuffleBots.forEach(bot => bot.isFaceUp = false);
   }
 
   render() {
-    const {shuffleBots} = this.state;
+    const {shuffleBots, selected, firstCard, secondCard}= this.state;
 
-    const handleFlip = (id, index) => {
-      const {shuffleBots, firstCard, secondCard} = this.state;
-      if(!firstCard) {
-        return(
-          this.setState({ firstCard: index }),
-          shuffleBots[index].isFaceUp = true
-        );
-      }
-      if(firstCard && !secondCard) {
-        return( 
-          this.setState({ secondCard: index }),
-          shuffleBots[index].isFaceUp = true
-        );
-        if(firstCard && secondCard) {
-          handleMatch()
-        };
-      }
-      console.log('aready faceup');
-      console.log(firstCard, secondCard);
-      return;
+    const handleFlip = (robot, index) => {
+      shuffleBots[index].isFaceUp = true;
+      console.log('index', index, robot.id);
+      //if(selected && selected.length < 2) {
+      //  console.log('id', robot.id);
+      //  this.setState({ selected: {...selected, robot} });
+      //}
+      //if(selected.length === 2) {
+      //  console.log('match', selected);
+      //}
+      //return;
+      // if(!firstCard) {
+      //   console.log('one');
+      //  this.setState({ firstCard: index });
+      // }
+      // if(firstCard && !secondCard) {
+      //   this.setState({ secondCard: index }, () => {
+      //     handleMatch();
+      //   })
+      // }
+     return;
     }
+selectNumber = (numberIndex) => {
+  if (this.state.gameStatus !== 'playing') {
+    return;
+  }
+  this.setState(
+    (prevState) => ({
+      selectedIds: [...prevState.selectedIds, numberIndex],
+      gameStatus: this.calcGameStatus([
+        ...prevState.selectedIds,
+        numberIndex,
+      ]),
+    }),
+    () => {
+      if (this.state.gameStatus !== 'playing') {
+        clearInterval(this.intervalId);
+      }
+    }
+  );
+};
 
     const handleMatch = () => {
       const {shuffleBots, firstCard, secondCard} = this.state;
       console.log('a', firstCard, secondCard);
-      if(firstCard != secondCard) {
-        return(
-          shuffleBots[firstCard].isFaceUp = false,
-          shuffleBots[secondCard].isFaceUp = false,
-          this.setState({ firstCard: null, secondCard: null })
-        );
-        console.log('reset', firstCard, secondCard);
+      if(shuffleBots[firstCard].id === shuffleBots[secondCard].id) {
+        console.log('matched');
       }
-      return;
+      return(
+        shuffleBots[firstCard].isFaceUp = false,
+        shuffleBots[secondCard].isFaceUp = false,
+        this.setState({ firstCard: null, secondCard: null }),
+        console.log('reset', firstCard, secondCard)
+      );
+      console.log('b', firstCard, secondCard);
     }
 
     return (
