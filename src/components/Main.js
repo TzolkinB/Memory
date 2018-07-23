@@ -38,7 +38,7 @@ class App extends React.Component {
       console.log('flip');
       let id = robot.id;
       shuffleBots[index].isFaceUp = true;
-      if(selected && selected.length < 2) {
+      if(selected && selected.length <= 1) {
         console.log('index', index, robot.id, selected.length);
         this.setState(
           (prevState) => ({
@@ -46,23 +46,30 @@ class App extends React.Component {
           })
         );
       }
-        if(selected.length === 2) {
+      if(selected.length === 1) {
           console.log('checkMatch', selected, selected.length),
+      setTimeout(() => {
           handleMatch()
+      }, 500);
         }
      return;
     }
 
     const handleMatch = () => {
       const {shuffleBots, selected} = this.state;
+      setTimeout(() => {
+        console.log('0', selected[0]);
+        console.log('1', selected[1]);
         if(selected[0] === selected[1]) {
           console.log('they match!'),
           this.setState({ selected: [] })
         }
         if(selected[0] != selected[1]) {
-          this.setState({ selected: [] }),
-          shuffleBots.forEach(bot => bot.isFaceUp = false)
+         //resets all cards to face down, need to exclude the ones that match 
+          shuffleBots.forEach(bot => bot.isFaceUp = false),
+          this.setState({ selected: [] })
         }
+      }, 500);
     }
 
     //  const {shuffleBots, firstCard, secondCard} = this.state;
