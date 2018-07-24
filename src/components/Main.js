@@ -14,21 +14,30 @@ class App extends React.Component {
     super(props)
     this.state = {
       shuffleBots: shuffle(robots),
-      selected: []
+      selected: [],
+      bluePlayer: {
+        active: true,
+        matches: 0
+      },
+      redPlayer: {
+        active: false,
+        matches: 0
+      }
     };
   }
 
   reShuffle(bots) {
-    const {shuffleBots, selected} = this.state;
+    const {shuffleBots, selected, bluePlayer} = this.state;
+    //set defaultState/ initial state instead of repeating
     this.setState({
       shuffleBots: shuffle(bots),
-      selected: []
+      selected: [],
     });
     shuffleBots.forEach(bot => bot.isFaceUp = false);
   }
 
   render() {
-    const {shuffleBots, selected}= this.state;
+    const {shuffleBots, selected, bluePlayer, redPlayer}= this.state;
 
     const handleFlip = (robot, index) => {
       console.log('flip');
@@ -51,10 +60,15 @@ class App extends React.Component {
     }
 
     const handleMatch = () => {
-      const {shuffleBots, selected} = this.state;
+      const {shuffleBots, selected, bluePlayer, redPlayer} = this.state;
       if(selected[0] === selected[1]) {
         console.log('they match!')
-        this.setState({ selected: [] })
+        if(bluePlayer.active === true){
+          bluePlayer.matches++
+        }
+        if(redPlayer.active === true){
+          redPlayer.matches++
+        }
       }
       if(selected[0] != selected[1]) {
        //resets all cards to face down, need to exclude the ones that match 
@@ -68,18 +82,36 @@ class App extends React.Component {
             return bot.isFaceUp = false;
           }
         })
-        this.setState({ selected: [] })
       }
+      bluePlayer.active = !bluePlayer.active,
+      redPlayer.active = !bluePlayer.active,
+      this.setState({ selected: [], bluePlayer, redPlayer })
     }
 
     return (
       <main className="container-fluid">
-        <button
-          type="button"
-          onClick={e => this.reShuffle(shuffleBots)}
-          className="btn btn-raised btn-success">
-          Shuffle
-        </button>
+        <div className=" d-flex justify-content-between">
+          <button
+            type="button"
+            onClick={e => this.reShuffle(shuffleBots)}
+            className="btn btn-raised btn-success mt-3">
+            Shuffle
+          </button>
+          <table>
+            <thead>
+              <tr>
+                <th>Blue Player</th>
+                <th>Red Player</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{bluePlayer.matches}</td>
+                <td>{redPlayer.matches}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <div className="card-deck">
           <Card shuffleBots={shuffleBots} handleFlip={handleFlip} />
         </div>
