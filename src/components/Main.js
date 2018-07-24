@@ -1,5 +1,6 @@
 import React      from 'react';
-import Card   from './Card';
+import Modal      from './shared/Modal';
+import Card       from './Card';
 import { robots } from './../robots';
 
 const shuffle = (robots) => {
@@ -27,13 +28,25 @@ class App extends React.Component {
   }
 
   reShuffle(bots) {
-    const {shuffleBots, selected, bluePlayer} = this.state;
-    //set defaultState/ initial state instead of repeating
+    const {
+      shuffleBots, selected, bluePlayer,
+      redPlayer
+    }= this.state;
+    
     this.setState({
-      shuffleBots: shuffle(bots),
+      shuffleBots: shuffle(robots),
       selected: [],
+      bluePlayer: {
+        active: true,
+        matches: 0
+      },
+      redPlayer: {
+        active: false,
+        matches: 0
+      }
     });
-    shuffleBots.forEach(bot => bot.isFaceUp = false);
+    $('#modal').modal('hide'),
+    shuffleBots.forEach(bot => bot.isFaceUp = false)
   }
 
   playerInfo() {
@@ -44,15 +57,15 @@ class App extends React.Component {
   }
 
   render() {
-    const {shuffleBots, selected, bluePlayer, redPlayer}= this.state;
-
+    const {
+      shuffleBots, selected, bluePlayer,
+      redPlayer
+    }= this.state;
 
     const handleFlip = (robot, index) => {
-      console.log('flip');
       let id = robot.id;
       shuffleBots[index].isFaceUp = true;
       if(selected && selected.length <= 1) {
-        console.log('index', index, robot.id, selected.length);
         this.setState(
           (prevState) => ({
             selected: [...prevState.selected, id]
@@ -77,6 +90,7 @@ class App extends React.Component {
         if(redPlayer.active === true){
           redPlayer.matches++
         }
+        checkWinner();
       }
       if(selected[0] != selected[1]) {
        //resets all cards to face down, need to exclude the ones that match 
@@ -96,12 +110,28 @@ class App extends React.Component {
       this.setState({ selected: [], bluePlayer, redPlayer })
     }
 
+    const checkWinner = () => {
+      const {bluePlayer, redPlayer} = this.state;
+      console.log(bluePlayer.matches, redPlayer.matches);
+      if(bluePlayer.matches === 3 && redPlayer.matches === 3) {
+        console.log('its a tie!');
+      }
+      if(bluePlayer.matches === 4) {
+        console.log('blue wins');
+      }
+      if(redPlayer.matches === 4) {
+        console.log('red wins');
+      }
+      return;
+    };
+
     return (
       <main className="container-fluid">
         <div className="info d-flex justify-content-between mt-4">
           <button
             type="button"
-            onClick={e => this.reShuffle(shuffleBots)}
+            data-toggle="modal"
+            data-target="#modal"
             className="btn btn-raised btn-success">
             Restart
           </button>
@@ -124,6 +154,12 @@ class App extends React.Component {
         <div className="card-deck">
           <Card shuffleBots={shuffleBots} handleFlip={handleFlip} />
         </div>
+        <Modal 
+          closeText="Cancel"
+          confirmText="Yes"
+          handleClick={e => this.reShuffle(shuffleBots)}>
+          <p>Are you sure you want to reshuffle and restart the game?</p>
+        </Modal>
       </main>
     );
   }
