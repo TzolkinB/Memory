@@ -4,7 +4,7 @@ html {
 }
 
 body { 
-  margin-bottom: 160px;
+  margin-bottom: 140px;
   background-color: #f5f5f5;
 }
 
@@ -19,6 +19,10 @@ a:hover { text-decoration: none;}
   margin: 0 50px;
 }
 
+.info .mobile-stats {
+  display: none;
+}
+
 .player-text {
   font-size: x-large;
   font-weight: bold;
@@ -26,7 +30,7 @@ a:hover { text-decoration: none;}
 
 /* ----- Cards ----- */
 .card-deck {
-  margin-left: 3%;
+  margin-left: 3.5%;
 }
 
 .card-deck .card {
@@ -73,8 +77,9 @@ footer a:visited {
   }
 
   .info button {
-    font-size: small;
+    font-size: medium;
     height: 50px;
+    margin-left: 5px;
   }
 
   .player-text {
@@ -84,20 +89,25 @@ footer a:visited {
   }
 
   .info table {
-    margin-top: 30px;
+    display: none;
+  }
+
+  .info .mobile-stats {
+    display: inline;
   }
 
   .card-deck {
     flex-flow: row wrap;
+    margin-left: 0;
   }
   
   .card-deck .card {
-    width: 47%;
-    height: 140px;
+    width: 30%;
+    height: 110px;
   }
 
   .card-body img {
-    height: 125px;
-    width: 125px;
+    height: 100px;
+    width: 100px;
   }
 }

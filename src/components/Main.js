@@ -4,8 +4,9 @@ import Modal      from './shared/Modal';
 import Card       from './Card';
 import { robots } from './../robots';
 
-
 const shuffle = (robots) => {
+  // use Fisher-Yates for truly random but for code test
+  // short code might outweight whether or not results truly random
   robots.sort(() => {
     return 0.5 - Math.random()
   });
@@ -85,7 +86,6 @@ class App extends React.Component {
     const handleMatch = () => {
       const {shuffleBots, selected, bluePlayer, redPlayer} = this.state;
       if(selected[0] === selected[1]) {
-        console.log('they match!')
         if(bluePlayer.active === true){
           bluePlayer.matches++
         }
@@ -95,7 +95,7 @@ class App extends React.Component {
         checkWinner();
       }
       if(selected[0] != selected[1]) {
-       //resets all cards to face down, need to exclude the ones that match 
+        //resets all cards to face down, except ones that match 
         let a = selected[0];
         let b = selected[1];
         shuffleBots.forEach(bot => {
@@ -114,17 +114,13 @@ class App extends React.Component {
 
     const checkWinner = () => {
       const {bluePlayer, redPlayer} = this.state;
-      console.log(bluePlayer.matches, redPlayer.matches);
       if(bluePlayer.matches === 3 && redPlayer.matches === 3) {
-        console.log('its a tie!');
         Alert.warning('It is a tie!')
       }
       if(bluePlayer.matches === 4) {
-        console.log('blue wins');
         Alert.info('Blue Player Wins!')
       }
       if(redPlayer.matches === 4) {
-        console.log('red wins');
         Alert.error('Red Player Wins!')
       }
       return;
@@ -155,6 +151,14 @@ class App extends React.Component {
               </tr>
             </tbody>
           </table>
+          <div className="mobile-stats mt-4 pr-2">
+            <p className="text-info d-inline font-weight-bold pr-3">
+              Blue Player: {bluePlayer.matches}
+            </p>
+            <p className="text-danger d-inline font-weight-bold">
+              Red Player: {redPlayer.matches}
+            </p>
+          </div>
         </div>
         <div className="card-deck">
           <Card shuffleBots={shuffleBots} handleFlip={handleFlip} />

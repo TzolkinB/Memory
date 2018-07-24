@@ -43,7 +43,7 @@ module.exports = {
         use: [{
           loader: 'file-loader',
           options: {
-            name: 'prototypes/misuite/amar/local/[path][name].[ext]' //full file path required for firebase
+            name: 'prototypes/[path][name].[ext]' //full file path required for firebase
           }
         }],
       },

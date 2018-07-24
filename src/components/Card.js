@@ -19,7 +19,8 @@ const Card = props => {
 };
 
 Card.propTypes = {
-	id: PropTypes.number
+	shuffleBots: PropTypes.array.isRequired,
+  handleFlip: PropTypes.func.isRequired
 };
 
 export default Card;

@@ -25302,7 +25302,7 @@ exports = module.exports = __webpack_require__(13)(false);
 
 
 // module
-exports.push([module.i, "html { \n  position: relative;\n  min-height: 100%;\n}\n\nbody { \n  margin-bottom: 160px;\n  background-color: #f5f5f5;\n}\n\na:hover { text-decoration: none;}\n\n/* ---- App Bar ---- */\n.bg-primary { \n  background: #ff6f00!important;\n}\n\n.info {\n  margin: 0 50px;\n}\n\n.player-text {\n  font-size: x-large;\n  font-weight: bold;\n}\n\n/* ----- Cards ----- */\n.card-deck {\n  margin-left: 3%;\n}\n\n.card-deck .card {\n  width: 23%;\n  height: 175px;\n  margin: 5px;\n  flex: auto !important;\n  flex-grow: 0 !important;\n  cursor: pointer;\n}\n\n.card-deck .card-body {\n  text-align: center;\n  padding: 0 !important;\n}\n\n.card-back {\n  background-color: #303F9F;\n}\n\n.card-back img {\n  display: none;\n}\n\n/* ----- Footer ----- */\nfooter {\n  position: absolute;\n  bottom: 0;\n  width: 100%;\n  height: 140px;\n  padding: 30px;\n  text-align: center;\n  background: #505060;\n}\n\nfooter a:visited {\n  color: white;\n}\n", ""]);
+exports.push([module.i, "html { \n  position: relative;\n  min-height: 100%;\n}\n\nbody { \n  margin-bottom: 160px;\n  background-color: #f5f5f5;\n}\n\na:hover { text-decoration: none;}\n\n/* ---- App Bar ---- */\n.bg-primary { \n  background: #ff6f00!important;\n}\n\n.info {\n  margin: 0 50px;\n}\n\n.player-text {\n  font-size: x-large;\n  font-weight: bold;\n}\n\n/* ----- Cards ----- */\n.card-deck {\n  margin-left: 3%;\n}\n\n.card-deck .card {\n  width: 23%;\n  height: 175px;\n  margin: 5px;\n  flex: auto !important;\n  flex-grow: 0 !important;\n  cursor: pointer;\n}\n\n.card-body {\n  text-align: center;\n  padding: 0 !important;\n}\n\n.card-back {\n  background-color: #303F9F;\n}\n\n.card-back img {\n  display: none;\n}\n\n/* ----- Footer ----- */\nfooter {\n  position: absolute;\n  bottom: 0;\n  width: 100%;\n  height: 100px;\n  padding: 30px;\n  text-align: center;\n  background: #505060;\n}\n\nfooter a:visited {\n  color: white;\n}\n\n/*  Small devices (portrait phones, less than 576px ) */\n@media (max-width: 576px) {\n  .info {\n    margin: 0;\n  }\n\n  .info button {\n    font-size: small;\n    height: 50px;\n  }\n\n  .player-text {\n    right: 25px;\n    font-size: large;\n    position: absolute;\n  }\n\n  .info table {\n    margin-top: 30px;\n  }\n\n  .card-deck {\n    flex-flow: row wrap;\n  }\n  \n  .card-deck .card {\n    width: 47%;\n    height: 140px;\n  }\n\n  .card-body img {\n    height: 125px;\n    width: 125px;\n  }\n}\n", ""]);
 
 // exports
 
@@ -25436,23 +25436,6 @@ var AppBar = function AppBar() {
           { className: 'text-white pl-3 font-weight-light' },
           'Memory Game'
         )
-      ),
-      _react2.default.createElement(
-        'button',
-        {
-          className: 'navbar-toggler',
-          type: 'button',
-          'data-toggle': 'collapse',
-          'data-target': '#navbarSupportedContent',
-          'aria-controls': 'navbarSupportedContent',
-          'aria-expanded': 'false',
-          'aria-label': 'Toggle navigation' },
-        _react2.default.createElement('span', { className: 'navbar-toggler-icon' })
-      ),
-      _react2.default.createElement(
-        'div',
-        { className: 'collapse navbar-collapse justify-content-end', id: 'navbarSupportedContent' },
-        _react2.default.createElement('ul', { className: 'navbar-nav' })
       )
     )
   );
@@ -25534,7 +25517,7 @@ var Growl = function Growl() {
     stack: true,
     offset: 75,
     position: 'top-right',
-    timeout: 500000,
+    timeout: 4000,
     effect: 'slide'
   });
 };
