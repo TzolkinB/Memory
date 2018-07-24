@@ -15,11 +15,24 @@ a:hover { text-decoration: none;}
   background: #ff6f00!important;
 }
 
+.info {
+  margin: 0 50px;
+}
+
+.player-text {
+  font-size: x-large;
+  font-weight: bold;
+}
+
 /* ----- Cards ----- */
+.card-deck {
+  margin-left: 3%;
+}
+
 .card-deck .card {
-  width: 24%;
+  width: 23%;
   height: 175px;
-  margin: 10px;
+  margin: 5px;
   flex: auto !important;
   flex-grow: 0 !important;
   cursor: pointer;

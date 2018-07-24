@@ -36,8 +36,16 @@ class App extends React.Component {
     shuffleBots.forEach(bot => bot.isFaceUp = false);
   }
 
+  playerInfo() {
+    if(this.state.bluePlayer.active) {
+      return <p className="player-text text-info">Blue Player's Turn</p>;
+    }
+    return <p className="player-text text-danger">Red Player's Turn</p>;
+  }
+
   render() {
     const {shuffleBots, selected, bluePlayer, redPlayer}= this.state;
+
 
     const handleFlip = (robot, index) => {
       console.log('flip');
@@ -90,18 +98,19 @@ class App extends React.Component {
 
     return (
       <main className="container-fluid">
-        <div className=" d-flex justify-content-between">
+        <div className="info d-flex justify-content-between mt-4">
           <button
             type="button"
             onClick={e => this.reShuffle(shuffleBots)}
-            className="btn btn-raised btn-success mt-3">
-            Shuffle
+            className="btn btn-raised btn-success">
+            Restart
           </button>
+          {this.playerInfo()}
           <table>
             <thead>
               <tr>
-                <th>Blue Player</th>
-                <th>Red Player</th>
+                <th className="text-info pr-3">Blue Player</th>
+                <th className="text-danger">Red Player</th>
               </tr>
             </thead>
             <tbody>
