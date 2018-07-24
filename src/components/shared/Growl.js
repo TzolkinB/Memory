@@ -11,7 +11,7 @@ const Growl = () => {
       stack
       offset={75}
       position="top-right"
-      timeout={500000}
+      timeout={4000}
       effect="slide"
     />
   );
