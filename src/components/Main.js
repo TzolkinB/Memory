@@ -57,12 +57,12 @@ class App extends React.Component {
 
     const handleMatch = () => {
       const {shuffleBots, selected} = this.state;
+      console.log('selected', selected);
+      const i = 0;
       setTimeout(() => {
-        console.log('0', selected[0]);
-        console.log('1', selected[1]);
         if(selected[0] === selected[1]) {
-          console.log('they match!'),
-          this.setState({ selected: [] })
+          console.log('they match!')
+          //this.setState({ selected: [] })
         }
         if(selected[0] != selected[1]) {
          //resets all cards to face down, need to exclude the ones that match 
