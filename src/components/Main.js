@@ -23,16 +23,14 @@ class App extends React.Component {
   reShuffle(bots) {
     const {shuffleBots, firstCard, secondCard, selected} = this.state;
     this.setState({
-      shuffleBots: shuffle(bots,
-      firstCard: null,
-      secondCard: null,
+      shuffleBots: shuffle(bots),
       selected: []
-    )});
+    });
     shuffleBots.forEach(bot => bot.isFaceUp = false);
   }
 
   render() {
-    const {shuffleBots, selected, firstCard, secondCard}= this.state;
+    const {shuffleBots, selected}= this.state;
 
     const handleFlip = (robot, index) => {
       console.log('flip');
@@ -62,29 +60,25 @@ class App extends React.Component {
       setTimeout(() => {
         if(selected[0] === selected[1]) {
           console.log('they match!')
-          //this.setState({ selected: [] })
-        }
-        if(selected[0] != selected[1]) {
-         //resets all cards to face down, need to exclude the ones that match 
-          shuffleBots.forEach(bot => bot.isFaceUp = false),
           this.setState({ selected: [] })
         }
+        //if(selected[0] != selected[1]) {
+        // //resets all cards to face down, need to exclude the ones that match 
+        //  shuffleBots.forEach(bot => bot.isFaceUp = false),
+        //  this.setState({ selected: [] })
+        //}
+        let a = selected[0];
+        let b = selected[1];
+        shuffleBots.map(bot => {
+          if(shuffleBots.id === a) {
+            return(
+              bot.isFaceUp = false
+            );
+          }
+          this.setState({ selected: [] })
+        });
       }, 500);
     }
-
-    //  const {shuffleBots, firstCard, secondCard} = this.state;
-    //  console.log('a', firstCard, secondCard);
-    //  if(shuffleBots[firstCard].id === shuffleBots[secondCard].id) {
-    //    console.log('matched');
-    //  }
-    //  return(
-    //    shuffleBots[firstCard].isFaceUp = false,
-    //    shuffleBots[secondCard].isFaceUp = false,
-    //    this.setState({ firstCard: null, secondCard: null }),
-    //    console.log('reset', firstCard, secondCard)
-    //  );
-    //  console.log('b', firstCard, secondCard);
-    //}
 
     return (
       <main className="container-fluid">
