@@ -14,14 +14,12 @@ class App extends React.Component {
     super(props)
     this.state = {
       shuffleBots: shuffle(robots),
-      firstCard: null,
-      secondCard: null,
       selected: []
     };
   }
 
   reShuffle(bots) {
-    const {shuffleBots, firstCard, secondCard, selected} = this.state;
+    const {shuffleBots, selected} = this.state;
     this.setState({
       shuffleBots: shuffle(bots),
       selected: []
@@ -45,38 +43,33 @@ class App extends React.Component {
         );
       }
       if(selected.length === 1) {
-          console.log('checkMatch', selected, selected.length),
-      setTimeout(() => {
+        setTimeout(() => {
           handleMatch()
-      }, 500);
-        }
+        }, 500);
+      }
      return;
     }
 
     const handleMatch = () => {
       const {shuffleBots, selected} = this.state;
-      console.log('selected', selected);
-      const i = 0;
-      setTimeout(() => {
-        if(selected[0] === selected[1]) {
-          console.log('they match!')
-          this.setState({ selected: [] })
-        }
-        if(selected[0] != selected[1]) {
-         //resets all cards to face down, need to exclude the ones that match 
-          let a = selected[0];
-          let b = selected[1];
-          shuffleBots.forEach(bot => {
-            if(a === bot.id && bot.isFaceUp == true) {
-              return bot.isFaceUp = false;
-            }
-            if(b === bot.id && bot.isFaceUp == true) {
-              return bot.isFaceUp = false;
-            }
-          })
-          this.setState({ selected: [] })
-        }
-      }, 500);
+      if(selected[0] === selected[1]) {
+        console.log('they match!')
+        this.setState({ selected: [] })
+      }
+      if(selected[0] != selected[1]) {
+       //resets all cards to face down, need to exclude the ones that match 
+        let a = selected[0];
+        let b = selected[1];
+        shuffleBots.forEach(bot => {
+          if(a === bot.id && bot.isFaceUp == true) {
+            return bot.isFaceUp = false;
+          }
+          if(b === bot.id && bot.isFaceUp == true) {
+            return bot.isFaceUp = false;
+          }
+        })
+        this.setState({ selected: [] })
+      }
     }
 
     return (
