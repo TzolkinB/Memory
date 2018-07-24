@@ -62,21 +62,20 @@ class App extends React.Component {
           console.log('they match!')
           this.setState({ selected: [] })
         }
-        //if(selected[0] != selected[1]) {
-        // //resets all cards to face down, need to exclude the ones that match 
-        //  shuffleBots.forEach(bot => bot.isFaceUp = false),
-        //  this.setState({ selected: [] })
-        //}
-        let a = selected[0];
-        let b = selected[1];
-        shuffleBots.map(bot => {
-          if(shuffleBots.id === a) {
-            return(
-              bot.isFaceUp = false
-            );
-          }
+        if(selected[0] != selected[1]) {
+         //resets all cards to face down, need to exclude the ones that match 
+          let a = selected[0];
+          let b = selected[1];
+          shuffleBots.forEach(bot => {
+            if(a === bot.id && bot.isFaceUp == true) {
+              return bot.isFaceUp = false;
+            }
+            if(b === bot.id && bot.isFaceUp == true) {
+              return bot.isFaceUp = false;
+            }
+          })
           this.setState({ selected: [] })
-        });
+        }
       }, 500);
     }
 
