@@ -9,11 +9,10 @@ const Growl = () => {
   return (
     <Alert
       stack
-      offset={150}
+      offset={75}
       position="top-right"
-      timeout={5000}
+      timeout={500000}
       effect="slide"
-      contentTemplate={CustomTemplate}
     />
   );
 };

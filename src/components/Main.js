@@ -1,7 +1,9 @@
 import React      from 'react';
+import Alert      from 'react-s-alert';
 import Modal      from './shared/Modal';
 import Card       from './Card';
 import { robots } from './../robots';
+
 
 const shuffle = (robots) => {
   robots.sort(() => {
@@ -115,12 +117,15 @@ class App extends React.Component {
       console.log(bluePlayer.matches, redPlayer.matches);
       if(bluePlayer.matches === 3 && redPlayer.matches === 3) {
         console.log('its a tie!');
+        Alert.warning('It is a tie!')
       }
       if(bluePlayer.matches === 4) {
         console.log('blue wins');
+        Alert.info('Blue Player Wins!')
       }
       if(redPlayer.matches === 4) {
         console.log('red wins');
+        Alert.error('Red Player Wins!')
       }
       return;
     };

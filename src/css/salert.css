@@ -1,25 +1,9 @@
-.s-alert-success,
-.s-alert-error {
-  background-color: #fff;
-  color: #000;
-}
-
-.s-alert-success > div > i {
-  color: #4CAF50;
-}
-
-.s-alert-error > div > i {
-  color: #E74C3C;
-}
-
-.s-alert-close:before,
-.s-alert-close:after {
-  background: #000 !important;
-}
-
 .s-alert-box-inner {
   display: flex;
   padding-right: 15px;
+  width: max-content;
+  font-size: xx-large;
+  margin: 10px;
 }
 
 .s-alert-box.s-alert-show {
