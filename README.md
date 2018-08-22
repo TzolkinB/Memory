@@ -1,6 +1,8 @@
 # Juego de Memoria
 A memory game with robots!
 
+- Bootstrap Material Design, React, Webpack, ES6
+
 ## Installation
 Install all of the npm dependencies:
 
