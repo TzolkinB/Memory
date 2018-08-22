@@ -1,7 +1,12 @@
 {
   "name": "memory-game",
   "version": "1.0.0",
+  "description": "Memory/Concentration card game.",
   "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TzolkinB/Memory"
+  },
   "scripts": {
     "start": "webpack-dev-server --open",
     "build": "webpack",
@@ -9,7 +14,7 @@
     "deploy": "firebase deploy"
   },
   "author": "Kimberly Bell",
-  "license": "UNLICENSED",
+  "license": "ISC",
   "dependencies": {
     "prop-types": "^15.6.2",
     "react": "^16.3.1",
