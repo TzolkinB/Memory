@@ -1,11 +1,11 @@
 {
   "name": "memory-game",
   "version": "1.0.0",
-  "description": "A memory card game with two players and a winner is declared",
+  "description": "Memory/Concentration card game.",
   "main": "app.js",
-  "respository": {
+  "repository": {
     "type": "git",
-    "url": "https://github.com/TzolkinB/memory"
+    "url": "https://github.com/TzolkinB/Memory"
   },
   "scripts": {
     "start": "webpack-dev-server --open",
@@ -13,14 +13,14 @@
     "deploy": "firebase deploy"
   },
   "author": "Kimberly Bell",
-  "license": "UNLICENSED",
+  "license": "ISC",
   "dependencies": {
     "prop-types": "^15.6.2",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-s-alert": "^1.4.1",
+    "react-s-alert": "^1.4.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

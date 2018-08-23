@@ -19,6 +19,7 @@ class App extends React.Component {
     this.state = {
       shuffleBots: shuffle(robots),
       selected: [],
+      index: [],
       bluePlayer: {
         active: true,
         matches: 0
@@ -33,12 +34,13 @@ class App extends React.Component {
   reShuffle(bots) {
     const {
       shuffleBots, selected, bluePlayer,
-      redPlayer
+      redPlayer, index
     }= this.state;
     
     this.setState({
       shuffleBots: shuffle(robots),
       selected: [],
+      index: [],
       bluePlayer: {
         active: true,
         matches: 0
@@ -62,30 +64,58 @@ class App extends React.Component {
   render() {
     const {
       shuffleBots, selected, bluePlayer,
-      redPlayer
+      redPlayer, index
     }= this.state;
 
-    const handleFlip = (robot, index) => {
+    const handleFlip = (robot, i) => {
       let id = robot.id;
-      shuffleBots[index].isFaceUp = true;
+      shuffleBots[i].isFaceUp = true;
       if(selected && selected.length <= 1) {
         this.setState(
           (prevState) => ({
-            selected: [...prevState.selected, id]
+            selected: [...prevState.selected, id],
+            index: [...prevState.index, i]
           })
         );
       }
       if(selected.length === 1) {
         setTimeout(() => {
-          handleMatch()
+          doubleClick()
         }, 500);
       }
      return;
     }
 
+    const doubleClick = () => {
+      console.log('dc');
+      const { selected, index } = this.state;
+      console.log('selected', selected);
+      console.log('index', index);
+
+      if(index[0] === index[1]) {
+        console.log(prevState);
+        return(
+          this.setState( prevState => ({
+            ...prevState,
+            selected: selected.filter(selection => selection != selected[1]),
+            index: index.filter(selection => selection != selected[1]),
+          }))
+        );
+        console.log('s', selected);
+        console.log('i', index);
+      }
+      return handleMatch();
+    }
+
     const handleMatch = () => {
-      const {shuffleBots, selected, bluePlayer, redPlayer} = this.state;
+      console.log('match');
+      const {
+        shuffleBots, selected, bluePlayer,
+        redPlayer, index
+      } = this.state;
+      
       if(selected[0] === selected[1]) {
+        console.log('here');
         if(bluePlayer.active === true){
           bluePlayer.matches++
         }
@@ -109,7 +139,9 @@ class App extends React.Component {
       }
       bluePlayer.active = !bluePlayer.active,
       redPlayer.active = !bluePlayer.active,
-      this.setState({ selected: [], bluePlayer, redPlayer })
+      this.setState({
+        selected: [], index: [], bluePlayer, redPlayer
+      })
     }
 
     const checkWinner = () => {
