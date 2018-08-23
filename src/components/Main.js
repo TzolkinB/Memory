@@ -31,12 +31,6 @@ class App extends React.Component {
     };
   }
 
-  //componentDidUpdate(prevState) {
-  //  if (prevState.selected != this.state.selected) {
-  //    console.log(true);
-  //  }
-  //}
-
   reShuffle(bots) {
     const {
       shuffleBots, selected, bluePlayer,
