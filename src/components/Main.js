@@ -70,7 +70,8 @@ class App extends React.Component {
     const handleFlip = (robot, i) => {
       let id = robot.id;
       shuffleBots[i].isFaceUp = true;
-      if(selected && selected.length <= 1) {
+      if(selected && (i != index[0])) {
+        console.log(selected.length)
         this.setState(
           (prevState) => ({
             selected: [...prevState.selected, id],
@@ -79,33 +80,15 @@ class App extends React.Component {
         );
       }
       if(selected.length === 1) {
+        console.log('l', selected.length);
         setTimeout(() => {
-          doubleClick()
+          return handleMatch();
         }, 500);
       }
      return;
     }
 
-    const doubleClick = () => {
-      console.log('dc');
-      const { selected, index } = this.state;
-      console.log('selected', selected);
-      console.log('index', index);
-
-      if(index[0] === index[1]) {
-        console.log(prevState);
-        return(
-          this.setState( prevState => ({
-            ...prevState,
-            selected: selected.filter(selection => selection != selected[1]),
-            index: index.filter(selection => selection != selected[1]),
-          }))
-        );
-        console.log('s', selected);
-        console.log('i', index);
-      }
-      return handleMatch();
-    }
+    // when selected.length is 0, line 73, still console.log's "match"
 
     const handleMatch = () => {
       console.log('match');
@@ -114,6 +97,7 @@ class App extends React.Component {
         redPlayer, index
       } = this.state;
       
+
       if(selected[0] === selected[1]) {
         console.log('here');
         if(bluePlayer.active === true){
