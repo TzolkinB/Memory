@@ -5,8 +5,7 @@ import Card       from './Card';
 import { robots } from './../robots';
 
 const shuffle = (robots) => {
-  // use Fisher-Yates for truly random but for code test
-  // short code might outweight whether or not results truly random
+  // use Fisher-Yates for truly random but for simple game it's fine
   robots.sort(() => {
     return 0.5 - Math.random()
   });
