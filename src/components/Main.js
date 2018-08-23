@@ -31,6 +31,12 @@ class App extends React.Component {
     };
   }
 
+  //componentDidUpdate(prevState) {
+  //  if (prevState.selected != this.state.selected) {
+  //    console.log(true);
+  //  }
+  //}
+
   reShuffle(bots) {
     const {
       shuffleBots, selected, bluePlayer,
@@ -68,80 +74,60 @@ class App extends React.Component {
     }= this.state;
 
     const handleFlip = (robot, i) => {
-      let id = robot.id;
+      const id = robot.id;
+      const cleanClick = i != index[0];
       shuffleBots[i].isFaceUp = true;
-      if(selected && selected.length <= 1) {
-        this.setState(
-          (prevState) => ({
-            selected: [...prevState.selected, id],
-            index: [...prevState.index, i]
-          })
-        );
+      
+      if(cleanClick) {
+        this.setState({
+          selected: [...selected, id],
+          index: [...index, i]
+        });
       }
       if(selected.length === 1) {
         setTimeout(() => {
-          doubleClick()
+          handleMatch();
         }, 500);
       }
-     return;
-    }
-
-    const doubleClick = () => {
-      console.log('dc');
-      const { selected, index } = this.state;
-      console.log('selected', selected);
-      console.log('index', index);
-
-      if(index[0] === index[1]) {
-        console.log(prevState);
-        return(
-          this.setState( prevState => ({
-            ...prevState,
-            selected: selected.filter(selection => selection != selected[1]),
-            index: index.filter(selection => selection != selected[1]),
-          }))
-        );
-        console.log('s', selected);
-        console.log('i', index);
-      }
-      return handleMatch();
+      return;
     }
 
     const handleMatch = () => {
-      console.log('match');
       const {
         shuffleBots, selected, bluePlayer,
         redPlayer, index
       } = this.state;
-      
-      if(selected[0] === selected[1]) {
-        console.log('here');
-        if(bluePlayer.active === true){
-          bluePlayer.matches++
-        }
-        if(redPlayer.active === true){
-          redPlayer.matches++
-        }
-        checkWinner();
-      }
-      if(selected[0] != selected[1]) {
-        //resets all cards to face down, except ones that match 
-        let a = selected[0];
-        let b = selected[1];
-        shuffleBots.forEach(bot => {
-          if(a === bot.id && bot.isFaceUp == true) {
-            return bot.isFaceUp = false;
+
+      if (selected.length === 2) {
+        if(selected[0] === selected[1]) {
+          if(bluePlayer.active === true){
+            bluePlayer.matches++
           }
-          if(b === bot.id && bot.isFaceUp == true) {
-            return bot.isFaceUp = false;
+          if(redPlayer.active === true){
+            redPlayer.matches++
           }
+          checkWinner();
+        }
+        if(selected[0] != selected[1]) {
+          //resets all cards to face down, except ones that match 
+          let a = selected[0];
+          let b = selected[1];
+          shuffleBots.forEach(bot => {
+            if(a === bot.id && bot.isFaceUp == true) {
+              return bot.isFaceUp = false;
+            }
+            if(b === bot.id && bot.isFaceUp == true) {
+              return bot.isFaceUp = false;
+            }
+          })
+        }
+        bluePlayer.active = !bluePlayer.active,
+        redPlayer.active = !bluePlayer.active,
+        this.setState({
+          selected: [], index: [], bluePlayer, redPlayer
         })
       }
-      bluePlayer.active = !bluePlayer.active,
-      redPlayer.active = !bluePlayer.active,
-      this.setState({
-        selected: [], index: [], bluePlayer, redPlayer
-      })
+      console.log('l', selected.length);
     }
 
     const checkWinner = () => {
