@@ -12,22 +12,24 @@ const shuffle = (robots) => {
   return robots;
 };
 
+const defaultState = {
+  shuffleBots: shuffle(robots),
+  selected: [],
+  index: [],
+  bluePlayer: {
+    active: true,
+    matches: 0
+  },
+  redPlayer: {
+    active: false,
+    matches: 0
+  }
+};
+
 class App extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      shuffleBots: shuffle(robots),
-      selected: [],
-      index: [],
-      bluePlayer: {
-        active: true,
-        matches: 0
-      },
-      redPlayer: {
-        active: false,
-        matches: 0
-      }
-    };
+    this.state = defaultState;
     this.handleFlip = this.handleFlip.bind(this);
   }
 
@@ -37,6 +39,8 @@ class App extends React.Component {
       redPlayer, index
     }= this.state;
     
+    console.log(selected, index);
+    console.log(bluePlayer, redPlayer);
     this.setState({
       shuffleBots: shuffle(robots),
       selected: [],
