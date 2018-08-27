@@ -14,7 +14,7 @@ const shuffle = (robots) => {
 
 class App extends React.Component {
   constructor(props){
-    super(props)
+    super(props);
     this.state = {
       shuffleBots: shuffle(robots),
       selected: [],
@@ -28,6 +28,7 @@ class App extends React.Component {
         matches: 0
       }
     };
+    this.handleFlip = this.handleFlip.bind(this);
   }
 
   reShuffle(bots) {
@@ -60,82 +61,87 @@ class App extends React.Component {
     return <p className="player-text text-danger">Red Player's Turn</p>;
   }
 
-  render() {
+  handleFlip(robot, i) {
     const {
       shuffleBots, selected, bluePlayer,
       redPlayer, index
     }= this.state;
 
-    const handleFlip = (robot, i) => {
-      const id = robot.id;
-      const cleanClick = i != index[0];
-      shuffleBots[i].isFaceUp = true;
-      
-      if(cleanClick) {
-        this.setState({
-          selected: [...selected, id],
-          index: [...index, i]
-        });
-      }
-      if(selected.length === 1) {
-        setTimeout(() => {
-          handleMatch();
-        }, 500);
-      }
-      return;
+    const id = robot.id;
+    const cleanClick = i != index[0];
+    shuffleBots[i].isFaceUp = true;
+    
+    if(cleanClick) {
+      this.setState({
+        selected: [...selected, id],
+        index: [...index, i]
+      });
     }
+    if(selected.length === 1) {
+      setTimeout(() => {
+        this.handleMatch();
+      }, 500);
+    }
+    return;
+  }
 
-    const handleMatch = () => {
-      const {
-        shuffleBots, selected, bluePlayer,
-        redPlayer, index
-      } = this.state;
+  handleMatch() {
+    const {
+      shuffleBots, selected, bluePlayer,
+      redPlayer, index
+    } = this.state;
 
-      if (selected.length === 2) {
-        if(selected[0] === selected[1]) {
-          if(bluePlayer.active === true){
-            bluePlayer.matches++
-          }
-          if(redPlayer.active === true){
-            redPlayer.matches++
-          }
-          checkWinner();
+    if (selected.length === 2) {
+      if(selected[0] === selected[1]) {
+        if(bluePlayer.active === true){
+          bluePlayer.matches++
         }
-        if(selected[0] != selected[1]) {
-          //resets all cards to face down, except ones that match 
-          let a = selected[0];
-          let b = selected[1];
-          shuffleBots.forEach(bot => {
-            if(a === bot.id && bot.isFaceUp == true) {
-              return bot.isFaceUp = false;
-            }
-            if(b === bot.id && bot.isFaceUp == true) {
-              return bot.isFaceUp = false;
-            }
-          })
+        if(redPlayer.active === true){
+          redPlayer.matches++
         }
-        bluePlayer.active = !bluePlayer.active,
-        redPlayer.active = !bluePlayer.active,
-        this.setState({
-          selected: [], index: [], bluePlayer, redPlayer
+        this.checkWinner();
+      }
+      if(selected[0] != selected[1]) {
+        //resets all cards to face down, except ones that match 
+        let a = selected[0];
+        let b = selected[1];
+        shuffleBots.forEach(bot => {
+          if(a === bot.id && bot.isFaceUp == true) {
+            return bot.isFaceUp = false;
+          }
+          if(b === bot.id && bot.isFaceUp == true) {
+            return bot.isFaceUp = false;
+          }
         })
       }
-      console.log('l', selected.length);
+      bluePlayer.active = !bluePlayer.active,
+      redPlayer.active = !bluePlayer.active,
+      this.setState({
+        selected: [], index: [], bluePlayer, redPlayer
+      })
     }
+    console.log('l', selected.length);
+  }
 
-    const checkWinner = () => {
-      const {bluePlayer, redPlayer} = this.state;
-      if(bluePlayer.matches === 3 && redPlayer.matches === 3) {
-        Alert.warning('It is a tie!')
-      }
-      if(bluePlayer.matches === 4) {
-        Alert.info('Blue Player Wins!')
-      }
-      if(redPlayer.matches === 4) {
-        Alert.error('Red Player Wins!')
-      }
-      return;
-    };
+  checkWinner() {
+    const {bluePlayer, redPlayer} = this.state;
+
+    if(bluePlayer.matches === 3 && redPlayer.matches === 3) {
+      Alert.warning('It is a tie!')
+    }
+    if(bluePlayer.matches === 4) {
+      Alert.info('Blue Player Wins!')
+    }
+    if(redPlayer.matches === 4) {
+      Alert.error('Red Player Wins!')
+    }
+    return;
+  };
+
+  render() {
+    const {
+      shuffleBots, bluePlayer, redPlayer
+    }= this.state;
 
     return (
       <main className="container-fluid">
@@ -172,7 +178,7 @@ class App extends React.Component {
           </div>
         </div>
         <div className="card-deck">
-          <Card shuffleBots={shuffleBots} handleFlip={handleFlip} />
+          <Card shuffleBots={shuffleBots} handleFlip={this.handleFlip} />
         </div>
         <Modal 
           closeText="Cancel"
