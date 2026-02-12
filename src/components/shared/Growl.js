@@ -1,9 +1,9 @@
-import React from 'react';
-import Alert from 'react-s-alert';
+import React from "react";
+import Alert from "react-s-alert";
 
-import 'react-s-alert/dist/s-alert-default.css';
-import 'react-s-alert/dist/s-alert-css-effects/slide.css';
-import 'Style/salert.css';
+import "react-s-alert/dist/s-alert-default.css";
+import "react-s-alert/dist/s-alert-css-effects/slide.css";
+import "../../css/salert.css";
 
 const Growl = () => {
   return (
@@ -34,4 +34,4 @@ export const CustomTemplate = ({
       <span className="s-alert-close" onClick={handleClose}></span>
     </div>
   );
-}
+};
