@@ -2,7 +2,7 @@ import React from "react";
 import { HashRouter } from "react-router-dom";
 import { render } from "react-dom";
 
-import ".css/app.css";
+import "./css/app.css";
 
 import AppBar from "./components/shared/AppBar";
 import Footer from "./components/shared/Footer";
