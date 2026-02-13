@@ -1,6 +1,6 @@
-import React    from 'react';
+import React from 'react';
 
-const AppBar = () => {
+const AppBar = (): React.JSX.Element => {
   return(
     <div>
       <nav className="navbar navbar-expand-lg text-white bg-primary navbar-dark">

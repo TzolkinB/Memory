@@ -1,8 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { type Robot } from '../robots';
 
-const Card = props => {
-  const {shuffleBots, handleFlip} = props;
+interface CardProps {
+  shuffleBots: Robot[];
+  handleFlip: (robot: Robot, index: number) => void;
+}
+
+const Card: React.FC<CardProps> = ({ shuffleBots, handleFlip }) => {
   return (
     <React.Fragment>
       {shuffleBots.map((robot, i) => {
@@ -16,11 +20,6 @@ const Card = props => {
       })}
     </React.Fragment>
   );
-};
-
-Card.propTypes = {
-	shuffleBots: PropTypes.array.isRequired,
-  handleFlip: PropTypes.func.isRequired
 };
 
 export default Card;
