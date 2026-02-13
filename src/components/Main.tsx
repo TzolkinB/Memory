@@ -49,8 +49,6 @@ class App extends React.Component<{}, AppState> {
   reShuffle(): void {
     const { shuffleBots, selected, bluePlayer, redPlayer, index } = this.state;
 
-    console.log(selected, index);
-    console.log(bluePlayer, redPlayer);
     this.setState({
       shuffleBots: shuffle([...robots]),
       selected: [],

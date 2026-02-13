@@ -7,7 +7,7 @@ A memory game with robots!
 - React 18
 - TypeScript
 - Vite
-- React Router v6
+- React Router v7
 - React Hot Toast
 - Bootstrap Material Design
 
@@ -19,9 +19,9 @@ Install all of the npm dependencies:
 
 ## Usage
 
-To start the client in development run:
+To start the client in development run (standard Vite script):
 
-    $ npm run dev // common vite script
+    $ npm run dev
 
 This command will open a new window running at a default port of 5173 in your browser at
 [http://localhost:5173](http://localhost:5173).
