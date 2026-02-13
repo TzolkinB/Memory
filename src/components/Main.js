@@ -1,13 +1,13 @@
-import React      from 'react';
-import Alert      from 'react-s-alert';
-import Modal      from './shared/Modal';
-import Card       from './Card';
-import { robots } from './../robots';
+import React from "react";
+import toast from "react-hot-toast";
+import Modal from "./shared/Modal";
+import Card from "./Card";
+import { robots } from "./../robots";
 
 const shuffle = (robots) => {
   // use Fisher-Yates for truly random but for simple game it's fine
   robots.sort(() => {
-    return 0.5 - Math.random()
+    return 0.5 - Math.random();
   });
   return robots;
 };
@@ -18,27 +18,24 @@ const defaultState = {
   index: [],
   bluePlayer: {
     active: true,
-    matches: 0
+    matches: 0,
   },
   redPlayer: {
     active: false,
-    matches: 0
-  }
+    matches: 0,
+  },
 };
 
 class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = defaultState;
     this.handleFlip = this.handleFlip.bind(this);
   }
 
   reShuffle(bots) {
-    const {
-      shuffleBots, selected, bluePlayer,
-      redPlayer, index
-    }= this.state;
-    
+    const { shuffleBots, selected, bluePlayer, redPlayer, index } = this.state;
+
     console.log(selected, index);
     console.log(bluePlayer, redPlayer);
     this.setState({
@@ -47,41 +44,38 @@ class App extends React.Component {
       index: [],
       bluePlayer: {
         active: true,
-        matches: 0
+        matches: 0,
       },
       redPlayer: {
         active: false,
-        matches: 0
-      }
+        matches: 0,
+      },
     });
-    $('#modal').modal('hide'),
-    shuffleBots.forEach(bot => bot.isFaceUp = false)
+    ($("#modal").modal("hide"),
+      shuffleBots.forEach((bot) => (bot.isFaceUp = false)));
   }
 
   playerInfo() {
-    if(this.state.bluePlayer.active) {
+    if (this.state.bluePlayer.active) {
       return <p className="player-text text-info">Blue Player's Turn</p>;
     }
     return <p className="player-text text-danger">Red Player's Turn</p>;
   }
 
   handleFlip(robot, i) {
-    const {
-      shuffleBots, selected, bluePlayer,
-      redPlayer, index
-    }= this.state;
+    const { shuffleBots, selected, bluePlayer, redPlayer, index } = this.state;
 
     const id = robot.id;
     const cleanClick = i != index[0];
     shuffleBots[i].isFaceUp = true;
-    
-    if(cleanClick) {
+
+    if (cleanClick) {
       this.setState({
         selected: [...selected, id],
-        index: [...index, i]
+        index: [...index, i],
       });
     }
-    if(selected.length === 1) {
+    if (selected.length === 1) {
       setTimeout(() => {
         this.handleMatch();
       }, 500);
@@ -90,62 +84,60 @@ class App extends React.Component {
   }
 
   handleMatch() {
-    const {
-      shuffleBots, selected, bluePlayer,
-      redPlayer, index
-    } = this.state;
+    const { shuffleBots, selected, bluePlayer, redPlayer, index } = this.state;
 
     if (selected.length === 2) {
-      if(selected[0] === selected[1]) {
-        if(bluePlayer.active === true){
-          bluePlayer.matches++
+      if (selected[0] === selected[1]) {
+        if (bluePlayer.active === true) {
+          bluePlayer.matches++;
         }
-        if(redPlayer.active === true){
-          redPlayer.matches++
+        if (redPlayer.active === true) {
+          redPlayer.matches++;
         }
         this.checkWinner();
       }
-      if(selected[0] != selected[1]) {
-        //resets all cards to face down, except ones that match 
+      if (selected[0] != selected[1]) {
+        //resets all cards to face down, except ones that match
         let a = selected[0];
         let b = selected[1];
-        shuffleBots.forEach(bot => {
-          if(a === bot.id && bot.isFaceUp == true) {
-            return bot.isFaceUp = false;
+        shuffleBots.forEach((bot) => {
+          if (a === bot.id && bot.isFaceUp == true) {
+            return (bot.isFaceUp = false);
           }
-          if(b === bot.id && bot.isFaceUp == true) {
-            return bot.isFaceUp = false;
+          if (b === bot.id && bot.isFaceUp == true) {
+            return (bot.isFaceUp = false);
           }
-        })
+        });
       }
-      bluePlayer.active = !bluePlayer.active,
-      redPlayer.active = !bluePlayer.active,
-      this.setState({
-        selected: [], index: [], bluePlayer, redPlayer
-      })
+      ((bluePlayer.active = !bluePlayer.active),
+        (redPlayer.active = !bluePlayer.active),
+        this.setState({
+          selected: [],
+          index: [],
+          bluePlayer,
+          redPlayer,
+        }));
     }
-    console.log('l', selected.length);
+    console.log("l", selected.length);
   }
 
   checkWinner() {
-    const {bluePlayer, redPlayer} = this.state;
+    const { bluePlayer, redPlayer } = this.state;
 
-    if(bluePlayer.matches === 3 && redPlayer.matches === 3) {
-      Alert.warning('It is a tie!')
+    if (bluePlayer.matches === 3 && redPlayer.matches === 3) {
+      toast("It is a tie!", { icon: "🤝" });
     }
-    if(bluePlayer.matches === 4) {
-      Alert.info('Blue Player Wins!')
+    if (bluePlayer.matches === 4) {
+      toast.success("Blue Player Wins!", { icon: "💙" });
     }
-    if(redPlayer.matches === 4) {
-      Alert.error('Red Player Wins!')
+    if (redPlayer.matches === 4) {
+      toast.error("Red Player Wins!", { icon: "❤️" });
     }
     return;
-  };
+  }
 
   render() {
-    const {
-      shuffleBots, bluePlayer, redPlayer
-    }= this.state;
+    const { shuffleBots, bluePlayer, redPlayer } = this.state;
 
     return (
       <main className="container-fluid">
@@ -154,7 +146,8 @@ class App extends React.Component {
             type="button"
             data-toggle="modal"
             data-target="#modal"
-            className="btn btn-raised btn-success">
+            className="btn btn-raised btn-success"
+          >
             Restart
           </button>
           {this.playerInfo()}
@@ -184,10 +177,11 @@ class App extends React.Component {
         <div className="card-deck">
           <Card shuffleBots={shuffleBots} handleFlip={this.handleFlip} />
         </div>
-        <Modal 
+        <Modal
           closeText="Cancel"
           confirmText="Yes"
-          handleClick={e => this.reShuffle(shuffleBots)}>
+          handleClick={(e) => this.reShuffle(shuffleBots)}
+        >
           <p>Are you sure you want to reshuffle and restart the game?</p>
         </Modal>
       </main>
