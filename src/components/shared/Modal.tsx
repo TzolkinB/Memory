@@ -7,13 +7,20 @@ interface ModalProps {
   handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
+const getJQuery = () => (window as any).$;
+
 class Modal extends React.Component<ModalProps> {
+  private handleModalShown = () => {
+    getJQuery()("#databaseYear").trigger("focus");
+  };
+
   componentDidMount() {
-    (window as any).$("#modal").on("shown.bs.modal", function () {
-      (window as any).$("#databaseYear").trigger("focus");
-    });
+    getJQuery()("#modal").on("shown.bs.modal", this.handleModalShown);
   }
 
+  componentWillUnmount() {
+    getJQuery()("#modal").off("shown.bs.modal", this.handleModalShown);
+  }
   render(): React.JSX.Element {
     const { children, closeText, confirmText, handleClick } = this.props;
 
