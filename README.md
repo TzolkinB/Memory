@@ -12,6 +12,36 @@ A memory game with robots!
 - Bootstrap Material Design
 - Playwright (E2E testing)
 
+### Features
+
+- 🤖 12 unique robot avatars from RoboHash
+- 👥 Two-player turn-based gameplay
+- 🎯 Score tracking for both players
+- 🔄 Game restart functionality
+- 📱 Responsive design with Bootstrap Material Design
+- ✨ Toast notifications for game events
+
+## How to Play
+
+1. Blue player goes first
+2. Click any card to flip it face-up
+3. Click a second card to find a match
+4. If cards match, you score a point and continue your turn
+5. If cards don't match, they flip back and it's the other player's turn
+6. Game ends when all 6 pairs are found
+7. Player with the most matches wins!
+
+---
+
+## Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+## Environment Variables
+
+- `VITE_SHUFFLE_SEED` - When set during build, creates deterministic card shuffling for testing (automatically set to `42` in test builds)
+
 ## Installation
 
 Install all of the npm dependencies:
@@ -70,3 +100,19 @@ Hosted on Firebase
 [https://memory-game1234.firebaseapp.com/](https://memory-game1234.firebaseapp.com/)
 
     $ npm run deploy or firebase deploy
+
+## Project Structure
+
+src/
+├── components/
+│ ├── Card.tsx # Individual card component
+│ ├── Main.tsx # Main game container
+│ ├── Main.reducer.ts # Game state management
+│ └── shared/ # Reusable components
+├── css/ # Styling
+└── app.tsx # App entry point
+tests/
+├── seed.spec.ts # Base test setup
+├── core/ # Core game mechanic tests
+│ └── utils.ts # Test utilities
+└── edge-cases/ # Edge case testing
