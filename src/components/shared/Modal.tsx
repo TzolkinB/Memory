@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface ModalProps {
   children: React.ReactNode;
@@ -11,15 +11,15 @@ const getJQuery = () => (window as any).$;
 
 class Modal extends React.Component<ModalProps> {
   private handleModalShown = () => {
-    getJQuery()("#databaseYear").trigger("focus");
+    getJQuery()('#databaseYear').trigger('focus');
   };
 
   componentDidMount() {
-    getJQuery()("#modal").on("shown.bs.modal", this.handleModalShown);
+    getJQuery()('#modal').on('shown.bs.modal', this.handleModalShown);
   }
 
   componentWillUnmount() {
-    getJQuery()("#modal").off("shown.bs.modal", this.handleModalShown);
+    getJQuery()('#modal').off('shown.bs.modal', this.handleModalShown);
   }
   render(): React.JSX.Element {
     const { children, closeText, confirmText, handleClick } = this.props;
