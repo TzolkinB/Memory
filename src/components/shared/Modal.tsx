@@ -21,17 +21,10 @@ const getJQuery = (): JQueryLike | undefined => {
 };
 
 class Modal extends React.Component<ModalProps> {
-  private handleModalShown = () => {
-    getJQuery()?.('#databaseYear').trigger('focus');
-  };
-
   componentDidMount() {
-    getJQuery()?.('#modal').on('shown.bs.modal', this.handleModalShown);
+    getJQuery()?.('#modal').trigger('focus');
   }
 
-  componentWillUnmount() {
-    getJQuery()?.('#modal').off('shown.bs.modal', this.handleModalShown);
-  }
   render(): React.JSX.Element {
     const { children, closeText, confirmText, handleClick } = this.props;
 

@@ -4,9 +4,11 @@ import type { GameAction, GameOutcome, GameState } from './Main.types';
 const TOTAL_PAIRS = robots.length / 2;
 
 const shuffle = <T>(items: T[]): T[] => {
-  items.sort(() => {
-    return 0.5 - Math.random();
-  });
+  // Fisher–Yates shuffle
+  for (let i = items.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [items[i], items[j]] = [items[j], items[i]];
+  }
 
   return items;
 };
