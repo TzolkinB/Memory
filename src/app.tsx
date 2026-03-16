@@ -1,14 +1,14 @@
-import { HashRouter } from "react-router-dom";
-import { createRoot } from "react-dom/client";
-import { Toaster } from "react-hot-toast";
+import { HashRouter } from 'react-router-dom';
+import { createRoot } from 'react-dom/client';
+import { Toaster } from 'react-hot-toast';
 
-import "./css/app.css";
+import './css/app.css';
 
-import AppBar from "./components/shared/AppBar";
-import Footer from "./components/shared/Footer";
-import Main from "./components/Main";
+import AppBar from './components/shared/AppBar';
+import Footer from './components/shared/Footer';
+import Main from './components/Main';
 
-const App = (): React.JSX.Element => (
+export const App = (): React.JSX.Element => (
   <div>
     <AppBar />
     <Main />
@@ -17,18 +17,18 @@ const App = (): React.JSX.Element => (
       toastOptions={{
         success: {
           style: {
-            background: "blue",
-            color: "white",
+            background: 'blue',
+            color: 'white',
           },
         },
         error: {
           style: {
-            background: "red",
-            color: "white",
+            background: 'red',
+            color: 'white',
           },
         },
         style: {
-          padding: "5rem 5rem",
+          padding: '5rem 5rem',
         },
       }}
     />
@@ -36,9 +36,9 @@ const App = (): React.JSX.Element => (
   </div>
 );
 
-const root = createRoot(document.getElementById("memory-game")!);
+const root = createRoot(document.getElementById('memory-game')!);
 root.render(
   <HashRouter basename="/">
     <App />
-  </HashRouter>,
+  </HashRouter>
 );
