@@ -35,6 +35,7 @@ class Modal extends React.Component<ModalProps> {
         tabIndex={-1}
         role="dialog"
         aria-hidden="true"
+        data-testid="restart-modal"
       >
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">

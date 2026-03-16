@@ -86,8 +86,8 @@ const App = (): React.JSX.Element => {
           </thead>
           <tbody>
             <tr>
-              <td>{state.blueMatches}</td>
-              <td>{state.redMatches}</td>
+              <td data-testid="score-blue">{state.blueMatches}</td>
+              <td data-testid="score-red">{state.redMatches}</td>
             </tr>
           </tbody>
         </table>
@@ -101,7 +101,9 @@ const App = (): React.JSX.Element => {
         </div>
       </div>
       <div className="card-deck">
-        <Card shuffleBots={state.shuffleBots} handleFlip={handleFlip} />
+        <div data-testid="card-grid">
+          <Card shuffleBots={state.shuffleBots} handleFlip={handleFlip} />
+        </div>
       </div>
       <Modal
         closeText="Cancel"
