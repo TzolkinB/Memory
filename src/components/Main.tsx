@@ -100,10 +100,8 @@ const App = (): React.JSX.Element => {
           </p>
         </div>
       </div>
-      <div className="card-deck">
-        <div data-testid="card-grid">
-          <Card shuffleBots={state.shuffleBots} handleFlip={handleFlip} />
-        </div>
+      <div className="card-deck" data-testid="card-grid">
+        <Card shuffleBots={state.shuffleBots} handleFlip={handleFlip} />
       </div>
       <Modal
         closeText="Cancel"

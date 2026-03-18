@@ -1,18 +1,20 @@
-html { 
+html {
   position: relative;
   min-height: 100%;
 }
 
-body { 
+body {
   margin-bottom: 140px;
   background-color: #f5f5f5;
 }
 
-a:hover { text-decoration: none;}
+a:hover {
+  text-decoration: none;
+}
 
 /* ---- App Bar ---- */
-.bg-primary { 
-  background: #ff6f00!important;
+.bg-primary {
+  background: #ff6f00 !important;
 }
 
 .info {
@@ -48,7 +50,7 @@ a:hover { text-decoration: none;}
 }
 
 .card-back {
-  background-color: #303F9F;
+  background-color: #303f9f;
 }
 
 .card-back img {
@@ -100,7 +102,7 @@ footer a:visited {
     flex-flow: row wrap;
     margin-left: 0;
   }
-  
+
   .card-deck .card {
     width: 30%;
     height: 110px;
