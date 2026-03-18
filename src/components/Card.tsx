@@ -1,4 +1,5 @@
 import React from 'react';
+import { MDBCard, MDBCardBody } from 'mdb-react-ui-kit';
 import { type Robot } from '../robots';
 
 interface CardProps {
@@ -11,8 +12,7 @@ const Card: React.FC<CardProps> = ({ shuffleBots, handleFlip }) => {
     <React.Fragment>
       {shuffleBots.map((robot, i) => {
         return (
-          <div
-            className="card"
+          <MDBCard
             key={i}
             data-testid="card"
             data-face-up={robot.isFaceUp}
@@ -22,15 +22,15 @@ const Card: React.FC<CardProps> = ({ shuffleBots, handleFlip }) => {
             tabIndex={0}
             onClick={() => handleFlip(robot, i)}
           >
-            <div className={`card-body ${robot.isFaceUp ? '' : 'card-back'}`}>
+            <MDBCardBody className={robot.isFaceUp ? '' : 'card-back'}>
               <img
                 role="presentation"
                 src={`https://robohash.org/${robot.id}`}
                 height="150"
                 width="150"
               />
-            </div>
-          </div>
+            </MDBCardBody>
+          </MDBCard>
         );
       })}
     </React.Fragment>
