@@ -113,6 +113,6 @@ src/
 └── app.tsx # App entry point
 tests/
 ├── seed.spec.ts # Base test setup
+├── utils.ts # Test utilities
 ├── core/ # Core game mechanic tests
-│ └── utils.ts # Test utilities
 └── edge-cases/ # Edge case testing
