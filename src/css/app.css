@@ -83,11 +83,11 @@ footer a:visited {
     margin-left: 5px;
   }
 
-  .player-text {
+  /* .player-text {
     right: 25px;
     font-size: large;
     position: absolute;
-  }
+  } */
 
   .info table {
     display: none;
