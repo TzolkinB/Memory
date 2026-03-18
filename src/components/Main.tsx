@@ -1,16 +1,10 @@
-import React, { useCallback, useEffect, useReducer } from 'react';
+import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import toast from 'react-hot-toast';
 import { MDBBtn } from 'mdb-react-ui-kit';
 import Modal from './shared/Modal';
 import Card from './Card';
 import { type Robot } from '../robots';
 import { createInitialState, gameReducer } from './Main.reducer';
-import { type JQueryLike } from './Main.types';
-
-const getJQuery = (): JQueryLike | undefined => {
-  const windowWithJQuery = window as Window & { $?: JQueryLike };
-  return windowWithJQuery.$;
-};
 
 const App = (): React.JSX.Element => {
   const [state, dispatch] = useReducer(
@@ -18,6 +12,7 @@ const App = (): React.JSX.Element => {
     undefined,
     createInitialState
   );
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     if (state.status !== 'checking') {
@@ -63,18 +58,21 @@ const App = (): React.JSX.Element => {
 
   const reShuffle = useCallback((): void => {
     dispatch({ type: 'RESHUFFLE' });
-    getJQuery()?.('#modal').modal('hide');
+    setModalOpen(false);
+  }, []);
+
+  const openModal = useCallback(() => {
+    setModalOpen(true);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setModalOpen(false);
   }, []);
 
   return (
     <main className="container-fluid">
       <div className="info d-flex justify-content-between mt-4">
-        <MDBBtn
-          data-toggle="modal"
-          data-target="#modal"
-          color="success"
-          className="btn-raised"
-        >
+        <MDBBtn onClick={openModal} color="success" className="btn-raised">
           Restart
         </MDBBtn>
         {playerInfo()}
@@ -105,6 +103,8 @@ const App = (): React.JSX.Element => {
         <Card shuffleBots={state.shuffleBots} handleFlip={handleFlip} />
       </div>
       <Modal
+        open={modalOpen}
+        onClose={closeModal}
         closeText="Cancel"
         confirmText="Yes"
         handleClick={() => reShuffle()}
