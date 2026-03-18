@@ -10,16 +10,25 @@ const Card: React.FC<CardProps> = ({ shuffleBots, handleFlip }) => {
   return (
     <React.Fragment>
       {shuffleBots.map((robot, i) => {
-        return(
+        return (
           <div
-            className='card'
+            className="card"
             key={i}
             data-testid="card"
             data-face-up={robot.isFaceUp}
-            onClick={()=> handleFlip(robot, i)}
+            role="button"
+            aria-expanded={robot.isFaceUp}
+            aria-label={`${robot.isFaceUp ? 'Face-up' : 'Face-down'} card with robot ${robot.id}`}
+            tabIndex={0}
+            onClick={() => handleFlip(robot, i)}
           >
             <div className={`card-body ${robot.isFaceUp ? '' : 'card-back'}`}>
-              <img role='presentation' src={`https://robohash.org/${robot.id}`} height="150" width="150" />
+              <img
+                role="presentation"
+                src={`https://robohash.org/${robot.id}`}
+                height="150"
+                width="150"
+              />
             </div>
           </div>
         );

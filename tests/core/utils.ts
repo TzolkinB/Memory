@@ -13,9 +13,7 @@ export const clickCardAndVerifyFaceUp = async (card: Locator) => {
 };
 
 export const getFaceUpCards = (page: Page) =>
-  page
-    .getByTestId('card')
-    .filter({ has: page.locator('[data-face-up="true"]') });
+  page.getByTestId('card').and(page.getByRole('button', { expanded: true, name: /Face-up card/ }));
 
 export const expectFaceUpCount = async (page: Page, count: number) => {
   await expect(getFaceUpCards(page)).toHaveCount(count);
