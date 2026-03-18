@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useReducer } from 'react';
 import toast from 'react-hot-toast';
+import { MDBBtn } from 'mdb-react-ui-kit';
 import Modal from './shared/Modal';
 import Card from './Card';
 import { type Robot } from '../robots';
@@ -68,14 +69,14 @@ const App = (): React.JSX.Element => {
   return (
     <main className="container-fluid">
       <div className="info d-flex justify-content-between mt-4">
-        <button
-          type="button"
+        <MDBBtn
           data-toggle="modal"
           data-target="#modal"
-          className="btn btn-raised btn-success"
+          color="success"
+          className="btn-raised"
         >
           Restart
-        </button>
+        </MDBBtn>
         {playerInfo()}
         <table>
           <thead>
