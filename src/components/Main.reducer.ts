@@ -16,7 +16,10 @@ export const createSeededRandom = (seed: number): (() => number) => {
 };
 
 /** Fisher–Yates shuffle. Accepts an optional RNG so tests can pass a seeded one. */
-export const shuffle = <T>(items: T[], random: () => number = Math.random): T[] => {
+export const shuffle = <T>(
+  items: T[],
+  random: () => number = Math.random
+): T[] => {
   for (let i = items.length - 1; i > 0; i -= 1) {
     const j = Math.floor(random() * (i + 1));
     [items[i], items[j]] = [items[j], items[i]];
@@ -26,8 +29,12 @@ export const shuffle = <T>(items: T[], random: () => number = Math.random): T[] 
 
 const buildDeck = () => {
   const seedStr = import.meta.env.VITE_SHUFFLE_SEED;
-  const random = seedStr !== undefined ? createSeededRandom(Number(seedStr)) : Math.random;
-  return shuffle([...robots], random).map((bot) => ({ ...bot, isFaceUp: false }));
+  const seed = Number(seedStr);
+  const random = Number.isFinite(seed) ? createSeededRandom(seed) : Math.random;
+  return shuffle([...robots], random).map((bot) => ({
+    ...bot,
+    isFaceUp: false,
+  }));
 };
 
 export const createInitialState = (): GameState => ({

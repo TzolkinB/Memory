@@ -6,7 +6,7 @@ import {
   clickCardAndVerifyFaceUp,
   expectCardFaceUp,
   expectFaceUpCount,
-} from './utils';
+} from '../utils';
 
 test.describe('Core Game Mechanics', () => {
   test('Win Conditions and Game Completion', async ({ page }) => {

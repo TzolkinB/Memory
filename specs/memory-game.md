@@ -147,7 +147,7 @@ A comprehensive test plan for the Memory card game covering core gameplay mechan
 
 #### 2.1. Restart Functionality
 
-**File:** `tests/controls/restart.spec.ts`
+**File:** `tests/restart-functionality.spec.ts`
 
 **Steps:**
 

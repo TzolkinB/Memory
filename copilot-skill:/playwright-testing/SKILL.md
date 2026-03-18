@@ -1,3 +1,8 @@
+---
+name: playwright-testing
+description: 'Playwright testing best practices and patterns. USE FOR: writing Playwright tests, debugging test selectors, implementing accessibility testing, choosing proper locators, fixing test flakiness, test organization. Covers semantic locators, accessibility-first testing, anti-patterns to avoid, and efficient testing workflows.'
+---
+
 # Playwright Testing Best Practices
 
 ## Accessibility-First Testing

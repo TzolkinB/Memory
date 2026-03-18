@@ -2,7 +2,11 @@
 // seed: tests/seed.spec.ts
 
 import { test, expect } from '@playwright/test';
-import { clickCardAndVerifyFaceUp, expectCardFaceUp } from '../core/utils';
+import {
+  clickCardAndVerifyFaceUp,
+  expectCardFaceUp,
+  getFaceUpCards,
+} from '../utils';
 
 test.describe('Edge Cases and Error States', () => {
   test('Card Interaction Edge Cases', async ({ page }) => {
@@ -49,9 +53,7 @@ test.describe('Edge Cases and Error States', () => {
     const availableCard = cards.nth(2);
     await expectCardFaceUp(availableCard, false);
 
-    const initialFaceUpCount = await cards
-      .filter({ has: page.locator('[data-face-up="true"]') })
-      .count();
+    const initialFaceUpCount = await getFaceUpCards(page).count();
 
     // expect: Only the first valid click registers
     // expect: Subsequent rapid clicks are ignored
@@ -64,9 +66,7 @@ test.describe('Edge Cases and Error States', () => {
     }
 
     // Verify game state remained consistent
-    const currentFaceUpCount = await cards
-      .filter({ has: page.locator('[data-face-up="true"]') })
-      .count();
+    const currentFaceUpCount = await getFaceUpCards(page).count();
     expect(currentFaceUpCount).toBe(initialFaceUpCount + 1);
 
     // 3. Click cards during checking state
@@ -91,9 +91,7 @@ test.describe('Edge Cases and Error States', () => {
     await testCard.click();
 
     // Verify only 2 cards are face-up during checking (plus the 2 matched cards from earlier)
-    const faceUpCountDuringCheck = await cards
-      .filter({ has: page.locator('[data-face-up="true"]') })
-      .count();
+    const faceUpCountDuringCheck = await getFaceUpCards(page).count();
     expect(faceUpCountDuringCheck).toBeLessThanOrEqual(4); // 2 matched + max 2 checking
 
     // Verify third card click was ignored

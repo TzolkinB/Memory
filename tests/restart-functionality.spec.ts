@@ -2,7 +2,7 @@
 // seed: tests/seed.spec.ts
 
 import { test, expect } from '@playwright/test';
-import { expectFaceUpCount, clickCardAndVerifyFaceUp } from './core/utils';
+import { expectFaceUpCount, clickCardAndVerifyFaceUp } from './utils';
 
 test.describe('Game Controls and Restart', () => {
   test('Restart Functionality', async ({ page }) => {

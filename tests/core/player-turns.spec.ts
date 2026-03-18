@@ -2,7 +2,7 @@
 // seed: tests/seed.spec.ts
 
 import { test, expect } from '@playwright/test';
-import { clickCardAndVerifyFaceUp, expectCardFaceUp } from './utils';
+import { clickCardAndVerifyFaceUp, expectCardFaceUp } from '../utils';
 
 test.describe('Core Game Mechanics', () => {
   test('Player Turn Switching', async ({ page }) => {

@@ -48,7 +48,7 @@ test.describe('Core Game Mechanics', () => {
     await expect(page.getByTestId('card-grid')).toBeVisible();
 
     // expect: Restart button is available
-    await expect(page.getByTestId('restart-button')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Restart' })).toBeVisible();
 
     // 3. Verify deterministic card layout
     // expect: Cards appear in consistent positions due to seeded shuffle
