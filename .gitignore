@@ -5,6 +5,15 @@
 
 # testing
 /coverage
+/test-results
+/playwright-report
+/playwright/.cache
+
+# debugging/temporary files
+*debug*.png
+*ui-state*.png
+*grid-layout*.png
+*flipped*.png
 
 # deploy
 /build

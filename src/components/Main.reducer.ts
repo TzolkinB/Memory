@@ -3,18 +3,39 @@ import type { GameAction, GameOutcome, GameState } from './Main.types';
 
 const TOTAL_PAIRS = robots.length / 2;
 
-const shuffle = <T>(items: T[]): T[] => {
-  // Fisher–Yates shuffle
+/**
+ * Linear congruential generator — produces a deterministic sequence for a
+ * given seed. Used to make shuffles reproducible in E2E tests.
+ */
+export const createSeededRandom = (seed: number): (() => number) => {
+  let s = seed >>> 0;
+  return () => {
+    s = (Math.imul(1664525, s) + 1013904223) >>> 0;
+    return s / 0x100000000;
+  };
+};
+
+/** Fisher–Yates shuffle. Accepts an optional RNG so tests can pass a seeded one. */
+export const shuffle = <T>(
+  items: T[],
+  random: () => number = Math.random
+): T[] => {
   for (let i = items.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(random() * (i + 1));
     [items[i], items[j]] = [items[j], items[i]];
   }
-
   return items;
 };
 
-const buildDeck = () =>
-  shuffle([...robots]).map((bot) => ({ ...bot, isFaceUp: false }));
+const buildDeck = () => {
+  const seedStr = import.meta.env.VITE_SHUFFLE_SEED;
+  const seed = Number(seedStr);
+  const random = Number.isFinite(seed) ? createSeededRandom(seed) : Math.random;
+  return shuffle([...robots], random).map((bot) => ({
+    ...bot,
+    isFaceUp: false,
+  }));
+};
 
 export const createInitialState = (): GameState => ({
   shuffleBots: buildDeck(),
