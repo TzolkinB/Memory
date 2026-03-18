@@ -116,6 +116,72 @@ The extra `<div data-testid="card-grid">` wrapper was added for testing but brok
 **Simple fix**: Remove extra wrapper  
 **Avoided**: Complex CSS grid/flexbox workarounds
 
+## Case Study: Playwright Test Timing Issues
+
+### Problem
+
+Playwright test completing a memory game was flaky - sometimes matching pairs wouldn't register, causing score assertions to fail.
+
+### ❌ Anti-Pattern Approach (What I Did Initially)
+
+```
+1. See test failing on score assertions
+2. Assume match pair positions are wrong
+3. Replace efficient for loop with verbose step-by-step approach
+4. Write 33 lines of repetitive code instead of 8-line loop
+5. Violate DRY principle with copy-paste code
+```
+
+### ✅ Correct Approach (What Should Have Been Done)
+
+```
+1. ANALYZE: Clicks happening too fast - game has 500ms "checking" state
+2. ROOT CAUSE: Reducer ignores clicks while status === 'checking'
+3. SOLUTION: Add synchronization after each pair
+4. KEEP: Original efficient for loop structure
+5. ADD: Wait for score update before next iteration
+```
+
+### Key Code Difference
+
+**Bad (33 lines of repetition):**
+
+```js
+// Blue player gets match 1: Robot ID 3 (positions 0 and 9)
+await clickCardAndVerifyFaceUp(cards.nth(0));
+await clickCardAndVerifyFaceUp(cards.nth(9));
+await expect(page.getByTestId('score-blue')).toHaveText('1');
+
+// Blue player gets match 2: Robot ID 1 (positions 1 and 10)
+// ... 25 more lines of repetitive code
+```
+
+**Good (8 lines with proper timing):**
+
+```js
+let expectedBlueScore = 0;
+for (const [first, second] of matchPairs) {
+  await cards.nth(first).click();
+  await cards.nth(second).click();
+  expectedBlueScore += 1;
+  // Wait for match resolution before proceeding
+  await expect(page.getByTestId('score-blue')).toHaveText(
+    String(expectedBlueScore)
+  );
+}
+```
+
+### Key Lessons
+
+1. **Timing issues ≠ Logic issues** - Don't rewrite working logic when you need synchronization
+2. **Preserve DRY principle** - Fix the timing, keep the loop structure
+3. **Understand the state machine** - Game has "checking" state that blocks clicks
+4. **Add minimal synchronization** - One assertion per iteration vs. complete rewrite
+
+**Root cause**: Missing synchronization between rapid click pairs  
+**Simple fix**: Add score expectation after each pair  
+**Avoided**: Verbose repetitive code violating DRY principle
+
 ## Anti-Patterns to Avoid
 
 1. **Fix-first mentality** - Implementing solutions before understanding the problem
