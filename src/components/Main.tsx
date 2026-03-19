@@ -1,15 +1,10 @@
-import React, { useCallback, useEffect, useReducer } from 'react';
+import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import toast from 'react-hot-toast';
+import { MDBBtn, MDBRow } from 'mdb-react-ui-kit';
 import Modal from './shared/Modal';
 import Card from './Card';
 import { type Robot } from '../robots';
 import { createInitialState, gameReducer } from './Main.reducer';
-import { type JQueryLike } from './Main.types';
-
-const getJQuery = (): JQueryLike | undefined => {
-  const windowWithJQuery = window as Window & { $?: JQueryLike };
-  return windowWithJQuery.$;
-};
 
 const App = (): React.JSX.Element => {
   const [state, dispatch] = useReducer(
@@ -17,6 +12,8 @@ const App = (): React.JSX.Element => {
     undefined,
     createInitialState
   );
+  const [restartModal, setRestartModal] = useState(false);
+  const toggleOpen = (): void => setRestartModal((prev) => !prev);
 
   useEffect(() => {
     if (state.status !== 'checking') {
@@ -62,20 +59,20 @@ const App = (): React.JSX.Element => {
 
   const reShuffle = useCallback((): void => {
     dispatch({ type: 'RESHUFFLE' });
-    getJQuery()?.('#modal').modal('hide');
+    setRestartModal(false);
   }, []);
 
   return (
     <main className="container-fluid">
       <div className="info d-flex justify-content-between mt-4">
-        <button
-          type="button"
-          data-toggle="modal"
-          data-target="#modal"
-          className="btn btn-raised btn-success"
+        <MDBBtn
+          onClick={toggleOpen}
+          color="success"
+          className="btn-raised"
+          size="lg"
         >
           Restart
-        </button>
+        </MDBBtn>
         {playerInfo()}
         <table>
           <thead>
@@ -101,12 +98,16 @@ const App = (): React.JSX.Element => {
         </div>
       </div>
       <div className="card-deck" data-testid="card-grid">
-        <Card shuffleBots={state.shuffleBots} handleFlip={handleFlip} />
+        <MDBRow>
+          <Card shuffleBots={state.shuffleBots} handleFlip={handleFlip} />
+        </MDBRow>
       </div>
       <Modal
+        open={restartModal}
+        onClose={() => setRestartModal(false)}
         closeText="Cancel"
         confirmText="Yes"
-        handleClick={() => reShuffle()}
+        handleClick={reShuffle}
       >
         <p>Are you sure you want to reshuffle and restart the game?</p>
       </Modal>

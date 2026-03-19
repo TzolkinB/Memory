@@ -2,6 +2,8 @@ import { HashRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { Toaster } from 'react-hot-toast';
 
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import './css/app.css';
 
 import AppBar from './components/shared/AppBar';
