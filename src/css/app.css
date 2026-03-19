@@ -111,3 +111,27 @@ footer a:visited {
     width: 100px;
   }
 }
+
+/* ----- Deck Selector ----- */
+.deck-option {
+  transition: all 0.3s ease;
+}
+
+.deck-option:hover {
+  border-color: #007bff !important;
+  background-color: #f8f9fa;
+}
+
+.deck-option.selected {
+  border-color: #28a745 !important;
+  background-color: #d4edda;
+}
+
+.deck-preview {
+  margin-top: 10px;
+}
+
+.deck-preview img {
+  border-radius: 4px;
+  object-fit: cover;
+}

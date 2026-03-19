@@ -2,8 +2,10 @@ import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import toast from 'react-hot-toast';
 import { MDBBtn, MDBRow } from 'mdb-react-ui-kit';
 import Modal from './shared/Modal';
+import DeckSelectorModal from './shared/DeckSelectorModal';
 import Card from './Card';
 import { type Robot } from '../robots';
+import { getDeckById } from '../decks';
 import { createInitialState, gameReducer } from './Main.reducer';
 
 const App = (): React.JSX.Element => {
@@ -13,6 +15,7 @@ const App = (): React.JSX.Element => {
     createInitialState
   );
   const [restartModal, setRestartModal] = useState(false);
+  const [deckSelectorModal, setDeckSelectorModal] = useState(false);
   const toggleOpen = (): void => setRestartModal((prev) => !prev);
 
   useEffect(() => {
@@ -53,13 +56,28 @@ const App = (): React.JSX.Element => {
     return <p className="player-text text-danger">Red Player's Turn</p>;
   };
 
-  const handleFlip = useCallback((_robot: Robot, i: number): void => {
+  const handleFlip = useCallback((_card: Robot, i: number): void => {
     dispatch({ type: 'FLIP_CARD', index: i });
   }, []);
 
   const reShuffle = useCallback((): void => {
     dispatch({ type: 'RESHUFFLE' });
     setRestartModal(false);
+  }, []);
+
+  const showDeckSelector = useCallback((): void => {
+    dispatch({ type: 'SHOW_DECK_SELECTOR' });
+    setDeckSelectorModal(true);
+  }, []);
+
+  const selectDeck = useCallback((deckId: string): void => {
+    dispatch({ type: 'SELECT_DECK', deckId });
+    setDeckSelectorModal(false);
+  }, []);
+
+  const hideDeckSelector = useCallback((): void => {
+    dispatch({ type: 'HIDE_DECK_SELECTOR' });
+    setDeckSelectorModal(false);
   }, []);
 
   return (
@@ -72,6 +90,13 @@ const App = (): React.JSX.Element => {
           size="lg"
         >
           Restart
+        </MDBBtn>
+        <MDBBtn
+          onClick={showDeckSelector}
+          color="secondary"
+          className="btn-raised"
+        >
+          Change Deck ({getDeckById(state.selectedDeck).name})
         </MDBBtn>
         {playerInfo()}
         <table>
@@ -99,7 +124,11 @@ const App = (): React.JSX.Element => {
       </div>
       <div className="card-deck" data-testid="card-grid">
         <MDBRow>
-          <Card shuffleBots={state.shuffleBots} handleFlip={handleFlip} />
+          <Card
+            shuffleBots={state.shuffleBots}
+            handleFlip={handleFlip}
+            selectedDeck={state.selectedDeck}
+          />
         </MDBRow>
       </div>
       <Modal
@@ -111,6 +140,12 @@ const App = (): React.JSX.Element => {
       >
         <p>Are you sure you want to reshuffle and restart the game?</p>
       </Modal>
+      <DeckSelectorModal
+        open={deckSelectorModal}
+        selectedDeck={state.selectedDeck}
+        onSelectDeck={selectDeck}
+        onHide={hideDeckSelector}
+      />
     </main>
   );
 };

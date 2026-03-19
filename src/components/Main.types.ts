@@ -13,12 +13,17 @@ export interface GameState {
   redMatches: number;
   status: GameStatus;
   outcome: GameOutcome;
+  selectedDeck: string;
+  showDeckSelector: boolean;
 }
 
 export type GameAction =
   | { type: 'FLIP_CARD'; index: number }
   | { type: 'RESOLVE_SELECTION' }
-  | { type: 'RESHUFFLE' };
+  | { type: 'RESHUFFLE' }
+  | { type: 'SELECT_DECK'; deckId: string }
+  | { type: 'SHOW_DECK_SELECTOR' }
+  | { type: 'HIDE_DECK_SELECTOR' };
 
 export interface JQueryModal {
   modal: (action: string) => void;
