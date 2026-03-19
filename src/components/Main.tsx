@@ -13,7 +13,7 @@ const App = (): React.JSX.Element => {
     createInitialState
   );
   const [restartModal, setRestartModal] = useState(false);
-  const toggleOpen = () => setRestartModal(!restartModal);
+  const toggleOpen = (): void => setRestartModal((prev) => !prev);
 
   useEffect(() => {
     if (state.status !== 'checking') {

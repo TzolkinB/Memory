@@ -12,9 +12,8 @@ const Card: React.FC<CardProps> = ({ shuffleBots, handleFlip }) => {
     <React.Fragment>
       {shuffleBots.map((robot, i) => {
         return (
-          <MDBCol sm="4">
+          <MDBCol sm="4" size={4} key={i}>
             <MDBCard
-              key={i}
               data-testid="card"
               data-face-up={robot.isFaceUp}
               role="button"

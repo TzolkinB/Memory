@@ -41,9 +41,10 @@ const Modal: React.FC<ModalProps> = ({
                 className="btn-close"
                 color="none"
                 onClick={onClose}
+                aria-label="Close"
               ></MDBBtn>
             </MDBModalHeader>
-            <MDBModalBody className="pb-0 pl-5">{children}</MDBModalBody>
+            <MDBModalBody className="pb-0">{children}</MDBModalBody>
             <MDBModalFooter className="p-3">
               <MDBBtn color="secondary" onClick={onClose}>
                 {closeText}
