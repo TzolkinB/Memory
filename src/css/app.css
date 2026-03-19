@@ -33,15 +33,13 @@ a:hover {
 
 /* ----- Cards ----- */
 .card-deck {
-  margin-left: 3.5%;
+  max-width: 800px;
+  margin: 0px auto;
 }
 
 .card-deck .card {
-  width: 23%;
   height: 175px;
   margin: 5px;
-  flex: auto !important;
-  flex-grow: 0 !important;
   cursor: pointer;
 }
 

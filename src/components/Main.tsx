@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import toast from 'react-hot-toast';
-import { MDBBtn } from 'mdb-react-ui-kit';
+import { MDBBtn, MDBRow } from 'mdb-react-ui-kit';
 import Modal from './shared/Modal';
 import Card from './Card';
 import { type Robot } from '../robots';
@@ -12,7 +12,8 @@ const App = (): React.JSX.Element => {
     undefined,
     createInitialState
   );
-  const [modalOpen, setModalOpen] = useState(false);
+  const [restartModal, setRestartModal] = useState(false);
+  const toggleOpen = () => setRestartModal(!restartModal);
 
   useEffect(() => {
     if (state.status !== 'checking') {
@@ -58,21 +59,18 @@ const App = (): React.JSX.Element => {
 
   const reShuffle = useCallback((): void => {
     dispatch({ type: 'RESHUFFLE' });
-    setModalOpen(false);
-  }, []);
-
-  const openModal = useCallback(() => {
-    setModalOpen(true);
-  }, []);
-
-  const closeModal = useCallback(() => {
-    setModalOpen(false);
+    setRestartModal(false);
   }, []);
 
   return (
     <main className="container-fluid">
       <div className="info d-flex justify-content-between mt-4">
-        <MDBBtn onClick={openModal} color="success" className="btn-raised">
+        <MDBBtn
+          onClick={toggleOpen}
+          color="success"
+          className="btn-raised"
+          size="lg"
+        >
           Restart
         </MDBBtn>
         {playerInfo()}
@@ -100,14 +98,16 @@ const App = (): React.JSX.Element => {
         </div>
       </div>
       <div className="card-deck" data-testid="card-grid">
-        <Card shuffleBots={state.shuffleBots} handleFlip={handleFlip} />
+        <MDBRow>
+          <Card shuffleBots={state.shuffleBots} handleFlip={handleFlip} />
+        </MDBRow>
       </div>
       <Modal
-        open={modalOpen}
-        onClose={closeModal}
+        open={restartModal}
+        onClose={() => setRestartModal(false)}
         closeText="Cancel"
         confirmText="Yes"
-        handleClick={() => reShuffle()}
+        handleClick={reShuffle}
       >
         <p>Are you sure you want to reshuffle and restart the game?</p>
       </Modal>

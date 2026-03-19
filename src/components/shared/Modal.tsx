@@ -15,7 +15,7 @@ interface ModalProps {
   confirmText: string;
   open: boolean;
   onClose: () => void;
-  handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleClick: () => void;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -28,10 +28,12 @@ const Modal: React.FC<ModalProps> = ({
 }) => {
   return (
     <>
-      {/* Keep div for testing compatibility */}
-      <div id="modal" className="d-none" data-testid="restart-modal" />
-
-      <MDBModal open={open} onClose={onClose} tabIndex={-1}>
+      <MDBModal
+        open={open}
+        onClose={onClose}
+        tabIndex={-1}
+        data-testid="restart-modal"
+      >
         <MDBModalDialog centered>
           <MDBModalContent>
             <MDBModalHeader>
