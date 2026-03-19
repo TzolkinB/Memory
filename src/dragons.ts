@@ -36,9 +36,9 @@ export const dragons: Dragon[] = [
   },
   {
     id: 5,
-    name: 'Winter',
+    name: 'Whiteout',
     imageUrl:
-      'https://static.wikia.nocookie.net/wingsoffire/images/6/6b/WinterTopShot.png',
+      'https://static.wikia.nocookie.net/wingsoffire/images/7/71/Whiteout_GN_6.png',
     description: 'IceWing prince and former student',
   },
   {
@@ -47,5 +47,12 @@ export const dragons: Dragon[] = [
     imageUrl:
       'https://static.wikia.nocookie.net/wingsoffire/images/6/60/TsunamiTopShot.png',
     description: ' SeaWing and the main protagonist of The Lost Heir.',
+  },
+  {
+    id: 7,
+    name: 'Anemone',
+    imageUrl:
+      'https://static.wikia.nocookie.net/wingsoffire/images/1/1e/AnemoneTopShot.png',
+    description: '',
   },
 ];

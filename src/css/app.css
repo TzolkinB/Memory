@@ -22,13 +22,14 @@ a:hover {
   margin: 0 50px;
 }
 
-.info .mobile-stats {
+/* .info .mobile-stats {
   display: none;
-}
+} */
 
 .player-text {
   font-size: x-large;
   font-weight: bold;
+  margin-right: 20%;
 }
 
 /* ----- Cards ----- */
@@ -83,18 +84,12 @@ footer a:visited {
     margin-left: 5px;
   }
 
-  /* .player-text {
-    right: 25px;
-    font-size: large;
-    position: absolute;
-  } */
+  .player-text {
+    margin-top: 10px;
+  }
 
   .info table {
     display: none;
-  }
-
-  .info .mobile-stats {
-    display: inline;
   }
 
   .card-deck {

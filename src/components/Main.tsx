@@ -50,7 +50,9 @@ const App = (): React.JSX.Element => {
 
   const playerInfo = (): React.JSX.Element => {
     if (state.activePlayer === 'blue') {
-      return <p className="player-text text-info">Blue Player's Turn</p>;
+      return (
+        <p className="player-text text-info text-align">Blue Player's Turn</p>
+      );
     }
 
     return <p className="player-text text-danger">Red Player's Turn</p>;
@@ -82,38 +84,27 @@ const App = (): React.JSX.Element => {
 
   return (
     <main className="container-fluid">
-      <div className="info d-flex justify-content-between mt-4">
-        <MDBBtn
-          onClick={toggleOpen}
-          color="success"
-          className="btn-raised"
-          size="lg"
-        >
-          Restart
-        </MDBBtn>
-        <MDBBtn
-          onClick={showDeckSelector}
-          color="secondary"
-          className="btn-raised"
-        >
-          Change Deck ({getDeckById(state.selectedDeck).name})
-        </MDBBtn>
+      <div className="info d-lg-flex justify-content-between mt-4">
+        <div>
+          <MDBBtn
+            onClick={toggleOpen}
+            color="success"
+            className="btn-raised me-2"
+            size="lg"
+          >
+            Restart
+          </MDBBtn>
+          <MDBBtn
+            onClick={showDeckSelector}
+            color="info"
+            className="btn-raised me-2"
+            size="lg"
+          >
+            Change Deck ({getDeckById(state.selectedDeck).name})
+          </MDBBtn>
+        </div>
         {playerInfo()}
-        <table>
-          <thead>
-            <tr>
-              <th className="text-info pr-3">Blue Player</th>
-              <th className="text-danger">Red Player</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-testid="score-blue">{state.blueMatches}</td>
-              <td data-testid="score-red">{state.redMatches}</td>
-            </tr>
-          </tbody>
-        </table>
-        <div className="mobile-stats mt-4 pr-2">
+        <div className="mt-4 pr-2">
           <p className="text-info d-inline font-weight-bold pr-3">
             Blue Player: {state.blueMatches}
           </p>
