@@ -31,17 +31,10 @@ export const shuffle = <T>(
 const buildDeck = (deckId: string = 'robots') => {
   const deck = getDeckById(deckId);
   const seedStr = import.meta.env.VITE_SHUFFLE_SEED;
-<<<<<<< HEAD
   const seed = Number(seedStr);
   const random = Number.isFinite(seed) ? createSeededRandom(seed) : Math.random;
-  return shuffle([...robots], random).map((bot) => ({
-    ...bot,
-=======
-  const random =
-    seedStr !== undefined ? createSeededRandom(Number(seedStr)) : Math.random;
   return shuffle([...deck.cards], random).map((card) => ({
     ...card,
->>>>>>> bb33748 (add dragons and implement select deck wip)
     isFaceUp: false,
   }));
 };
