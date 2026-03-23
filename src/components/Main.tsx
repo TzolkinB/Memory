@@ -2,8 +2,10 @@ import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import toast from 'react-hot-toast';
 import { MDBBtn, MDBRow } from 'mdb-react-ui-kit';
 import Modal from './shared/Modal';
+import DeckSelectorModal from './shared/DeckSelectorModal';
 import Card from './Card';
 import { type Robot } from '../robots';
+import { getDeckById } from '../decks';
 import { createInitialState, gameReducer } from './Main.reducer';
 
 const App = (): React.JSX.Element => {
@@ -13,6 +15,7 @@ const App = (): React.JSX.Element => {
     createInitialState
   );
   const [restartModal, setRestartModal] = useState(false);
+  const [deckSelectorModal, setDeckSelectorModal] = useState(false);
   const toggleOpen = (): void => setRestartModal((prev) => !prev);
 
   useEffect(() => {
@@ -47,13 +50,15 @@ const App = (): React.JSX.Element => {
 
   const playerInfo = (): React.JSX.Element => {
     if (state.activePlayer === 'blue') {
-      return <p className="player-text text-info">Blue Player's Turn</p>;
+      return (
+        <p className="player-text text-info text-align">Blue Player's Turn</p>
+      );
     }
 
     return <p className="player-text text-danger">Red Player's Turn</p>;
   };
 
-  const handleFlip = useCallback((_robot: Robot, i: number): void => {
+  const handleFlip = useCallback((_card: Robot, i: number): void => {
     dispatch({ type: 'FLIP_CARD', index: i });
   }, []);
 
@@ -62,33 +67,44 @@ const App = (): React.JSX.Element => {
     setRestartModal(false);
   }, []);
 
+  const showDeckSelector = useCallback((): void => {
+    dispatch({ type: 'SHOW_DECK_SELECTOR' });
+    setDeckSelectorModal(true);
+  }, []);
+
+  const selectDeck = useCallback((deckId: string): void => {
+    dispatch({ type: 'SELECT_DECK', deckId });
+    setDeckSelectorModal(false);
+  }, []);
+
+  const hideDeckSelector = useCallback((): void => {
+    dispatch({ type: 'HIDE_DECK_SELECTOR' });
+    setDeckSelectorModal(false);
+  }, []);
+
   return (
     <main className="container-fluid">
-      <div className="info d-flex justify-content-between mt-4">
-        <MDBBtn
-          onClick={toggleOpen}
-          color="success"
-          className="btn-raised"
-          size="lg"
-        >
-          Restart
-        </MDBBtn>
+      <div className="info d-lg-flex justify-content-between mt-4">
+        <div>
+          <MDBBtn
+            onClick={toggleOpen}
+            color="success"
+            className="btn-raised me-2"
+            size="lg"
+          >
+            Restart
+          </MDBBtn>
+          <MDBBtn
+            onClick={showDeckSelector}
+            color="info"
+            className="btn-raised me-2"
+            size="lg"
+          >
+            Change Deck ({getDeckById(state.selectedDeck).name})
+          </MDBBtn>
+        </div>
         {playerInfo()}
-        <table>
-          <thead>
-            <tr>
-              <th className="text-info pr-3">Blue Player</th>
-              <th className="text-danger">Red Player</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-testid="score-blue">{state.blueMatches}</td>
-              <td data-testid="score-red">{state.redMatches}</td>
-            </tr>
-          </tbody>
-        </table>
-        <div className="mobile-stats mt-4 pr-2">
+        <div className="mt-4 pr-2">
           <p className="text-info d-inline font-weight-bold pr-3">
             Blue Player: {state.blueMatches}
           </p>
@@ -99,7 +115,11 @@ const App = (): React.JSX.Element => {
       </div>
       <div className="card-deck" data-testid="card-grid">
         <MDBRow>
-          <Card shuffleBots={state.shuffleBots} handleFlip={handleFlip} />
+          <Card
+            shuffleBots={state.shuffleBots}
+            handleFlip={handleFlip}
+            selectedDeck={state.selectedDeck}
+          />
         </MDBRow>
       </div>
       <Modal
@@ -111,6 +131,12 @@ const App = (): React.JSX.Element => {
       >
         <p>Are you sure you want to reshuffle and restart the game?</p>
       </Modal>
+      <DeckSelectorModal
+        open={deckSelectorModal}
+        selectedDeck={state.selectedDeck}
+        onSelectDeck={selectDeck}
+        onHide={hideDeckSelector}
+      />
     </main>
   );
 };

@@ -1,4 +1,5 @@
 import { robots } from '../robots';
+import { getDeckById } from '../decks';
 import type { GameAction, GameOutcome, GameState } from './Main.types';
 
 const TOTAL_PAIRS = robots.length / 2;
@@ -27,18 +28,19 @@ export const shuffle = <T>(
   return items;
 };
 
-const buildDeck = () => {
+const buildDeck = (deckId: string = 'robots') => {
+  const deck = getDeckById(deckId);
   const seedStr = import.meta.env.VITE_SHUFFLE_SEED;
   const seed = Number(seedStr);
   const random = Number.isFinite(seed) ? createSeededRandom(seed) : Math.random;
-  return shuffle([...robots], random).map((bot) => ({
-    ...bot,
+  return shuffle([...deck.cards], random).map((card) => ({
+    ...card,
     isFaceUp: false,
   }));
 };
 
-export const createInitialState = (): GameState => ({
-  shuffleBots: buildDeck(),
+export const createInitialState = (deckId: string = 'robots'): GameState => ({
+  shuffleBots: buildDeck(deckId),
   selectedIndices: [],
   matchedIndices: new Set(),
   activePlayer: 'blue',
@@ -46,6 +48,8 @@ export const createInitialState = (): GameState => ({
   redMatches: 0,
   status: 'idle',
   outcome: null,
+  selectedDeck: deckId,
+  showDeckSelector: false,
 });
 
 const handleFlipCard = (state: GameState, index: number): GameState => {
@@ -168,7 +172,22 @@ export const gameReducer = (
       return resolveSelection(state);
 
     case 'RESHUFFLE':
-      return createInitialState();
+      return createInitialState(state.selectedDeck);
+
+    case 'SELECT_DECK':
+      return createInitialState(action.deckId);
+
+    case 'SHOW_DECK_SELECTOR':
+      return {
+        ...state,
+        showDeckSelector: true,
+      };
+
+    case 'HIDE_DECK_SELECTOR':
+      return {
+        ...state,
+        showDeckSelector: false,
+      };
 
     default:
       return state;

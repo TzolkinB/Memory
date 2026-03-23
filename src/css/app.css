@@ -22,13 +22,14 @@ a:hover {
   margin: 0 50px;
 }
 
-.info .mobile-stats {
+/* .info .mobile-stats {
   display: none;
-}
+} */
 
 .player-text {
   font-size: x-large;
   font-weight: bold;
+  margin-right: 20%;
 }
 
 /* ----- Cards ----- */
@@ -38,14 +39,21 @@ a:hover {
 }
 
 .card-deck .card {
-  height: 175px;
+  height: 150px;
   margin: 5px;
   cursor: pointer;
+  position: relative;
 }
 
 .card-body {
-  text-align: center;
   padding: 0 !important;
+}
+
+.card-body img {
+  position: absolute;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
 }
 
 .card-back {
@@ -84,17 +92,7 @@ footer a:visited {
   }
 
   .player-text {
-    right: 25px;
-    font-size: large;
-    position: absolute;
-  }
-
-  .info table {
-    display: none;
-  }
-
-  .info .mobile-stats {
-    display: inline;
+    margin-top: 10px;
   }
 
   .card-deck {
@@ -103,11 +101,30 @@ footer a:visited {
   }
 
   .card-deck .card {
-    height: 110px;
+    max-height: auto;
   }
+}
 
-  .card-body img {
-    height: 100px;
-    width: 100px;
-  }
+/* ----- Deck Selector ----- */
+.deck-option {
+  transition: all 0.3s ease;
+}
+
+.deck-option:hover {
+  border-color: #007bff !important;
+  background-color: #f8f9fa;
+}
+
+.deck-option.selected {
+  border-color: #28a745 !important;
+  background-color: #d4edda;
+}
+
+.deck-preview {
+  margin-top: 10px;
+}
+
+.deck-preview img {
+  border-radius: 4px;
+  object-fit: cover;
 }
