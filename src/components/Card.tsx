@@ -34,7 +34,7 @@ const Card: React.FC<CardProps> = ({
     <React.Fragment>
       {shuffleBots.map((card, i) => {
         return (
-          <MDBCol sm="4" size={4} key={i}>
+          <MDBCol sm="4" lg="3" size={4} key={i} className="px-0">
             <MDBCard
               data-testid="card"
               data-face-up={card.isFaceUp}
@@ -43,14 +43,16 @@ const Card: React.FC<CardProps> = ({
               aria-label={`${card.isFaceUp ? 'Face-up' : 'Face-down'} card with ${selectedDeck} ${card.id}`}
               tabIndex={0}
               onClick={() => handleFlip(card, i)}
+              className="w-auto"
             >
               <MDBCardBody className={card.isFaceUp ? '' : 'card-back'}>
                 <img
                   role="presentation"
                   src={getImageSrc(card)}
                   alt={getImageAlt(card)}
-                  height="150"
-                  width="150"
+                  // height="150"
+                  // width="150"
+                  className="img-fluid"
                 />
               </MDBCardBody>
             </MDBCard>

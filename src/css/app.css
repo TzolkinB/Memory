@@ -39,14 +39,21 @@ a:hover {
 }
 
 .card-deck .card {
-  height: 175px;
+  height: 150px;
   margin: 5px;
   cursor: pointer;
+  position: relative;
 }
 
 .card-body {
-  text-align: center;
   padding: 0 !important;
+}
+
+.card-body img {
+  position: absolute;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
 }
 
 .card-back {
@@ -88,22 +95,13 @@ footer a:visited {
     margin-top: 10px;
   }
 
-  .info table {
-    display: none;
-  }
-
   .card-deck {
     flex-flow: row wrap;
     margin-left: 0;
   }
 
   .card-deck .card {
-    height: 110px;
-  }
-
-  .card-body img {
-    height: 100px;
-    width: 100px;
+    max-height: auto;
   }
 }
 
