@@ -4,8 +4,8 @@ import { MDBBtn, MDBRow } from 'mdb-react-ui-kit';
 import Modal from './shared/Modal';
 import DeckSelectorModal from './shared/DeckSelectorModal';
 import Card from './Card';
-import { type Robot } from '../robots';
 import { getDeckById, type DeckId } from '../decks';
+import { type GameCard } from './Main.types';
 import { createInitialState, gameReducer } from './Main.reducer';
 
 const App = (): React.JSX.Element => {
@@ -58,7 +58,7 @@ const App = (): React.JSX.Element => {
     return <p className="player-text text-danger">Red Player's Turn</p>;
   };
 
-  const handleFlip = useCallback((_card: Robot, i: number): void => {
+  const handleFlip = useCallback((_card: GameCard, i: number): void => {
     dispatch({ type: 'FLIP_CARD', index: i });
   }, []);
 
@@ -114,7 +114,7 @@ const App = (): React.JSX.Element => {
       <div className="card-deck" data-testid="card-grid">
         <MDBRow>
           <Card
-            shuffleBots={state.shuffleBots}
+            shuffledCards={state.shuffledCards}
             handleFlip={handleFlip}
             selectedDeck={state.selectedDeck}
           />

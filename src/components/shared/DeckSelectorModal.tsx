@@ -62,6 +62,8 @@ const DeckSelectorModal: React.FC<DeckSelectorModalProps> = ({
                       <img
                         src="https://robohash.org/1"
                         alt="Robot preview"
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
                         width="60"
                         height="60"
                       />
@@ -69,6 +71,8 @@ const DeckSelectorModal: React.FC<DeckSelectorModalProps> = ({
                       <img
                         src={deck.metadata?.characters?.[0]?.imageUrl || ''}
                         alt={`${deck.metadata?.characters?.[0]?.name || 'Dragon'} preview`}
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
                         width="60"
                         height="60"
                       />

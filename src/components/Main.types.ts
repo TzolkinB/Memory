@@ -1,12 +1,16 @@
 import { type Robot } from '../robots';
 import { type DeckId } from '../decks';
 
+export interface GameCard extends Robot {
+  instanceId: string;
+}
+
 export type ActivePlayer = 'blue' | 'red';
 export type GameStatus = 'idle' | 'checking' | 'finished';
 export type GameOutcome = 'blue-win' | 'red-win' | 'tie' | null;
 
 export interface GameState {
-  shuffleBots: Robot[];
+  shuffledCards: GameCard[];
   selectedIndices: number[];
   matchedIndices: Set<number>;
   activePlayer: ActivePlayer;

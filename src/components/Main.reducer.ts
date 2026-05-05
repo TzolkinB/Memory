@@ -1,6 +1,11 @@
 import { robots } from '../robots';
 import { getDeckById, type DeckId } from '../decks';
-import type { GameAction, GameOutcome, GameState } from './Main.types';
+import type {
+  GameAction,
+  GameCard,
+  GameOutcome,
+  GameState,
+} from './Main.types';
 
 const TOTAL_PAIRS = robots.length / 2;
 
@@ -28,19 +33,20 @@ export const shuffle = <T>(
   return items;
 };
 
-const buildDeck = (deckId: DeckId = 'robots') => {
+const buildDeck = (deckId: DeckId = 'robots'): GameCard[] => {
   const deck = getDeckById(deckId);
   const seedStr = import.meta.env.VITE_SHUFFLE_SEED;
   const seed = Number(seedStr);
   const random = Number.isFinite(seed) ? createSeededRandom(seed) : Math.random;
-  return shuffle([...deck.cards], random).map((card) => ({
+  return shuffle([...deck.cards], random).map((card, index) => ({
     ...card,
+    instanceId: `${deckId}-${card.id}-${index}`,
     isFaceUp: false,
   }));
 };
 
 export const createInitialState = (deckId: DeckId = 'robots'): GameState => ({
-  shuffleBots: buildDeck(deckId),
+  shuffledCards: buildDeck(deckId),
   selectedIndices: [],
   matchedIndices: new Set(),
   activePlayer: 'blue',
@@ -56,7 +62,7 @@ const handleFlipCard = (state: GameState, index: number): GameState => {
     return state;
   }
 
-  const clickedCard = state.shuffleBots[index];
+  const clickedCard = state.shuffledCards[index];
   if (!clickedCard || clickedCard.isFaceUp || state.matchedIndices.has(index)) {
     return state;
   }
@@ -69,13 +75,13 @@ const handleFlipCard = (state: GameState, index: number): GameState => {
   }
 
   const nextSelectedIndices = [...state.selectedIndices, index];
-  const nextBots = state.shuffleBots.map((bot, i) =>
-    i === index ? { ...bot, isFaceUp: true } : bot
+  const nextCards = state.shuffledCards.map((card, i) =>
+    i === index ? { ...card, isFaceUp: true } : card
   );
 
   return {
     ...state,
-    shuffleBots: nextBots,
+    shuffledCards: nextCards,
     selectedIndices: nextSelectedIndices,
     status: nextSelectedIndices.length === 2 ? 'checking' : 'idle',
   };
@@ -124,13 +130,13 @@ const handleMismatch = (
   indexA: number,
   indexB: number
 ): GameState => {
-  const nextBots = state.shuffleBots.map((bot, i) =>
-    i === indexA || i === indexB ? { ...bot, isFaceUp: false } : bot
+  const nextCards = state.shuffledCards.map((card, i) =>
+    i === indexA || i === indexB ? { ...card, isFaceUp: false } : card
   );
 
   return {
     ...state,
-    shuffleBots: nextBots,
+    shuffledCards: nextCards,
     selectedIndices: [],
     activePlayer: state.activePlayer === 'blue' ? 'red' : 'blue',
     status: 'idle',
@@ -143,8 +149,8 @@ const resolveSelection = (state: GameState): GameState => {
   }
 
   const [indexA, indexB] = state.selectedIndices;
-  const cardA = state.shuffleBots[indexA];
-  const cardB = state.shuffleBots[indexB];
+  const cardA = state.shuffledCards[indexA];
+  const cardB = state.shuffledCards[indexB];
 
   if (!cardA || !cardB) {
     return {

@@ -1,20 +1,20 @@
 import React from 'react';
 import { MDBCard, MDBCardBody, MDBCol } from 'mdb-react-ui-kit';
-import { type Robot } from '../robots';
 import { getDragonById, type DeckId } from '../decks';
+import { type GameCard } from './Main.types';
 
 interface CardProps {
-  shuffleBots: Robot[];
-  handleFlip: (card: Robot, index: number) => void;
+  shuffledCards: GameCard[];
+  handleFlip: (card: GameCard, index: number) => void;
   selectedDeck: DeckId;
 }
 
 const Card: React.FC<CardProps> = ({
-  shuffleBots,
+  shuffledCards,
   handleFlip,
   selectedDeck,
 }) => {
-  const getImageSrc = (card: Robot): string => {
+  const getImageSrc = (card: GameCard): string => {
     if (selectedDeck === 'dragons') {
       const dragon = getDragonById(card.id);
       return dragon?.imageUrl || `https://robohash.org/${card.id}`;
@@ -22,7 +22,7 @@ const Card: React.FC<CardProps> = ({
     return `https://robohash.org/${card.id}`;
   };
 
-  const getImageAlt = (card: Robot): string => {
+  const getImageAlt = (card: GameCard): string => {
     if (selectedDeck === 'dragons') {
       const dragon = getDragonById(card.id);
       return dragon?.name || `Dragon ${card.id}`;
@@ -32,9 +32,9 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <React.Fragment>
-      {shuffleBots.map((card, i) => {
+      {shuffledCards.map((card, i) => {
         return (
-          <MDBCol sm="4" lg="3" size={4} key={i} className="px-0">
+          <MDBCol sm="4" lg="3" size={4} key={card.instanceId} className="px-0">
             <MDBCard
               data-testid="card"
               data-face-up={card.isFaceUp}
@@ -49,6 +49,8 @@ const Card: React.FC<CardProps> = ({
                 <img
                   src={getImageSrc(card)}
                   alt={getImageAlt(card)}
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
                   // height="150"
                   // width="150"
                   className="img-fluid"
