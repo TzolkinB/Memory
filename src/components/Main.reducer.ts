@@ -1,7 +1,10 @@
-import { robots } from '../robots';
-import type { GameAction, GameOutcome, GameState } from './Main.types';
-
-const TOTAL_PAIRS = robots.length / 2;
+import { getDeckById, type DeckId } from '../decks';
+import type {
+  GameAction,
+  GameCard,
+  GameOutcome,
+  GameState,
+} from './Main.types';
 
 /**
  * Linear congruential generator — produces a deterministic sequence for a
@@ -27,18 +30,22 @@ export const shuffle = <T>(
   return items;
 };
 
-const buildDeck = () => {
-  const seedStr = import.meta.env.VITE_SHUFFLE_SEED;
+const buildDeck = (deckId: DeckId = 'robots'): GameCard[] => {
+  const deck = getDeckById(deckId);
+  const seedStr =
+    import.meta.env.VITE_SHUFFLE_SEED ??
+    (import.meta.env.DEV ? '42' : undefined);
   const seed = Number(seedStr);
   const random = Number.isFinite(seed) ? createSeededRandom(seed) : Math.random;
-  return shuffle([...robots], random).map((bot) => ({
-    ...bot,
+  return shuffle([...deck.cards], random).map((card, index) => ({
+    ...card,
+    instanceId: `${deckId}-${card.id}-${index}`,
     isFaceUp: false,
   }));
 };
 
-export const createInitialState = (): GameState => ({
-  shuffleBots: buildDeck(),
+export const createInitialState = (deckId: DeckId = 'robots'): GameState => ({
+  shuffledCards: buildDeck(deckId),
   selectedIndices: [],
   matchedIndices: new Set(),
   activePlayer: 'blue',
@@ -46,6 +53,7 @@ export const createInitialState = (): GameState => ({
   redMatches: 0,
   status: 'idle',
   outcome: null,
+  selectedDeck: deckId,
 });
 
 const handleFlipCard = (state: GameState, index: number): GameState => {
@@ -53,7 +61,7 @@ const handleFlipCard = (state: GameState, index: number): GameState => {
     return state;
   }
 
-  const clickedCard = state.shuffleBots[index];
+  const clickedCard = state.shuffledCards[index];
   if (!clickedCard || clickedCard.isFaceUp || state.matchedIndices.has(index)) {
     return state;
   }
@@ -66,13 +74,13 @@ const handleFlipCard = (state: GameState, index: number): GameState => {
   }
 
   const nextSelectedIndices = [...state.selectedIndices, index];
-  const nextBots = state.shuffleBots.map((bot, i) =>
-    i === index ? { ...bot, isFaceUp: true } : bot
+  const nextCards = state.shuffledCards.map((card, i) =>
+    i === index ? { ...card, isFaceUp: true } : card
   );
 
   return {
     ...state,
-    shuffleBots: nextBots,
+    shuffledCards: nextCards,
     selectedIndices: nextSelectedIndices,
     status: nextSelectedIndices.length === 2 ? 'checking' : 'idle',
   };
@@ -103,7 +111,8 @@ const handleMatch = (
     state.activePlayer === 'blue' ? state.blueMatches + 1 : state.blueMatches;
   const redMatches =
     state.activePlayer === 'red' ? state.redMatches + 1 : state.redMatches;
-  const allPairsMatched = nextMatchedIndices.size / 2 === TOTAL_PAIRS;
+  const totalPairs = state.shuffledCards.length / 2;
+  const allPairsMatched = nextMatchedIndices.size / 2 === totalPairs;
 
   return {
     ...state,
@@ -121,13 +130,13 @@ const handleMismatch = (
   indexA: number,
   indexB: number
 ): GameState => {
-  const nextBots = state.shuffleBots.map((bot, i) =>
-    i === indexA || i === indexB ? { ...bot, isFaceUp: false } : bot
+  const nextCards = state.shuffledCards.map((card, i) =>
+    i === indexA || i === indexB ? { ...card, isFaceUp: false } : card
   );
 
   return {
     ...state,
-    shuffleBots: nextBots,
+    shuffledCards: nextCards,
     selectedIndices: [],
     activePlayer: state.activePlayer === 'blue' ? 'red' : 'blue',
     status: 'idle',
@@ -140,8 +149,8 @@ const resolveSelection = (state: GameState): GameState => {
   }
 
   const [indexA, indexB] = state.selectedIndices;
-  const cardA = state.shuffleBots[indexA];
-  const cardB = state.shuffleBots[indexB];
+  const cardA = state.shuffledCards[indexA];
+  const cardB = state.shuffledCards[indexB];
 
   if (!cardA || !cardB) {
     return {
@@ -168,7 +177,10 @@ export const gameReducer = (
       return resolveSelection(state);
 
     case 'RESHUFFLE':
-      return createInitialState();
+      return createInitialState(state.selectedDeck);
+
+    case 'SELECT_DECK':
+      return createInitialState(action.deckId);
 
     default:
       return state;

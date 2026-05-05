@@ -1,0 +1,92 @@
+import React from 'react';
+import {
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalHeader,
+  MDBModalBody,
+  MDBModalFooter,
+  MDBBtn,
+} from 'mdb-react-ui-kit';
+import { decks, type DeckId } from '../../decks';
+
+interface DeckSelectorModalProps {
+  open: boolean;
+  selectedDeck: DeckId;
+  onSelectDeck: (deckId: DeckId) => void;
+  onHide: () => void;
+}
+
+const DeckSelectorModal: React.FC<DeckSelectorModalProps> = ({
+  open,
+  selectedDeck,
+  onSelectDeck,
+  onHide,
+}) => {
+  return (
+    <MDBModal
+      open={open}
+      onClose={onHide}
+      tabIndex={-1}
+      data-testid="deck-selector-modal"
+    >
+      <MDBModalDialog centered>
+        <MDBModalContent>
+          <MDBModalHeader>
+            <h5 className="modal-title">Choose Your Deck</h5>
+            <MDBBtn
+              className="btn-close"
+              color="none"
+              onClick={onHide}
+              aria-label="Close"
+            ></MDBBtn>
+          </MDBModalHeader>
+          <MDBModalBody>
+            <div className="d-flex flex-wrap justify-content-around">
+              {Object.values(decks).map((deck) => (
+                <MDBBtn
+                  key={deck.id}
+                  type="button"
+                  color="none"
+                  className={`deck-option ${selectedDeck === deck.id ? 'selected' : ''}`}
+                  onClick={() => onSelectDeck(deck.id)}
+                  aria-pressed={selectedDeck === deck.id}
+                >
+                  <h6>{deck.name}</h6>
+                  <div className="deck-preview">
+                    {deck.type === 'robots' ? (
+                      <img
+                        src="https://robohash.org/1"
+                        alt="Robot preview"
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
+                        width="60"
+                        height="60"
+                      />
+                    ) : (
+                      <img
+                        src={deck.metadata?.characters?.[0]?.imageUrl || ''}
+                        alt={`${deck.metadata?.characters?.[0]?.name || 'Dragon'} preview`}
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
+                        width="60"
+                        height="60"
+                      />
+                    )}
+                  </div>
+                </MDBBtn>
+              ))}
+            </div>
+          </MDBModalBody>
+          <MDBModalFooter>
+            <MDBBtn color="secondary" onClick={onHide}>
+              Cancel
+            </MDBBtn>
+          </MDBModalFooter>
+        </MDBModalContent>
+      </MDBModalDialog>
+    </MDBModal>
+  );
+};
+
+export default DeckSelectorModal;
