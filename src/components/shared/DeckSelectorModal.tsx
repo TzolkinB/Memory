@@ -44,17 +44,13 @@ const DeckSelectorModal: React.FC<DeckSelectorModalProps> = ({
           <MDBModalBody>
             <div className="d-flex flex-wrap justify-content-around">
               {Object.values(decks).map((deck) => (
-                <div
+                <MDBBtn
                   key={deck.id}
+                  type="button"
+                  color="none"
                   className={`deck-option ${selectedDeck === deck.id ? 'selected' : ''}`}
                   onClick={() => onSelectDeck(deck.id)}
-                  style={{
-                    cursor: 'pointer',
-                    margin: '10px',
-                    padding: '20px',
-                    border: '2px solid #ccc',
-                    borderRadius: '8px',
-                  }}
+                  aria-pressed={selectedDeck === deck.id}
                 >
                   <h6>{deck.name}</h6>
                   <div className="deck-preview">
@@ -78,7 +74,7 @@ const DeckSelectorModal: React.FC<DeckSelectorModalProps> = ({
                       />
                     )}
                   </div>
-                </div>
+                </MDBBtn>
               ))}
             </div>
           </MDBModalBody>

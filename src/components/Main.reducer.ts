@@ -1,4 +1,3 @@
-import { robots } from '../robots';
 import { getDeckById, type DeckId } from '../decks';
 import type {
   GameAction,
@@ -6,8 +5,6 @@ import type {
   GameOutcome,
   GameState,
 } from './Main.types';
-
-const TOTAL_PAIRS = robots.length / 2;
 
 /**
  * Linear congruential generator — produces a deterministic sequence for a
@@ -35,7 +32,9 @@ export const shuffle = <T>(
 
 const buildDeck = (deckId: DeckId = 'robots'): GameCard[] => {
   const deck = getDeckById(deckId);
-  const seedStr = import.meta.env.VITE_SHUFFLE_SEED ?? (import.meta.env.DEV ? '42' : undefined);
+  const seedStr =
+    import.meta.env.VITE_SHUFFLE_SEED ??
+    (import.meta.env.DEV ? '42' : undefined);
   const seed = Number(seedStr);
   const random = Number.isFinite(seed) ? createSeededRandom(seed) : Math.random;
   return shuffle([...deck.cards], random).map((card, index) => ({
@@ -112,7 +111,8 @@ const handleMatch = (
     state.activePlayer === 'blue' ? state.blueMatches + 1 : state.blueMatches;
   const redMatches =
     state.activePlayer === 'red' ? state.redMatches + 1 : state.redMatches;
-  const allPairsMatched = nextMatchedIndices.size / 2 === TOTAL_PAIRS;
+  const totalPairs = state.shuffledCards.length / 2;
+  const allPairsMatched = nextMatchedIndices.size / 2 === totalPairs;
 
   return {
     ...state,
