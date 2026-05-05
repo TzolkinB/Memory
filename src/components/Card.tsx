@@ -47,7 +47,6 @@ const Card: React.FC<CardProps> = ({
             >
               <MDBCardBody className={card.isFaceUp ? '' : 'card-back'}>
                 <img
-                  role="presentation"
                   src={getImageSrc(card)}
                   alt={getImageAlt(card)}
                   // height="150"

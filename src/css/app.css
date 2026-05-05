@@ -22,10 +22,6 @@ a:hover {
   margin: 0 50px;
 }
 
-/* .info .mobile-stats {
-  display: none;
-} */
-
 .player-text {
   font-size: x-large;
   font-weight: bold;
@@ -98,10 +94,6 @@ footer a:visited {
   .card-deck {
     flex-flow: row wrap;
     margin-left: 0;
-  }
-
-  .card-deck .card {
-    max-height: auto;
   }
 }
 
