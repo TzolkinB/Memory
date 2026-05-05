@@ -68,7 +68,6 @@ const App = (): React.JSX.Element => {
   }, []);
 
   const showDeckSelector = useCallback((): void => {
-    dispatch({ type: 'SHOW_DECK_SELECTOR' });
     setDeckSelectorModal(true);
   }, []);
 
@@ -78,7 +77,6 @@ const App = (): React.JSX.Element => {
   }, []);
 
   const hideDeckSelector = useCallback((): void => {
-    dispatch({ type: 'HIDE_DECK_SELECTOR' });
     setDeckSelectorModal(false);
   }, []);
 

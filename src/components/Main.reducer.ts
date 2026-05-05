@@ -49,7 +49,6 @@ export const createInitialState = (deckId: DeckId = 'robots'): GameState => ({
   status: 'idle',
   outcome: null,
   selectedDeck: deckId,
-  showDeckSelector: false,
 });
 
 const handleFlipCard = (state: GameState, index: number): GameState => {
@@ -176,18 +175,6 @@ export const gameReducer = (
 
     case 'SELECT_DECK':
       return createInitialState(action.deckId);
-
-    case 'SHOW_DECK_SELECTOR':
-      return {
-        ...state,
-        showDeckSelector: true,
-      };
-
-    case 'HIDE_DECK_SELECTOR':
-      return {
-        ...state,
-        showDeckSelector: false,
-      };
 
     default:
       return state;

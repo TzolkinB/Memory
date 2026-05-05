@@ -15,16 +15,13 @@ export interface GameState {
   status: GameStatus;
   outcome: GameOutcome;
   selectedDeck: DeckId;
-  showDeckSelector: boolean;
 }
 
 export type GameAction =
   | { type: 'FLIP_CARD'; index: number }
   | { type: 'RESOLVE_SELECTION' }
   | { type: 'RESHUFFLE' }
-  | { type: 'SELECT_DECK'; deckId: DeckId }
-  | { type: 'SHOW_DECK_SELECTOR' }
-  | { type: 'HIDE_DECK_SELECTOR' };
+  | { type: 'SELECT_DECK'; deckId: DeckId };
 
 export interface JQueryModal {
   modal: (action: string) => void;
