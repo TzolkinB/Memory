@@ -5,6 +5,15 @@ description: 'Playwright testing best practices and patterns. USE FOR: writing P
 
 # Playwright Testing Best Practices
 
+## When a Test Fails
+
+1. Run `npm run dossier` to generate a summary at `playwright-report/dossier.md`.
+2. Read the dossier. It contains the error, screenshot path, trace path, and reproduction command for every failing test.
+3. Use the reproduction command to rerun just the failing test while iterating.
+4. Do not "fix" a failing test by changing the assertion. Fix the underlying code.
+5. Do not add `console.log` calls to test files to debug. The trace already has the DOM at every step; open it with `npx playwright show-trace <path>`.
+6. Remove any temporary files created only for test debugging or diagnosis once tests are passing. Do not leave scratch scripts, throwaway notes, or one-off artifacts in the repository.
+
 ## Accessibility-First Testing
 
 ### ✅ PREFERRED: Semantic HTML + ARIA + Role Locators

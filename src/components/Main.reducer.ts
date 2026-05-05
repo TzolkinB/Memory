@@ -35,7 +35,7 @@ export const shuffle = <T>(
 
 const buildDeck = (deckId: DeckId = 'robots'): GameCard[] => {
   const deck = getDeckById(deckId);
-  const seedStr = import.meta.env.VITE_SHUFFLE_SEED;
+  const seedStr = import.meta.env.VITE_SHUFFLE_SEED ?? (import.meta.env.DEV ? '42' : undefined);
   const seed = Number(seedStr);
   const random = Number.isFinite(seed) ? createSeededRandom(seed) : Math.random;
   return shuffle([...deck.cards], random).map((card, index) => ({

@@ -104,10 +104,11 @@ const App = (): React.JSX.Element => {
         {playerInfo()}
         <div className="mt-4 pr-2">
           <p className="text-info d-inline font-weight-bold pr-3">
-            Blue Player: {state.blueMatches}
+            Blue Player:{' '}
+            <span data-testid="score-blue">{state.blueMatches}</span>
           </p>
           <p className="text-danger d-inline font-weight-bold">
-            Red Player: {state.redMatches}
+            Red Player: <span data-testid="score-red">{state.redMatches}</span>
           </p>
         </div>
       </div>
