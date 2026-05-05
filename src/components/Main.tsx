@@ -5,7 +5,7 @@ import Modal from './shared/Modal';
 import DeckSelectorModal from './shared/DeckSelectorModal';
 import Card from './Card';
 import { type Robot } from '../robots';
-import { getDeckById } from '../decks';
+import { getDeckById, type DeckId } from '../decks';
 import { createInitialState, gameReducer } from './Main.reducer';
 
 const App = (): React.JSX.Element => {
@@ -72,7 +72,7 @@ const App = (): React.JSX.Element => {
     setDeckSelectorModal(true);
   }, []);
 
-  const selectDeck = useCallback((deckId: string): void => {
+  const selectDeck = useCallback((deckId: DeckId): void => {
     dispatch({ type: 'SELECT_DECK', deckId });
     setDeckSelectorModal(false);
   }, []);

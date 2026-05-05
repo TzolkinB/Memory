@@ -1,8 +1,10 @@
 import { robots } from './robots';
 import { dragons, type Dragon } from './dragons';
 
+export type DeckId = 'robots' | 'dragons';
+
 export interface Deck {
-  id: string;
+  id: DeckId;
   name: string;
   type: 'robots' | 'dragons';
   cards: { id: number; isFaceUp: boolean }[];
@@ -20,7 +22,7 @@ const dragonCards = dragons.flatMap((dragon) => [
 ]);
 
 // Available decks
-export const decks: Record<string, Deck> = {
+export const decks: Record<DeckId, Deck> = {
   robots: {
     id: 'robots',
     name: 'Classic Robots',
@@ -47,6 +49,10 @@ export const getDragonById = (id: number): Dragon | undefined => {
 };
 
 // Helper function to get deck by ID
-export const getDeckById = (deckId: string): Deck => {
-  return decks[deckId] || decks.robots;
+export const getDeckById = (deckId: DeckId | string): Deck => {
+  if (deckId in decks) {
+    return decks[deckId as DeckId];
+  }
+
+  return decks.robots;
 };

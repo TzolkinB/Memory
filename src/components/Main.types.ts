@@ -1,4 +1,5 @@
 import { type Robot } from '../robots';
+import { type DeckId } from '../decks';
 
 export type ActivePlayer = 'blue' | 'red';
 export type GameStatus = 'idle' | 'checking' | 'finished';
@@ -13,7 +14,7 @@ export interface GameState {
   redMatches: number;
   status: GameStatus;
   outcome: GameOutcome;
-  selectedDeck: string;
+  selectedDeck: DeckId;
   showDeckSelector: boolean;
 }
 
@@ -21,7 +22,7 @@ export type GameAction =
   | { type: 'FLIP_CARD'; index: number }
   | { type: 'RESOLVE_SELECTION' }
   | { type: 'RESHUFFLE' }
-  | { type: 'SELECT_DECK'; deckId: string }
+  | { type: 'SELECT_DECK'; deckId: DeckId }
   | { type: 'SHOW_DECK_SELECTOR' }
   | { type: 'HIDE_DECK_SELECTOR' };
 

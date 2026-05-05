@@ -8,12 +8,12 @@ import {
   MDBModalFooter,
   MDBBtn,
 } from 'mdb-react-ui-kit';
-import { decks } from '../../decks';
+import { decks, type DeckId } from '../../decks';
 
 interface DeckSelectorModalProps {
   open: boolean;
-  selectedDeck: string;
-  onSelectDeck: (deckId: string) => void;
+  selectedDeck: DeckId;
+  onSelectDeck: (deckId: DeckId) => void;
   onHide: () => void;
 }
 

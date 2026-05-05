@@ -1,12 +1,12 @@
 import React from 'react';
 import { MDBCard, MDBCardBody, MDBCol } from 'mdb-react-ui-kit';
 import { type Robot } from '../robots';
-import { getDragonById } from '../decks';
+import { getDragonById, type DeckId } from '../decks';
 
 interface CardProps {
   shuffleBots: Robot[];
   handleFlip: (card: Robot, index: number) => void;
-  selectedDeck: string;
+  selectedDeck: DeckId;
 }
 
 const Card: React.FC<CardProps> = ({

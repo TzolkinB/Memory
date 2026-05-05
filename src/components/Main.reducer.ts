@@ -1,5 +1,5 @@
 import { robots } from '../robots';
-import { getDeckById } from '../decks';
+import { getDeckById, type DeckId } from '../decks';
 import type { GameAction, GameOutcome, GameState } from './Main.types';
 
 const TOTAL_PAIRS = robots.length / 2;
@@ -28,7 +28,7 @@ export const shuffle = <T>(
   return items;
 };
 
-const buildDeck = (deckId: string = 'robots') => {
+const buildDeck = (deckId: DeckId = 'robots') => {
   const deck = getDeckById(deckId);
   const seedStr = import.meta.env.VITE_SHUFFLE_SEED;
   const seed = Number(seedStr);
@@ -39,7 +39,7 @@ const buildDeck = (deckId: string = 'robots') => {
   }));
 };
 
-export const createInitialState = (deckId: string = 'robots'): GameState => ({
+export const createInitialState = (deckId: DeckId = 'robots'): GameState => ({
   shuffleBots: buildDeck(deckId),
   selectedIndices: [],
   matchedIndices: new Set(),
