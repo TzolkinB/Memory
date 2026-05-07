@@ -102,25 +102,24 @@ page.getByPlaceholder('Enter email');
 page.getByTestId('card'); // For elements without semantic roles
 ```
 
-### 3. ⚠️ ACCEPTABLE: CSS/Attribute Selectors
+### 3. ❌ DO NOT USE: CSS Selectors
 
 ```typescript
-page.locator('[data-testid="card"][data-face-up="true"]'); // When other methods don't work
-```
-
-### 4. ❌ AVOID: Complex CSS selectors
-
-```typescript
-page.locator('#app > div.main > .card:nth-child(2)'); // Brittle, breaks easily
+// Do not use CSS selectors. If no semantic locator applies, add a data-testid to the
+// element and use getByTestId instead.
+page.locator('#app > div.main > .card:nth-child(2)'); // ❌ Brittle, breaks easily
+page.locator('[data-testid="card"][data-face-up="true"]'); // ❌ Use getByTestId + filter instead
 ```
 
 ## Filtering Best Practices
 
-### ✅ CORRECT: Direct CSS Selector for Attributes
+### ✅ CORRECT: Filter by Attribute Using getByTestId + filter
 
 ```typescript
-// When filtering by attributes on the element itself - most reliable
-page.locator('[data-testid="card"][data-face-up="true"]');
+// Use getByTestId to find the element, then filter by attribute
+page
+  .getByTestId('card')
+  .filter(async (loc) => (await loc.getAttribute('data-face-up')) === 'true');
 ```
 
 ### ✅ ALTERNATIVE: Filter with Function (when CSS isn't possible)
@@ -275,7 +274,7 @@ await expect(page.getByTestId('score-blue')).toHaveText('3');
 
 ## Anti-Patterns to Avoid
 
-1. **Complex CSS selectors** - Break when DOM structure changes
+1. **CSS selectors** - All CSS selectors are fragile; use semantic locators or `getByTestId`. If only CSS would work, add a `data-testid` to the element instead.
 2. **Mixing locator strategies unnecessarily** - Stick to one approach when possible
 3. **Using `has` for element attributes** - Use filter functions instead
 4. **Hardcoded delays** - Use `waitFor` conditions instead of `setTimeout`

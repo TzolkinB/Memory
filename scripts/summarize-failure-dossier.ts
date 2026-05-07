@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
 type Attachment = {
@@ -46,6 +46,7 @@ if (!existsSync(reportPath)) {
     '# Playwright failure dossier\n\n' +
     'No report data found at `playwright-report/report.json`.\n\n' +
     'Run `npm run test:e2e` first, then run `npm run dossier`.\n';
+  mkdirSync(outputDir, { recursive: true });
   writeFileSync(outputPath, message);
   console.error(
     'No Playwright JSON report found at playwright-report/report.json. ' +

@@ -46,7 +46,7 @@ export const dragons: Dragon[] = [
     name: 'Tsunami',
     imageUrl:
       'https://static.wikia.nocookie.net/wingsoffire/images/6/60/TsunamiTopShot.png',
-    description: ' SeaWing and the main protagonist of The Lost Heir.',
+    description: 'SeaWing and the main protagonist of The Lost Heir.',
   },
   {
     id: 7,

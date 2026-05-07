@@ -11,7 +11,7 @@ import { createInitialState, gameReducer } from './Main.reducer';
 const App = (): React.JSX.Element => {
   const [state, dispatch] = useReducer(
     gameReducer,
-    undefined,
+    'robots',
     createInitialState
   );
   const [restartModal, setRestartModal] = useState(false);
@@ -50,9 +50,7 @@ const App = (): React.JSX.Element => {
 
   const playerInfo = (): React.JSX.Element => {
     if (state.activePlayer === 'blue') {
-      return (
-        <p className="player-text text-info text-align">Blue Player's Turn</p>
-      );
+      return <p className="player-text text-info">Blue Player's Turn</p>;
     }
 
     return <p className="player-text text-danger">Red Player's Turn</p>;

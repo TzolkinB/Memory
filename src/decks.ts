@@ -49,10 +49,6 @@ export const getDragonById = (id: number): Dragon | undefined => {
 };
 
 // Helper function to get deck by ID
-export const getDeckById = (deckId: DeckId | string): Deck => {
-  if (deckId in decks) {
-    return decks[deckId as DeckId];
-  }
-
-  return decks.robots;
+export const getDeckById = (deckId: DeckId): Deck => {
+  return decks[deckId];
 };
