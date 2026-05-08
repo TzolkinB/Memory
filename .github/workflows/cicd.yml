@@ -37,7 +37,7 @@ jobs:
 
       # Cache node_modules to avoid reinstalling in every downstream job
       - name: Cache node_modules
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         id: cache-node-modules
         with:
           path: node_modules
@@ -66,7 +66,7 @@ jobs:
           node-version: 20
 
       - name: Restore node_modules from setup job
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: node_modules
           key: node-modules-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
@@ -92,7 +92,7 @@ jobs:
           node-version: 20
 
       - name: Restore node_modules from setup job
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: node_modules
           key: node-modules-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
