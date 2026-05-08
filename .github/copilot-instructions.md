@@ -85,6 +85,15 @@ Follow idiomatic React patterns. Do not deviate without an explicit reason.
 
 ---
 
+## Scratch artifacts hygiene
+
+- Treat tool-generated debug artifacts as temporary unless explicitly requested for commit.
+- Clean up temporary folders/files created during debugging before finalizing work.
+- Keep scratch outputs out of version control via `.gitignore` (for example `.playwright-mcp/`, `playwright-report/`, and `test-results/`).
+- Do not commit transient browser/page dumps, trace scratch files, or ad-hoc local debug captures.
+
+---
+
 ## Code review
 
 When reviewing code, apply the rules in `copilot-skill:/code-review/SKILL.md` in addition to the above. Key things to check:
