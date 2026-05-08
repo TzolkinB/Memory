@@ -93,23 +93,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Detect visual baselines
-        id: visual-baselines
+      - name: Generate visual baselines (if missing) and run tests
         run: |
-          if find tests -type f -path '*-snapshots/*.png' | grep -q .; then
-            echo "found=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "found=false" >> "$GITHUB_OUTPUT"
+          if [ ! -d "tests/visual-smoke-baseline.spec.ts-snapshots" ]; then
+            npm run test -- --update-snapshots
           fi
-
-      - name: Run Playwright E2E tests
-        if: steps.visual-baselines.outputs.found == 'true'
-        run: npm run test
-
-      - name: 'First run: create visual baselines, then run tests'
-        if: steps.visual-baselines.outputs.found != 'true'
-        run: |
-          npm run test -- --update-snapshots
           npm run test
 
       # Always save report artifacts on master runs for debugging/auditing
