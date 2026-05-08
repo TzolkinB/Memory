@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import toast from 'react-hot-toast';
 import { MDBBtn, MDBRow } from 'mdb-react-ui-kit';
-import Modal from './shared/Modal';
+import Modal from './shared/RestartModal';
 import DeckSelectorModal from './shared/DeckSelectorModal';
 import Card from './Card';
 import { getDeckById, type DeckId } from '../decks';

@@ -28,14 +28,9 @@ const Modal: React.FC<ModalProps> = ({
 }) => {
   return (
     <>
-      <MDBModal
-        open={open}
-        onClose={onClose}
-        tabIndex={-1}
-        data-testid="restart-modal"
-      >
+      <MDBModal open={open} onClose={onClose} tabIndex={-1}>
         <MDBModalDialog centered>
-          <MDBModalContent>
+          <MDBModalContent data-testid="restart-modal">
             <MDBModalHeader>
               <MDBBtn
                 className="btn-close"

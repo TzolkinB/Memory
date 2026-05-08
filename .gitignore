@@ -8,6 +8,7 @@
 /test-results
 /playwright-report
 /playwright/.cache
+/.playwright-mcp
 
 # debugging/temporary files
 *debug*.png
