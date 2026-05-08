@@ -12,6 +12,10 @@ on:
 jobs:
   copilot-setup-steps:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.59.1-jammy
+    env:
+      HOME: /root
 
     permissions:
       contents: read
@@ -25,9 +29,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
 
       # Customize this step as needed
       - name: Build application
