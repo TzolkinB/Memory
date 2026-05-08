@@ -1,0 +1,544 @@
+- generic [ref=e2]:
+  - region "Skip to main content":
+    - link "Skip to main content" [ref=e3] [cursor=pointer]:
+      - /url: "#__docusaurus_skipToContent_fallback"
+  - navigation "Main" [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - link "Playwright logoPlaywright logo Playwright" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e8]:
+            - img "Playwright logo" [ref=e9]
+            - img "Playwright logo" [ref=e10]
+          - generic [ref=e11]: Playwright
+        - link "Docs" [ref=e12] [cursor=pointer]:
+          - /url: /docs/intro
+        - link "MCP" [ref=e13] [cursor=pointer]:
+          - /url: /mcp/introduction
+        - link "CLI" [ref=e14] [cursor=pointer]:
+          - /url: /agent-cli/introduction
+        - link "API" [ref=e15] [cursor=pointer]:
+          - /url: /docs/api/class-playwright
+        - button "Node.js" [ref=e17] [cursor=pointer]
+      - generic [ref=e18]:
+        - link "GitHub repository" [ref=e19] [cursor=pointer]:
+          - /url: https://github.com/microsoft/playwright
+        - link "Discord server" [ref=e20] [cursor=pointer]:
+          - /url: https://aka.ms/playwright/discord
+        - button "Switch between dark and light mode (currently system mode)" [disabled] [ref=e22]:
+          - img [ref=e23]
+        - button "Search (Command+K)" [ref=e26] [cursor=pointer]:
+          - generic [ref=e27]:
+            - img [ref=e28]
+            - generic [ref=e30]: Search
+  - generic [ref=e33]:
+    - complementary [ref=e34]:
+      - navigation "Docs sidebar" [ref=e37]:
+        - list [ref=e38]:
+          - listitem [ref=e39]:
+            - button "Getting Started" [expanded] [ref=e41] [cursor=pointer]
+            - list [ref=e42]:
+              - listitem [ref=e43]:
+                - link "Installation" [ref=e44] [cursor=pointer]:
+                  - /url: /docs/intro
+              - listitem [ref=e45]:
+                - link "Writing tests" [ref=e46] [cursor=pointer]:
+                  - /url: /docs/writing-tests
+              - listitem [ref=e47]:
+                - link "Generating tests" [ref=e48] [cursor=pointer]:
+                  - /url: /docs/codegen-intro
+              - listitem [ref=e49]:
+                - link "Running and debugging tests" [ref=e50] [cursor=pointer]:
+                  - /url: /docs/running-tests
+              - listitem [ref=e51]:
+                - link "Trace viewer" [ref=e52] [cursor=pointer]:
+                  - /url: /docs/trace-viewer-intro
+              - listitem [ref=e53]:
+                - link "Setting up CI" [ref=e54] [cursor=pointer]:
+                  - /url: /docs/ci-intro
+              - listitem [ref=e55]:
+                - link "VS Code" [ref=e56] [cursor=pointer]:
+                  - /url: /docs/getting-started-vscode
+          - listitem [ref=e57]:
+            - link "Release notes" [ref=e58] [cursor=pointer]:
+              - /url: /docs/release-notes
+          - listitem [ref=e59]:
+            - link "Canary releases" [ref=e60] [cursor=pointer]:
+              - /url: /docs/canary-releases
+          - listitem [ref=e61]:
+            - button "Playwright Test" [expanded] [ref=e63] [cursor=pointer]
+            - list [ref=e64]:
+              - listitem [ref=e65]:
+                - link "Agents" [ref=e66] [cursor=pointer]:
+                  - /url: /docs/test-agents
+              - listitem [ref=e67]:
+                - link "Annotations" [ref=e68] [cursor=pointer]:
+                  - /url: /docs/test-annotations
+              - listitem [ref=e69]:
+                - link "Command line" [ref=e70] [cursor=pointer]:
+                  - /url: /docs/test-cli
+              - listitem [ref=e71]:
+                - link "Configuration" [ref=e72] [cursor=pointer]:
+                  - /url: /docs/test-configuration
+              - listitem [ref=e73]:
+                - link "Configuration (use)" [ref=e74] [cursor=pointer]:
+                  - /url: /docs/test-use-options
+              - listitem [ref=e75]:
+                - link "Emulation" [ref=e76] [cursor=pointer]:
+                  - /url: /docs/emulation
+              - listitem [ref=e77]:
+                - link "Fixtures" [ref=e78] [cursor=pointer]:
+                  - /url: /docs/test-fixtures
+              - listitem [ref=e79]:
+                - link "Global setup and teardown" [ref=e80] [cursor=pointer]:
+                  - /url: /docs/test-global-setup-teardown
+              - listitem [ref=e81]:
+                - link "Parallelism" [ref=e82] [cursor=pointer]:
+                  - /url: /docs/test-parallel
+              - listitem [ref=e83]:
+                - link "Parameterize tests" [ref=e84] [cursor=pointer]:
+                  - /url: /docs/test-parameterize
+              - listitem [ref=e85]:
+                - link "Projects" [ref=e86] [cursor=pointer]:
+                  - /url: /docs/test-projects
+              - listitem [ref=e87]:
+                - link "Reporters" [ref=e88] [cursor=pointer]:
+                  - /url: /docs/test-reporters
+              - listitem [ref=e89]:
+                - link "Retries" [ref=e90] [cursor=pointer]:
+                  - /url: /docs/test-retries
+              - listitem [ref=e91]:
+                - link "Sharding" [ref=e92] [cursor=pointer]:
+                  - /url: /docs/test-sharding
+              - listitem [ref=e93]:
+                - link "Timeouts" [ref=e94] [cursor=pointer]:
+                  - /url: /docs/test-timeouts
+              - listitem [ref=e95]:
+                - link "TypeScript" [ref=e96] [cursor=pointer]:
+                  - /url: /docs/test-typescript
+              - listitem [ref=e97]:
+                - link "UI Mode" [ref=e98] [cursor=pointer]:
+                  - /url: /docs/test-ui-mode
+              - listitem [ref=e99]:
+                - link "Web server" [ref=e100] [cursor=pointer]:
+                  - /url: /docs/test-webserver
+          - listitem [ref=e101]:
+            - button "Guides" [expanded] [ref=e103] [cursor=pointer]
+            - list [ref=e104]:
+              - listitem [ref=e105]:
+                - link "Library" [ref=e106] [cursor=pointer]:
+                  - /url: /docs/library
+              - listitem [ref=e107]:
+                - link "Accessibility testing" [ref=e108] [cursor=pointer]:
+                  - /url: /docs/accessibility-testing
+              - listitem [ref=e109]:
+                - link "Actions" [ref=e110] [cursor=pointer]:
+                  - /url: /docs/input
+              - listitem [ref=e111]:
+                - link "Assertions" [ref=e112] [cursor=pointer]:
+                  - /url: /docs/test-assertions
+              - listitem [ref=e113]:
+                - link "API testing" [ref=e114] [cursor=pointer]:
+                  - /url: /docs/api-testing
+              - listitem [ref=e115]:
+                - link "Authentication" [ref=e116] [cursor=pointer]:
+                  - /url: /docs/auth
+              - listitem [ref=e117]:
+                - link "Auto-waiting" [ref=e118] [cursor=pointer]:
+                  - /url: /docs/actionability
+              - listitem [ref=e119]:
+                - link "Best Practices" [ref=e120] [cursor=pointer]:
+                  - /url: /docs/best-practices
+              - listitem [ref=e121]:
+                - link "Browsers" [ref=e122] [cursor=pointer]:
+                  - /url: /docs/browsers
+              - listitem [ref=e123]:
+                - link "Chrome extensions" [ref=e124] [cursor=pointer]:
+                  - /url: /docs/chrome-extensions
+              - listitem [ref=e125]:
+                - link "Clock" [ref=e126] [cursor=pointer]:
+                  - /url: /docs/clock
+              - listitem [ref=e127]:
+                - link "Components (experimental)" [ref=e128] [cursor=pointer]:
+                  - /url: /docs/test-components
+              - listitem [ref=e129]:
+                - link "Debugging Tests" [ref=e130] [cursor=pointer]:
+                  - /url: /docs/debug
+              - listitem [ref=e131]:
+                - link "Dialogs" [ref=e132] [cursor=pointer]:
+                  - /url: /docs/dialogs
+              - listitem [ref=e133]:
+                - link "Downloads" [ref=e134] [cursor=pointer]:
+                  - /url: /docs/downloads
+              - listitem [ref=e135]:
+                - link "Evaluating JavaScript" [ref=e136] [cursor=pointer]:
+                  - /url: /docs/evaluating
+              - listitem [ref=e137]:
+                - link "Events" [ref=e138] [cursor=pointer]:
+                  - /url: /docs/events
+              - listitem [ref=e139]:
+                - link "Extensibility" [ref=e140] [cursor=pointer]:
+                  - /url: /docs/extensibility
+              - listitem [ref=e141]:
+                - link "Frames" [ref=e142] [cursor=pointer]:
+                  - /url: /docs/frames
+              - listitem [ref=e143]:
+                - link "Handles" [ref=e144] [cursor=pointer]:
+                  - /url: /docs/handles
+              - listitem [ref=e145]:
+                - link "Isolation" [ref=e146] [cursor=pointer]:
+                  - /url: /docs/browser-contexts
+              - listitem [ref=e147]:
+                - link "Locators" [ref=e148] [cursor=pointer]:
+                  - /url: /docs/locators
+              - listitem [ref=e149]:
+                - link "Mock APIs" [ref=e150] [cursor=pointer]:
+                  - /url: /docs/mock
+              - listitem [ref=e151]:
+                - link "Mock browser APIs" [ref=e152] [cursor=pointer]:
+                  - /url: /docs/mock-browser-apis
+              - listitem [ref=e153]:
+                - link "Navigations" [ref=e154] [cursor=pointer]:
+                  - /url: /docs/navigations
+              - listitem [ref=e155]:
+                - link "Network" [ref=e156] [cursor=pointer]:
+                  - /url: /docs/network
+              - listitem [ref=e157]:
+                - link "Other locators" [ref=e158] [cursor=pointer]:
+                  - /url: /docs/other-locators
+              - listitem [ref=e159]:
+                - link "Pages" [ref=e160] [cursor=pointer]:
+                  - /url: /docs/pages
+              - listitem [ref=e161]:
+                - link "Page object models" [ref=e162] [cursor=pointer]:
+                  - /url: /docs/pom
+              - listitem [ref=e163]:
+                - link "Screenshots" [ref=e164] [cursor=pointer]:
+                  - /url: /docs/screenshots
+              - listitem [ref=e165]:
+                - link "Service Workers" [ref=e166] [cursor=pointer]:
+                  - /url: /docs/service-workers
+              - listitem [ref=e167]:
+                - link "Snapshot testing" [ref=e168] [cursor=pointer]:
+                  - /url: /docs/aria-snapshots
+              - listitem [ref=e169]:
+                - link "Test generator" [ref=e170] [cursor=pointer]:
+                  - /url: /docs/codegen
+              - listitem [ref=e171]:
+                - link "Touch events (legacy)" [ref=e172] [cursor=pointer]:
+                  - /url: /docs/touch-events
+              - listitem [ref=e173]:
+                - link "Trace viewer" [ref=e174] [cursor=pointer]:
+                  - /url: /docs/trace-viewer
+              - listitem [ref=e175]:
+                - link "Videos" [ref=e176] [cursor=pointer]:
+                  - /url: /docs/videos
+              - listitem [ref=e177]:
+                - link "Visual comparisons" [ref=e178] [cursor=pointer]:
+                  - /url: /docs/test-snapshots
+              - listitem [ref=e179]:
+                - link "WebView2" [ref=e180] [cursor=pointer]:
+                  - /url: /docs/webview2
+          - listitem [ref=e181]:
+            - button "Migration" [ref=e183] [cursor=pointer]
+          - listitem [ref=e184]:
+            - button "Integrations" [ref=e186] [cursor=pointer]
+          - listitem [ref=e187]:
+            - link "Supported languages" [ref=e188] [cursor=pointer]:
+              - /url: /docs/languages
+    - main [ref=e189]:
+      - generic [ref=e191]:
+        - generic [ref=e193]:
+          - article [ref=e194]:
+            - navigation "Breadcrumbs" [ref=e195]:
+              - list [ref=e196]:
+                - listitem [ref=e197]:
+                  - link "Home page" [ref=e198] [cursor=pointer]:
+                    - /url: /
+                    - img [ref=e199]
+                - listitem [ref=e201]:
+                  - generic [ref=e202]: Guides
+                - listitem [ref=e203]:
+                  - generic [ref=e204]: Visual comparisons
+            - generic [ref=e205]:
+              - heading "Visual comparisons" [level=1] [ref=e207]
+              - heading "IntroductionDirect link to Introduction" [level=2] [ref=e208]:
+                - text: Introduction
+                - link "Direct link to Introduction" [ref=e209] [cursor=pointer]:
+                  - /url: "#introduction"
+                  - text: "#"
+              - paragraph [ref=e210]:
+                - text: Playwright Test includes the ability to produce and visually compare screenshots using
+                - code [ref=e211]: await expect(page).toHaveScreenshot()
+                - text: . On first execution, Playwright test will generate reference screenshots. Subsequent runs will compare against the reference.
+              - generic [ref=e212]:
+                - generic [ref=e213]: example.spec.ts
+                - code [ref=e216]:
+                  - generic [ref=e217]: "import { test, expect } from '@playwright/test';"
+                  - generic [ref=e218]: "test('example test', async ({ page }) => {"
+                  - generic [ref=e219]: await page.goto('https://playwright.dev');
+                  - generic [ref=e220]: await expect(page).toHaveScreenshot();
+                  - generic [ref=e221]: "});"
+              - generic [ref=e222]:
+                - generic [ref=e223]:
+                  - img [ref=e225]
+                  - text: warning
+                - paragraph [ref=e228]: Browser rendering can vary based on the host OS, version, settings, hardware, power source (battery vs. power adapter), headless mode, and other factors. For consistent screenshots, run tests in the same environment where the baseline screenshots were generated.
+              - heading "Generating screenshotsDirect link to Generating screenshots" [level=2] [ref=e229]:
+                - text: Generating screenshots
+                - link "Direct link to Generating screenshots" [ref=e230] [cursor=pointer]:
+                  - /url: "#generating-screenshots"
+                  - text: "#"
+              - paragraph [ref=e231]: "When you run above for the first time, test runner will say:"
+              - code [ref=e235]:
+                - generic [ref=e236]: "Error: A snapshot doesn't exist at example.spec.ts-snapshots/example-test-1-chromium-darwin.png, writing actual."
+              - paragraph [ref=e237]: That's because there was no golden file yet. This method took a bunch of screenshots until two consecutive screenshots matched, and saved the last screenshot to file system. It is now ready to be added to the repository.
+              - paragraph [ref=e238]: "The name of the folder with the golden expectations starts with the name of your test file:"
+              - code [ref=e242]:
+                - generic [ref=e243]: drwxr-xr-x 5 user group 160 Jun 4 11:46 .
+                - generic [ref=e244]: drwxr-xr-x 6 user group 192 Jun 4 11:45 ..
+                - generic [ref=e245]: "-rw-r--r-- 1 user group 231 Jun 4 11:16 example.spec.ts"
+                - generic [ref=e246]: drwxr-xr-x 3 user group 96 Jun 4 11:46 example.spec.ts-snapshots
+              - paragraph [ref=e247]:
+                - text: The snapshot name
+                - code [ref=e248]: example-test-1-chromium-darwin.png
+                - text: "consists of a few parts:"
+              - list [ref=e249]:
+                - listitem [ref=e250]:
+                  - paragraph [ref=e251]:
+                    - code [ref=e252]: example-test-1.png
+                    - text: "- an auto-generated name of the snapshot. Alternatively you can specify snapshot name as the first argument of the"
+                    - code [ref=e253]: toHaveScreenshot()
+                    - text: "method:"
+                  - code [ref=e257]:
+                    - generic [ref=e258]: await expect(page).toHaveScreenshot('landing.png');
+                - listitem [ref=e259]:
+                  - paragraph [ref=e260]:
+                    - code [ref=e261]: chromium-darwin
+                    - text: "- the browser name and the platform. Screenshots differ between browsers and platforms due to different rendering, fonts and more, so you will need different snapshots for them. If you use multiple projects in your"
+                    - link "configuration file" [ref=e262] [cursor=pointer]:
+                      - /url: /docs/test-configuration
+                    - text: ", project name will be used instead of"
+                    - code [ref=e263]: chromium
+                    - text: .
+              - paragraph [ref=e264]:
+                - text: The snapshot name and path can be configured with
+                - link "testConfig.snapshotPathTemplate" [ref=e265] [cursor=pointer]:
+                  - /url: /docs/api/class-testconfig#test-config-snapshot-path-template
+                - text: in the playwright config.
+              - blockquote [ref=e266]:
+                - paragraph [ref=e267]:
+                  - text: Note that
+                  - code [ref=e268]: toHaveScreenshot()
+                  - text: also accepts an array of path segments to the snapshot file such as
+                  - code [ref=e269]: expect().toHaveScreenshot(['relative', 'path', 'to', 'snapshot.png'])
+                  - text: . However, this path must stay within the snapshots directory for each test file (i.e.
+                  - code [ref=e270]: a.spec.js-snapshots
+                  - text: ), otherwise it will throw.
+              - heading "Updating screenshotsDirect link to Updating screenshots" [level=2] [ref=e271]:
+                - text: Updating screenshots
+                - link "Direct link to Updating screenshots" [ref=e272] [cursor=pointer]:
+                  - /url: "#updating-screenshots"
+                  - text: "#"
+              - paragraph [ref=e273]:
+                - text: Sometimes you need to update the reference screenshot, for example when the page has changed. Do this with the
+                - code [ref=e274]: "--update-snapshots"
+                - text: flag.
+              - code [ref=e278]:
+                - generic [ref=e279]: npx playwright test --update-snapshots
+              - heading "OptionsDirect link to Options" [level=2] [ref=e280]:
+                - text: Options
+                - link "Direct link to Options" [ref=e281] [cursor=pointer]:
+                  - /url: "#options"
+                  - text: "#"
+              - heading "maxDiffPixelsDirect link to maxDiffPixels" [level=3] [ref=e282]:
+                - text: maxDiffPixels
+                - link "Direct link to maxDiffPixels" [ref=e283] [cursor=pointer]:
+                  - /url: "#maxdiffpixels"
+                  - text: "#"
+              - paragraph [ref=e284]:
+                - text: Playwright Test uses the
+                - link "pixelmatch" [ref=e285] [cursor=pointer]:
+                  - /url: https://github.com/mapbox/pixelmatch
+                - text: library. You can
+                - link "pass various options" [ref=e286] [cursor=pointer]:
+                  - /url: /docs/api/class-pageassertions#page-assertions-to-have-screenshot-1
+                - text: "to modify its behavior:"
+              - generic [ref=e287]:
+                - generic [ref=e288]: example.spec.ts
+                - code [ref=e291]:
+                  - generic [ref=e292]: "import { test, expect } from '@playwright/test';"
+                  - generic [ref=e293]: "test('example test', async ({ page }) => {"
+                  - generic [ref=e294]: await page.goto('https://playwright.dev');
+                  - generic [ref=e295]: "await expect(page).toHaveScreenshot({ maxDiffPixels: 100 });"
+                  - generic [ref=e296]: "});"
+              - paragraph [ref=e297]: "If you'd like to share the default value among all the tests in the project, you can specify it in the playwright config, either globally or per project:"
+              - generic [ref=e298]:
+                - generic [ref=e299]: playwright.config.ts
+                - code [ref=e302]:
+                  - generic [ref=e303]: "import { defineConfig } from '@playwright/test';"
+                  - generic [ref=e304]: "export default defineConfig({"
+                  - generic [ref=e305]: "expect: {"
+                  - generic [ref=e306]: "toHaveScreenshot: { maxDiffPixels: 100 },"
+                  - generic [ref=e307]: "},"
+                  - generic [ref=e308]: "});"
+              - heading "stylePathDirect link to stylePath" [level=3] [ref=e309]:
+                - text: stylePath
+                - link "Direct link to stylePath" [ref=e310] [cursor=pointer]:
+                  - /url: "#stylepath"
+                  - text: "#"
+              - paragraph [ref=e311]: You can apply a custom stylesheet to your page while taking screenshot. This allows filtering out dynamic or volatile elements, hence improving the screenshot determinism.
+              - generic [ref=e312]:
+                - generic [ref=e313]: screenshot.css
+                - code [ref=e316]:
+                  - generic [ref=e317]: "iframe {"
+                  - generic [ref=e318]: "visibility: hidden;"
+                  - generic [ref=e319]: "}"
+              - generic [ref=e320]:
+                - generic [ref=e321]: example.spec.ts
+                - code [ref=e324]:
+                  - generic [ref=e325]: "import { test, expect } from '@playwright/test';"
+                  - generic [ref=e326]: "test('example test', async ({ page }) => {"
+                  - generic [ref=e327]: await page.goto('https://playwright.dev');
+                  - generic [ref=e328]: "await expect(page).toHaveScreenshot({ stylePath: path.join(__dirname, 'screenshot.css') });"
+                  - generic [ref=e329]: "});"
+              - paragraph [ref=e330]: "If you'd like to share the default value among all the tests in the project, you can specify it in the playwright config, either globally or per project:"
+              - generic [ref=e331]:
+                - generic [ref=e332]: playwright.config.ts
+                - code [ref=e335]:
+                  - generic [ref=e336]: "import { defineConfig } from '@playwright/test';"
+                  - generic [ref=e337]: "export default defineConfig({"
+                  - generic [ref=e338]: "expect: {"
+                  - generic [ref=e339]: "toHaveScreenshot: {"
+                  - generic [ref=e340]: "stylePath: './screenshot.css'"
+                  - generic [ref=e341]: "},"
+                  - generic [ref=e342]: "},"
+                  - generic [ref=e343]: "});"
+              - heading "Non-image snapshotsDirect link to Non-image snapshots" [level=2] [ref=e344]:
+                - text: Non-image snapshots
+                - link "Direct link to Non-image snapshots" [ref=e345] [cursor=pointer]:
+                  - /url: "#non-image-snapshots"
+                  - text: "#"
+              - paragraph [ref=e346]:
+                - text: Apart from screenshots, you can use
+                - code [ref=e347]: expect(value).toMatchSnapshot(snapshotName)
+                - text: to compare text or arbitrary binary data. Playwright Test auto-detects the content type and uses the appropriate comparison algorithm.
+              - paragraph [ref=e348]: Here we compare text content against the reference.
+              - generic [ref=e349]:
+                - generic [ref=e350]: example.spec.ts
+                - code [ref=e353]:
+                  - generic [ref=e354]: "import { test, expect } from '@playwright/test';"
+                  - generic [ref=e355]: "test('example test', async ({ page }) => {"
+                  - generic [ref=e356]: await page.goto('https://playwright.dev');
+                  - generic [ref=e357]: expect(await page.textContent('.hero__title')).toMatchSnapshot('hero.txt');
+                  - generic [ref=e358]: "});"
+              - paragraph [ref=e359]:
+                - text: Snapshots are stored next to the test file, in a separate directory. For example,
+                - code [ref=e360]: my.spec.ts
+                - text: file will produce and store snapshots in the
+                - code [ref=e361]: my.spec.ts-snapshots
+                - text: directory. You should commit this directory to your version control (e.g.
+                - code [ref=e362]: git
+                - text: ), and review any changes to it.
+          - navigation "Docs pages" [ref=e363]:
+            - link "Previous « Videos" [ref=e364] [cursor=pointer]:
+              - /url: /docs/videos
+              - generic [ref=e365]: Previous
+              - generic [ref=e366]: « Videos
+            - link "Next WebView2 »" [ref=e367] [cursor=pointer]:
+              - /url: /docs/webview2
+              - generic [ref=e368]: Next
+              - generic [ref=e369]: WebView2 »
+        - list [ref=e372]:
+          - listitem [ref=e373]:
+            - link "Introduction" [ref=e374] [cursor=pointer]:
+              - /url: "#introduction"
+          - listitem [ref=e375]:
+            - link "Generating screenshots" [ref=e376] [cursor=pointer]:
+              - /url: "#generating-screenshots"
+          - listitem [ref=e377]:
+            - link "Updating screenshots" [ref=e378] [cursor=pointer]:
+              - /url: "#updating-screenshots"
+          - listitem [ref=e379]:
+            - link "Options" [ref=e380] [cursor=pointer]:
+              - /url: "#options"
+            - list [ref=e381]:
+              - listitem [ref=e382]:
+                - link "maxDiffPixels" [ref=e383] [cursor=pointer]:
+                  - /url: "#maxdiffpixels"
+              - listitem [ref=e384]:
+                - link "stylePath" [ref=e385] [cursor=pointer]:
+                  - /url: "#stylepath"
+          - listitem [ref=e386]:
+            - link "Non-image snapshots" [ref=e387] [cursor=pointer]:
+              - /url: "#non-image-snapshots"
+  - contentinfo [ref=e388]:
+    - generic [ref=e389]:
+      - generic [ref=e390]:
+        - generic [ref=e391]:
+          - generic [ref=e392]: Learn
+          - list [ref=e393]:
+            - listitem [ref=e394]:
+              - link "Getting started" [ref=e395] [cursor=pointer]:
+                - /url: /docs/intro
+            - listitem [ref=e396]:
+              - link "Playwright Training" [ref=e397] [cursor=pointer]:
+                - /url: https://learn.microsoft.com/en-us/training/modules/build-with-playwright/
+                - text: Playwright Training
+                - img [ref=e398]
+            - listitem [ref=e400]:
+              - link "Learn Videos" [ref=e401] [cursor=pointer]:
+                - /url: /community/learn-videos
+            - listitem [ref=e402]:
+              - link "Feature Videos" [ref=e403] [cursor=pointer]:
+                - /url: /community/feature-videos
+        - generic [ref=e404]:
+          - generic [ref=e405]: Community
+          - list [ref=e406]:
+            - listitem [ref=e407]:
+              - link "Stack Overflow" [ref=e408] [cursor=pointer]:
+                - /url: https://stackoverflow.com/questions/tagged/playwright
+                - text: Stack Overflow
+                - img [ref=e409]
+            - listitem [ref=e411]:
+              - link "Discord" [ref=e412] [cursor=pointer]:
+                - /url: https://aka.ms/playwright/discord
+                - text: Discord
+                - img [ref=e413]
+            - listitem [ref=e415]:
+              - link "Twitter" [ref=e416] [cursor=pointer]:
+                - /url: https://twitter.com/playwrightweb
+                - text: Twitter
+                - img [ref=e417]
+            - listitem [ref=e419]:
+              - link "LinkedIn" [ref=e420] [cursor=pointer]:
+                - /url: https://www.linkedin.com/company/playwrightweb
+                - text: LinkedIn
+                - img [ref=e421]
+        - generic [ref=e423]:
+          - generic [ref=e424]: More
+          - list [ref=e425]:
+            - listitem [ref=e426]:
+              - link "GitHub" [ref=e427] [cursor=pointer]:
+                - /url: https://github.com/microsoft/playwright
+                - text: GitHub
+                - img [ref=e428]
+            - listitem [ref=e430]:
+              - link "YouTube" [ref=e431] [cursor=pointer]:
+                - /url: https://www.youtube.com/channel/UC46Zj8pDH5tDosqm1gd7WTg
+                - text: YouTube
+                - img [ref=e432]
+            - listitem [ref=e434]:
+              - link "Blog" [ref=e435] [cursor=pointer]:
+                - /url: https://dev.to/playwright
+                - text: Blog
+                - img [ref=e436]
+            - listitem [ref=e438]:
+              - link "Ambassadors" [ref=e439] [cursor=pointer]:
+                - /url: /community/ambassadors
+            - listitem [ref=e440]:
+              - link "Microsoft Privacy Statement" [ref=e441] [cursor=pointer]:
+                - /url: https://go.microsoft.com/fwlink/?LinkId=521839
+                - text: Microsoft Privacy Statement
+                - img [ref=e442]
+      - generic [ref=e445]: Copyright © 2026 Microsoft

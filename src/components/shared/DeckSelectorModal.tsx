@@ -24,14 +24,9 @@ const DeckSelectorModal: React.FC<DeckSelectorModalProps> = ({
   onHide,
 }) => {
   return (
-    <MDBModal
-      open={open}
-      onClose={onHide}
-      tabIndex={-1}
-      data-testid="deck-selector-modal"
-    >
+    <MDBModal open={open} onClose={onHide} tabIndex={-1}>
       <MDBModalDialog centered>
-        <MDBModalContent>
+        <MDBModalContent data-testid="deck-selector-modal">
           <MDBModalHeader>
             <h5 className="modal-title">Choose Your Deck</h5>
             <MDBBtn

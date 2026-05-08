@@ -16,7 +16,7 @@ A memory game with robots!
 
 ### Features
 
-- 🤖 12 unique robot avatars from RoboHash
+- 🤖 Two card decks: robots (RoboHash) and dragons — switchable mid-session
 - 👥 Two-player turn-based gameplay
 - 🎯 Score tracking for both players
 - 🔄 Game restart functionality
@@ -71,18 +71,33 @@ switching.
 
 Run all tests (headless):
 
-    $ npm run test:e2e
+    $ npm run test
 
 Run with the Playwright UI (interactive, with time-travel debugging):
 
-    $ npm run test:e2e:ui
-
-Run in a visible browser window:
-
-    $ npm run test:e2e:headed
+    $ npm run test:ui
 
 The test runner automatically builds the app and starts a preview server on
 `http://localhost:4173` before running tests. No manual server start needed.
+
+### Visual regression tests
+
+A visual smoke suite (`tests/visual-smoke-baseline.spec.ts`) captures screenshots
+at desktop (1280×720) and tablet (820×1180) viewports for: the initial loaded
+state, a flipped card, the restart modal, and the deck-selector modal.
+
+Run visual tests:
+
+    $ npm run test:visual
+
+After intentional UI changes (library upgrades, layout changes), update the
+baselines:
+
+    $ npm run test:visual:update
+
+Baseline snapshots are committed to the repo under
+`tests/visual-smoke-baseline.spec.ts-snapshots/`. Always review the diffs in
+the Playwright report before committing updated baselines.
 
 ### Deterministic shuffle in tests
 
@@ -105,16 +120,37 @@ Hosted on Firebase
 
 ## Project Structure
 
+```
 src/
 ├── components/
-│ ├── Card.tsx # Individual card component
-│ ├── Main.tsx # Main game container
-│ ├── Main.reducer.ts # Game state management
-│ └── shared/ # Reusable components
-├── css/ # Styling
-└── app.tsx # App entry point
+│   ├── Card.tsx              # Individual card component
+│   ├── Main.tsx              # Main game container
+│   ├── Main.reducer.ts       # Game state management (useReducer)
+│   ├── Main.types.ts         # Shared TypeScript types
+│   └── shared/
+│       ├── AppBar.tsx        # Top navigation bar
+│       ├── DeckSelectorModal.tsx  # Deck switcher modal
+│       ├── Footer.tsx        # Footer component
+│       └── RestartModal.tsx  # Restart confirmation modal
+├── css/                      # Global styles
+├── decks.ts                  # Deck definitions (robots, dragons)
+├── robots.ts                 # Robot card data
+├── dragons.ts                # Dragon card data
+├── vite-env.d.ts             # Vite env variable declarations
+└── app.tsx                   # App entry point
 tests/
-├── seed.spec.ts # Base test setup
-├── utils.ts # Test utilities
-├── core/ # Core game mechanic tests
-└── edge-cases/ # Edge case testing
+├── visual-smoke-baseline.spec.ts              # Visual regression smoke suite
+├── visual-smoke-baseline.spec.ts-snapshots/   # Committed baseline images
+├── restart-functionality.spec.ts
+├── seed.spec.ts
+├── shuffle.spec.ts
+├── utils.ts                                   # Shared test utilities
+├── core/
+│   ├── card-flipping.spec.ts
+│   ├── game-initialization.spec.ts
+│   ├── match-detection.spec.ts
+│   ├── player-turns.spec.ts
+│   └── win-conditions.spec.ts
+└── edge-cases/
+    └── card-interactions.spec.ts
+```
