@@ -100,15 +100,16 @@ jobs:
           fi
           npm run test
 
-      # Always save report artifacts on master runs for debugging/auditing
+      # Always save report artifacts for debugging/auditing and snapshot generation
       - name: Upload Playwright artifacts
         uses: actions/upload-artifact@v7
-        if: always() && github.ref == 'refs/heads/master'
+        if: always()
         with:
           name: playwright-report
           path: |
             playwright-report/
             test-results/
+            tests/visual-smoke-baseline.spec.ts-snapshots/
           retention-days: 30
 
   deploy:
