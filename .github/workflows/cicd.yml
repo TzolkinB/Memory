@@ -81,24 +81,17 @@ jobs:
   test:
     name: E2E Tests
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.59.1-jammy
+    env:
+      HOME: /root
     needs: setup
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Restore node_modules from setup job
-        uses: actions/cache@v5
-        with:
-          path: node_modules
-          key: node-modules-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-
-      - name: Install Playwright browsers and system dependencies
-        run: npx playwright install --with-deps chromium
+      - name: Install dependencies
+        run: npm ci
 
       - name: Run Playwright E2E tests
         run: npm run test:e2e
