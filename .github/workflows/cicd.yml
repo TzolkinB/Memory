@@ -94,7 +94,7 @@ jobs:
         run: npm ci
 
       - name: Run Playwright E2E tests
-        run: npm run test:e2e
+        run: npm run test
 
       # Always save report artifacts on master runs for debugging/auditing
       - name: Upload Playwright artifacts
