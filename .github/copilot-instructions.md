@@ -20,7 +20,7 @@ These instructions apply to all Copilot interactions in this repo: code generati
 ## TypeScript
 
 - `strict: true` is enabled — all code must be fully type-safe.
-- No `any` unless absolutely unavoidable; use `unknown` and narrow it.
+- Never use `any` in TypeScript code. Use `unknown` and narrow it.
 - Prefer closed union types (e.g. `'robots' | 'dragons'`) over `string` when the set of values is known.
 - Use `type` imports (`import type { Foo }`) for type-only imports.
 - Do not widen types with `| string` or `| undefined` unless the call site genuinely requires it.

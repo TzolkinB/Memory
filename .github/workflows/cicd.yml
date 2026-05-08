@@ -1,0 +1,135 @@
+# CI/CD Pipeline: Lint and test on every push/PR
+# Workflow visualization: setup → (lint + test run in parallel)
+name: CI/CD
+
+# "on" is linter safe since it's a reserved word in YAML
+'on':
+  push:
+    branches: ['master']
+  pull_request:
+    branches: ['master']
+  schedule:
+    - cron: '0 3 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  # ============================================================================
+  # SETUP: Install dependencies once, share with all other jobs
+  # This job creates the foundation - other jobs depend on it
+  # ============================================================================
+  setup:
+    name: Setup Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # Cache node_modules to avoid reinstalling in every downstream job
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        id: cache-node-modules
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      # Only install if cache miss (first run or package changes)
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+
+  # ============================================================================
+  # LINT: Check code style and quality
+  # Runs in parallel with 'test' after 'setup' completes
+  # ============================================================================
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Restore node_modules from setup job
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Run linter
+        run: npm run lint
+
+  # ============================================================================
+  # TEST: Run Playwright E2E tests (chromium)
+  # Runs in parallel with 'lint' after 'setup' completes
+  # ============================================================================
+  test:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Restore node_modules from setup job
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Playwright browsers and system dependencies
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright E2E tests
+        run: npm run test:e2e
+
+      # Always save report artifacts on master runs for debugging/auditing
+      - name: Upload Playwright artifacts
+        uses: actions/upload-artifact@v4
+        if: always() && github.ref == 'refs/heads/master'
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 30
+
+  deploy:
+    if: github.ref == 'refs/heads/master' && needs.test.result == 'success'
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Download Playwright Report artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: playwright-report/
+      - name: Publish to GitHub Pages
+        uses: actions/deploy-pages@v5

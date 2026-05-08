@@ -2,6 +2,7 @@
 // seed: tests/seed.spec.ts
 
 import { test, expect } from '@playwright/test';
+import type { Locator } from '@playwright/test';
 
 test.describe('Core Game Mechanics', () => {
   test('Game Initialization', async ({ page }) => {
@@ -10,7 +11,7 @@ test.describe('Core Game Mechanics', () => {
 
     // Helper function for robot ID verification
     async function verifyRobotIdsAtPositions(
-      cards: any,
+      cards: Locator,
       expectedIds: number[]
     ) {
       for (let i = 0; i < expectedIds.length; i++) {

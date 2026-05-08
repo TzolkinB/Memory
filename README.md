@@ -1,3 +1,5 @@
+![CI/CD workflow](https://github.com/TzolkinB/Memory/actions/workflows/cicd.yml/badge.svg)
+
 # Juego de Memoria
 
 A memory game with robots!
