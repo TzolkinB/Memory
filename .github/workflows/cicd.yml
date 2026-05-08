@@ -98,7 +98,7 @@ jobs:
 
       # Always save report artifacts on master runs for debugging/auditing
       - name: Upload Playwright artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always() && github.ref == 'refs/heads/master'
         with:
           name: playwright-report
