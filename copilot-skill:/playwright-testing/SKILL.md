@@ -375,6 +375,15 @@ npx playwright show-report playwright-report/html
 - Don't use default snapshot naming — it includes OS/browser suffix causing cross-platform mismatches
 - Don't use `waitForLoadState('networkidle')` for image readiness — use specific element waits instead
 
+## Test Helper Rule
+
+Helpers live in `tests/utils.ts`. Before adding a new helper:
+
+1. Check if an existing helper already covers the assertion.
+2. Only propose a new helper if it will be called in **3 or more** distinct test locations.
+3. Propose the helper (name, signature, usage sites) to the user before implementing — do not add it speculatively.
+4. If a pattern appears in only 1–2 places, inline it there instead.
+
 ## Key Principles
 
 - **Start semantic**: Use role/text locators when possible

@@ -25,19 +25,30 @@ test.describe('Game Controls and Restart', () => {
     await restartButton.click();
 
     // Verify restart confirmation modal appears
+    const restartModal = page.getByTestId('restart-modal');
     await expect(
-      page.getByText('Are you sure you want to reshuffle and restart the game?')
+      restartModal.getByText(
+        'Are you sure you want to reshuffle and restart the game?'
+      )
     ).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Cancel' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Yes' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Close' })).toBeVisible();
+    await expect(
+      restartModal.getByRole('button', { name: 'Cancel' })
+    ).toBeVisible();
+    await expect(
+      restartModal.getByRole('button', { name: 'Yes' })
+    ).toBeVisible();
+    await expect(
+      restartModal.getByRole('button', { name: 'Close' })
+    ).toBeVisible();
 
     // 3. Click Cancel button in modal
-    await page.getByRole('button', { name: 'Cancel' }).click();
+    await restartModal.getByRole('button', { name: 'Cancel' }).click();
 
     // Verify modal closes without changes
     await expect(
-      page.getByText('Are you sure you want to reshuffle and restart the game?')
+      restartModal.getByText(
+        'Are you sure you want to reshuffle and restart the game?'
+      )
     ).not.toBeVisible();
     await expect(page.getByTestId('score-blue')).toHaveText('1');
     await expect(page.getByText("Blue Player's Turn")).toBeVisible();
@@ -47,12 +58,10 @@ test.describe('Game Controls and Restart', () => {
     await restartButton.click();
 
     // Verify modal opens again
-    await expect(
-      page.getByText('Are you sure you want to reshuffle and restart the game?')
-    ).toBeVisible();
+    expect(restartModal).toBeVisible();
 
     // 5. Click close '×' button in modal
-    await page.getByRole('button', { name: 'Close' }).click();
+    await restartModal.getByRole('button', { name: 'Close' }).click();
 
     // Verify close '×' button works same as Cancel
     await expect(
