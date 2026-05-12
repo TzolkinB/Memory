@@ -96,6 +96,11 @@ jobs:
       - name: Run E2E tests
         run: npm run test
 
+      - name: Run Percy visual tests
+        run: npm run test:visual
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+
       # Always save report artifacts for debugging/auditing and snapshot generation
       - name: Upload Playwright artifacts
         uses: actions/upload-artifact@v7

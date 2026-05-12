@@ -19,6 +19,7 @@
     "dossier": "node --experimental-strip-types scripts/summarize-failure-dossier.ts",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
+    "test:visual": "dotenv -- percy exec -- playwright test tests/visual-percy.spec.ts",
     "prepare": "husky"
   },
   "author": "Kimberly Bell",
@@ -34,11 +35,14 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
+    "@percy/cli": "^1.31.13",
+    "@percy/playwright": "^1.1.0",
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.6.2",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.7.0",
+    "dotenv-cli": "^11.0.0",
     "eslint": "^9.39.2",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
