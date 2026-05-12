@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { shuffle, createSeededRandom } from '../src/components/Main.reducer';
+import { shuffle, createSeededRandom } from '../../src/components/Main.reducer';
 
 /**
  * Unit tests for the shuffle utility.

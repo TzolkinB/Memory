@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import percySnapshot from '@percy/playwright';
 import { clickCardAndVerifyFaceUp } from '../utils';
 
@@ -27,14 +27,14 @@ for (const vp of viewports) {
     test('deck selector modal', async ({ page }) => {
       await page.goto('/');
       await page.getByRole('button', { name: /Change Deck/ }).click();
-      await page.getByTestId('deck-selector-modal').waitFor();
+      await expect(page.getByTestId('deck-selector-modal')).toBeVisible();
       await percySnapshot(page, `${vp.name} — deck selector modal`);
     });
 
     test('restart modal', async ({ page }) => {
       await page.goto('/');
       await page.getByRole('button', { name: 'Restart' }).click();
-      await page.getByTestId('restart-modal').waitFor();
+      await expect(page.getByTestId('restart-modal')).toBeVisible();
       await percySnapshot(page, `${vp.name} — restart modal`);
     });
   });
