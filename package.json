@@ -17,20 +17,20 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\"",
     "dossier": "node --experimental-strip-types scripts/summarize-failure-dossier.ts",
-    "test": "playwright test",
+    "test": "playwright test --project=e2e",
     "test:ui": "playwright test --ui",
-    "test:visual": "playwright test tests/visual-smoke-baseline.spec.ts",
-    "test:visual:update": "playwright test tests/visual-smoke-baseline.spec.ts --update-snapshots",
+    "test:visual": "playwright test --project=visual",
+    "test:visual:update": "playwright test --project=visual --update-snapshots",
     "prepare": "husky"
   },
   "author": "Kimberly Bell",
   "license": "ISC",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.2.0",
-    "mdb-react-ui-kit": "^9.0.0",
+    "mdb-react-ui-kit": "^10.0.0",
     "prop-types": "^15.6.2",
-    "react": "^19.2.6",
-    "react-dom": "^18.3.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-hot-toast": "^2.6.0",
     "react-router-dom": "^7.15.0"
   },
@@ -38,8 +38,8 @@
     "@eslint/js": "^9.39.2",
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.6.2",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^18.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.7.0",
     "eslint": "^9.39.2",
     "eslint-plugin-react-hooks": "^7.1.1",
@@ -51,6 +51,10 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.2",
     "vite": "^6.4.1"
+  },
+  "overrides": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [

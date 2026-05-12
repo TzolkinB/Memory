@@ -30,7 +30,13 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'chromium',
+      name: 'e2e',
+      testIgnore: '**/visual-smoke-baseline.spec.ts',
+      use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'visual',
+      testMatch: '**/visual-smoke-baseline.spec.ts',
       use: { ...devices['Desktop Chrome'] },
     },
   ],
