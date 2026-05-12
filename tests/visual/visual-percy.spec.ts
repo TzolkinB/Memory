@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 import percySnapshot from '@percy/playwright';
-import { clickCardAndVerifyFaceUp } from './utils';
+import { clickCardAndVerifyFaceUp } from '../utils';
 
 const viewports = [
   { name: 'desktop', width: 1280, height: 800 },

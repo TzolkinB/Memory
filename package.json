@@ -17,9 +17,9 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\"",
     "dossier": "node --experimental-strip-types scripts/summarize-failure-dossier.ts",
-    "test": "playwright test",
+    "test": "playwright test --project=e2e",
     "test:ui": "playwright test --ui",
-    "test:visual": "dotenv -- percy exec -- playwright test tests/visual-percy.spec.ts",
+    "test:visual": "dotenv -- percy exec -- playwright test --project=visual",
     "prepare": "husky"
   },
   "author": "Kimberly Bell",
