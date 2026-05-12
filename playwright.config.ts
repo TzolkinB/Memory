@@ -3,17 +3,6 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
-  expect: {
-    toHaveScreenshot: {
-      animations: 'disabled',
-      caret: 'hide',
-      maxDiffPixelRatio: 0.002,
-    },
-    toMatchSnapshot: {
-      maxDiffPixelRatio: 0.002,
-    },
-  },
-  snapshotPathTemplate: '{snapshotDir}/{testFilePath}-snapshots/{arg}{ext}',
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
@@ -30,7 +19,13 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'chromium',
+      name: 'e2e',
+      testDir: './tests/e2e',
+      use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'visual',
+      testDir: './tests/visual',
       use: { ...devices['Desktop Chrome'] },
     },
   ],

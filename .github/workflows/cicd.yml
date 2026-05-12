@@ -93,12 +93,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Generate visual baselines (if missing) and run tests
-        run: |
-          if [ ! -d "tests/visual-smoke-baseline.spec.ts-snapshots" ]; then
-            npm run test -- --update-snapshots
-          fi
-          npm run test
+      - name: Run E2E tests
+        run: npm run test
+
+      - name: Run Percy visual tests
+        run: npm run test:visual
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
 
       # Always save report artifacts for debugging/auditing and snapshot generation
       - name: Upload Playwright artifacts
@@ -109,7 +110,6 @@ jobs:
           path: |
             playwright-report/
             test-results/
-            tests/visual-smoke-baseline.spec.ts-snapshots/
           retention-days: 30
 
   deploy:

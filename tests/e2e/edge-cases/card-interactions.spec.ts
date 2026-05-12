@@ -6,7 +6,7 @@ import {
   clickCardAndVerifyFaceUp,
   expectCardFaceUp,
   getFaceUpCards,
-} from '../utils';
+} from '../../utils';
 
 test.describe('Edge Cases and Error States', () => {
   test('Card Interaction Edge Cases', async ({ page }) => {
