@@ -3,6 +3,14 @@
 name: Update Visual Snapshots
 
 'on':
+  # Auto-run after every merge to master so Linux baselines stay current
+  push:
+    branches: ['master']
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'tests/visual-smoke-baseline.spec.ts'
+  # Also available manually for other branches
   workflow_dispatch:
     inputs:
       branch:
@@ -25,7 +33,7 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v6
         with:
-          ref: ${{ github.event.inputs.branch }}
+          ref: ${{ github.event.inputs.branch || github.ref_name }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies

@@ -288,6 +288,93 @@ await expect(page.getByTestId('score-blue')).toHaveText('3');
 12. **Over-testing semantic locators** - getByRole locators already validate the underlying ARIA attributes
 13. **Redundant accessible name testing** - Don't test accessible names when using getByRole({ name: /pattern/ })
 
+## Visual Regression Tests (toHaveScreenshot)
+
+### Cross-Platform Snapshot Problem
+
+macOS and Linux render fonts differently. Snapshots generated on macOS **will fail on Linux CI** even with identical code.
+
+### Solution: Always Generate Snapshots on Linux
+
+Use `snapshotPathTemplate` in `playwright.config.ts` to strip OS/browser suffixes from snapshot filenames — one canonical set for all platforms:
+
+```typescript
+// playwright.config.ts
+export default defineConfig({
+  snapshotPathTemplate: '{snapshotDir}/{testFilePath}-snapshots/{arg}{ext}',
+  expect: {
+    toHaveScreenshot: {
+      animations: 'disabled',
+      caret: 'hide',
+      maxDiffPixelRatio: 0.002,
+    },
+  },
+});
+```
+
+Then add a **manual workflow** to regenerate snapshots on Linux and commit them back:
+
+```yaml
+# .github/workflows/update-snapshots.yml
+name: Update Visual Snapshots
+'on':
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to update snapshots on'
+        required: true
+        default: 'master'
+permissions:
+  contents: write
+jobs:
+  update-snapshots:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.59.1-jammy
+    env:
+      HOME: /root
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.inputs.branch }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm ci
+      - run: rm -rf tests/visual-smoke-baseline.spec.ts-snapshots
+      - run: npm run test:visual:update
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add tests/visual-smoke-baseline.spec.ts-snapshots/
+          git diff --cached --quiet || git commit -m "chore(visual): update snapshots for Linux/CI [skip ci]"
+          git push
+```
+
+### Workflow
+
+1. First time setup or after UI changes: run **Actions → Update Visual Snapshots → Run workflow**
+2. Commit regenerated Linux snapshots
+3. Local `npm run test:visual` compares against same snapshots (may show minor mac/linux diffs locally, but CI passes)
+
+### Snapshot Location
+
+- ✅ Baseline snapshots → `tests/<spec>.spec.ts-snapshots/` (committed to git)
+- ✅ Failure artifacts (actual, diff) → `test-results/` (gitignored, CI artifacts only)
+
+### View Diffs After Failure
+
+```bash
+# Local
+npx playwright show-report playwright-report/html
+
+# CI: download playwright-report artifact from failed Actions run → open html/index.html
+```
+
+### Anti-Patterns
+
+- Never generate snapshots on macOS for a Linux CI pipeline
+- Don't use default snapshot naming — it includes OS/browser suffix causing cross-platform mismatches
+- Don't use `waitForLoadState('networkidle')` for image readiness — use specific element waits instead
+
 ## Key Principles
 
 - **Start semantic**: Use role/text locators when possible
