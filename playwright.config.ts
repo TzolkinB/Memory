@@ -9,7 +9,11 @@ export default defineConfig({
       caret: 'hide',
       maxDiffPixelRatio: 0.002,
     },
+    toMatchSnapshot: {
+      maxDiffPixelRatio: 0.002,
+    },
   },
+  snapshotPathTemplate: '{snapshotDir}/{testFilePath}-snapshots/{arg}{ext}',
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,

@@ -39,6 +39,9 @@ test.describe('Visual Regression Smoke', () => {
       await firstCard.click();
       await expect(firstCard).toHaveAttribute('data-face-up', 'true');
 
+      // Wait for images to load
+      await page.waitForLoadState('networkidle');
+
       // 4. Capture a visual snapshot of the grid after one card flip
       await expect(page.getByTestId('card-grid')).toHaveScreenshot(
         `${viewport.name}-grid-after-one-flip.png`,

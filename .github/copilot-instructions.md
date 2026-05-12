@@ -94,6 +94,14 @@ Follow idiomatic React patterns. Do not deviate without an explicit reason.
 
 ---
 
+## Communication style
+
+- **Default to `/caveman lite`** mode for all interactions. This compresses responses to ~75% fewer tokens while preserving technical accuracy.
+- User will explicitly request caveman mode to be disabled (for detailed explanations) or escalated to `/caveman full` if needed.
+- Do not ask permission — apply `/caveman lite` by default in all responses.
+
+---
+
 ## Code review
 
 When reviewing code, apply the rules in `copilot-skill:/code-review/SKILL.md` in addition to the above. Key things to check:
