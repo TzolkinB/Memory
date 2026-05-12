@@ -17,10 +17,8 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\"",
     "dossier": "node --experimental-strip-types scripts/summarize-failure-dossier.ts",
-    "test": "playwright test --project=e2e",
+    "test": "playwright test",
     "test:ui": "playwright test --ui",
-    "test:visual": "playwright test --project=visual",
-    "test:visual:update": "playwright test --project=visual --update-snapshots",
     "prepare": "husky"
   },
   "author": "Kimberly Bell",

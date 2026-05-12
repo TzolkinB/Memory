@@ -96,9 +96,6 @@ jobs:
       - name: Run E2E tests
         run: npm run test
 
-      - name: Run visual regression tests
-        run: npm run test:visual
-
       # Always save report artifacts for debugging/auditing and snapshot generation
       - name: Upload Playwright artifacts
         uses: actions/upload-artifact@v7
@@ -108,7 +105,6 @@ jobs:
           path: |
             playwright-report/
             test-results/
-            tests/visual-smoke-baseline.spec.ts-snapshots/
           retention-days: 30
 
   deploy:
