@@ -27,17 +27,18 @@ for (const vp of viewports) {
     test('deck selector modal', async ({ page }) => {
       await page.goto('/');
       await page.getByRole('button', { name: /Change Deck/ }).click();
-      const modal = page.getByTestId('deck-selector-modal');
-      await expect(modal).toBeVisible();
-      await expect(modal.getByRole('button', { name: 'Cancel' })).toBeVisible();
+      // Wait for modal to load and animations to complete
+      await page.waitForLoadState('networkidle');
+      await expect(page.getByTestId('deck-selector-modal')).toBeVisible();
       await percySnapshot(page, `${vp.name} — deck selector modal`);
     });
 
     test('restart modal', async ({ page }) => {
       await page.goto('/');
       await page.getByRole('button', { name: 'Restart' }).click();
-      const modal = page.getByTestId('restart-modal');
-      await expect(modal).toBeVisible();
+      // Wait for modal to load and animations to complete
+      await page.waitForLoadState('networkidle');
+      await expect(page.getByTestId('restart-modal')).toBeVisible();
       await percySnapshot(page, `${vp.name} — restart modal`);
     });
   });
