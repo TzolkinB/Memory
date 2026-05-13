@@ -252,6 +252,38 @@ test('card flipping behavior', async ({ page }) => {
 
 ## Common Patterns
 
+### Scoping Locators to a Component
+
+When testing elements inside a known container (modal, panel, form), always scope locators to that container rather than querying from `page`. This avoids ambiguity and makes intent clear.
+
+```typescript
+// ✅ GOOD: scope to the modal, then query within it
+const modal = page.getByTestId('deck-selector-modal');
+await expect(
+  modal.getByRole('heading', { name: 'Choose Your Deck', level: 5 })
+).toBeVisible();
+await modal.getByRole('button', { name: 'Cancel' }).click();
+
+// ❌ BAD: querying from page risks matching outside the modal
+await page.getByRole('button', { name: 'Cancel' }).click();
+```
+
+### getByRole for Headings — Always Include `level`
+
+When using `getByRole('heading')`, always specify the `level` option. This ensures the locator matches the intended heading element and documents the expected DOM structure.
+
+```typescript
+// ✅ GOOD: specific and self-documenting
+await expect(
+  modal.getByRole('heading', { name: 'Choose Your Deck', level: 5 })
+).toBeVisible();
+
+// ❌ BAD: ambiguous — matches any heading level
+await expect(
+  page.getByRole('heading', { name: 'Choose Your Deck' })
+).toBeVisible();
+```
+
 ### Counting Elements with Conditions
 
 ```typescript
@@ -287,6 +319,8 @@ await expect(page.getByTestId('score-blue')).toHaveText('3');
 11. **Redundant ARIA testing** - Don't test aria-expanded separately when using getByRole({ expanded: true })
 12. **Over-testing semantic locators** - getByRole locators already validate the underlying ARIA attributes
 13. **Redundant accessible name testing** - Don't test accessible names when using getByRole({ name: /pattern/ })
+14. **Unscoped locators inside containers** - When a known container (modal, panel) exists, scope child locators to it rather than querying from `page`
+15. **getByRole heading without level** - Always specify `level` when using `getByRole('heading', ...)` to avoid ambiguous matches
 
 ## Visual Regression Tests (toHaveScreenshot)
 
