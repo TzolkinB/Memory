@@ -6,7 +6,7 @@ A memory game with robots!
 
 ## Tech Stack
 
-- React 18
+- React 19
 - TypeScript
 - Vite
 - React Router v7
@@ -82,22 +82,17 @@ The test runner automatically builds the app and starts a preview server on
 
 ### Visual regression tests
 
-A visual smoke suite (`tests/visual-smoke-baseline.spec.ts`) captures screenshots
-at desktop (1280×720) and tablet (820×1180) viewports for: the initial loaded
-state, a flipped card, the restart modal, and the deck-selector modal.
+Visual tests use [Percy](https://percy.io) via `@percy/playwright`. The suite
+(`tests/visual/visual-percy.spec.ts`) captures snapshots at desktop (1280×800)
+and tablet (768×1024) viewports for: the initial loaded state, a flipped card,
+the restart modal, and the deck-selector modal.
 
-Run visual tests:
+Run visual tests (requires `PERCY_TOKEN` env var):
 
     $ npm run test:visual
 
-After intentional UI changes (library upgrades, layout changes), update the
-baselines:
-
-    $ npm run test:visual:update
-
-Baseline snapshots are committed to the repo under
-`tests/visual-smoke-baseline.spec.ts-snapshots/`. Always review the diffs in
-the Playwright report before committing updated baselines.
+Diffs are reviewed in the Percy dashboard. No local baseline snapshots are
+committed to the repo.
 
 ### Deterministic shuffle in tests
 
@@ -139,18 +134,19 @@ src/
 ├── vite-env.d.ts             # Vite env variable declarations
 └── app.tsx                   # App entry point
 tests/
-├── visual-smoke-baseline.spec.ts              # Visual regression smoke suite
-├── visual-smoke-baseline.spec.ts-snapshots/   # Committed baseline images
-├── restart-functionality.spec.ts
-├── seed.spec.ts
-├── shuffle.spec.ts
 ├── utils.ts                                   # Shared test utilities
-├── core/
-│   ├── card-flipping.spec.ts
-│   ├── game-initialization.spec.ts
-│   ├── match-detection.spec.ts
-│   ├── player-turns.spec.ts
-│   └── win-conditions.spec.ts
-└── edge-cases/
-    └── card-interactions.spec.ts
+├── e2e/
+│   ├── restart-functionality.spec.ts
+│   ├── seed.spec.ts
+│   ├── shuffle.spec.ts
+│   ├── core/
+│   │   ├── card-flipping.spec.ts
+│   │   ├── game-initialization.spec.ts
+│   │   ├── match-detection.spec.ts
+│   │   ├── player-turns.spec.ts
+│   │   └── win-conditions.spec.ts
+│   └── edge-cases/
+│       └── card-interactions.spec.ts
+└── visual/
+    └── visual-percy.spec.ts                   # Percy visual regression suite
 ```
