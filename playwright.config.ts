@@ -19,9 +19,19 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'e2e',
+      name: 'chromium',
       testDir: './tests/e2e',
       use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'firefox',
+      testDir: './tests/e2e',
+      use: { ...devices['Desktop Firefox'] },
+    },
+    {
+      name: 'webkit',
+      testDir: './tests/e2e',
+      use: { ...devices['Desktop Safari'] },
     },
     {
       name: 'visual',

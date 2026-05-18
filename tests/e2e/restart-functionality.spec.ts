@@ -5,10 +5,11 @@ import { test, expect } from '@playwright/test';
 import { expectFaceUpCount, clickCardAndVerifyFaceUp } from '../utils';
 
 test.describe('Game Controls and Restart', () => {
-  test('Restart Functionality', async ({ page }) => {
-    // Navigate to the application
+  test.beforeEach(async ({ page }) => {
     await page.goto('/');
+  });
 
+  test('Restart Functionality', async ({ page }) => {
     // 1. Start a game and make some progress
     const cards = page.getByTestId('card');
 
@@ -38,7 +39,7 @@ test.describe('Game Controls and Restart', () => {
     // Verify modal closes without changes
     await expect(
       page.getByText('Are you sure you want to reshuffle and restart the game?')
-    ).not.toBeVisible();
+    ).toBeHidden();
     await expect(page.getByTestId('score-blue')).toHaveText('1');
     await expect(page.getByText("Blue Player's Turn")).toBeVisible();
     await expectFaceUpCount(page, 2); // Cards 1 and 10 remain face up
@@ -57,7 +58,7 @@ test.describe('Game Controls and Restart', () => {
     // Verify close '×' button works same as Cancel
     await expect(
       page.getByText('Are you sure you want to reshuffle and restart the game?')
-    ).not.toBeVisible();
+    ).toBeHidden();
     await expect(page.getByTestId('score-blue')).toHaveText('1');
     await expect(page.getByText("Blue Player's Turn")).toBeVisible();
     await expectFaceUpCount(page, 2);
@@ -69,7 +70,7 @@ test.describe('Game Controls and Restart', () => {
     // Verify complete reset
     await expect(
       page.getByText('Are you sure you want to reshuffle and restart the game?')
-    ).not.toBeVisible();
+    ).toBeHidden();
     await expect(page.getByTestId('score-blue')).toHaveText('0');
     await expect(page.getByTestId('score-red')).toHaveText('0');
     await expect(page.getByText("Blue Player's Turn")).toBeVisible();
