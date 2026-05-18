@@ -4,7 +4,11 @@
 import { test, expect } from '@playwright/test';
 import type { Locator } from '@playwright/test';
 
-test.describe('Core Game Mechanics', () => {
+test.describe('Core Game Mechanics — Game Initialization', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
   test('Game Initialization', async ({ page }) => {
     // Constants declared at beginning of test
     const expectedRobotIds = [3, 1, 12, 5, 5, 12, 13, 13, 2, 3, 1, 2];
@@ -21,8 +25,7 @@ test.describe('Core Game Mechanics', () => {
         );
       }
     }
-    // 1. Navigate to the game - expect: Game loads successfully, Page title shows 'Memory Game'
-    await page.goto('/');
+    // 1. Verify game loads successfully, Page title shows 'Memory Game'
     await expect(page.getByText('Memory Game')).toBeVisible();
     await expect(page).toHaveTitle('Memory Game');
 

@@ -17,7 +17,8 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\"",
     "dossier": "node --experimental-strip-types scripts/summarize-failure-dossier.ts",
-    "test": "playwright test --project=e2e",
+    "type-check": "tsc --noEmit",
+    "test": "playwright test --project=chromium --project=firefox --project=webkit",
     "test:ui": "playwright test --ui",
     "test:visual": "dotenv -- percy exec -- playwright test --project=visual",
     "prepare": "husky"
@@ -44,6 +45,8 @@
     "@vitejs/plugin-react": "^4.7.0",
     "dotenv-cli": "^11.0.0",
     "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-playwright": "^2.10.3",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",

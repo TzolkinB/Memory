@@ -4,10 +4,12 @@
 import { test, expect } from '@playwright/test';
 import { clickCardAndVerifyFaceUp, expectFaceUpCount } from '../../utils';
 
-test.describe('Core Game Mechanics', () => {
-  test('Card Flipping Behavior', async ({ page }) => {
+test.describe('Core Game Mechanics — Card Flipping', () => {
+  test.beforeEach(async ({ page }) => {
     await page.goto('/');
+  });
 
+  test('Card Flipping Behavior', async ({ page }) => {
     const cards = page.getByTestId('card');
 
     // 1. Click on the first card

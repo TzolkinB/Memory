@@ -9,9 +9,11 @@ import {
 } from '../../utils';
 
 test.describe('Edge Cases and Error States', () => {
-  test('Card Interaction Edge Cases', async ({ page }) => {
+  test.beforeEach(async ({ page }) => {
     await page.goto('/');
+  });
 
+  test('Card Interaction Edge Cases', async ({ page }) => {
     const cards = page.getByTestId('card');
 
     // 1. Attempt to click already matched cards
@@ -19,8 +21,7 @@ test.describe('Edge Cases and Error States', () => {
     await clickCardAndVerifyFaceUp(cards.nth(0));
     await clickCardAndVerifyFaceUp(cards.nth(9));
 
-    // Wait for match to be processed
-    await page.waitForTimeout(1000);
+    await expect(page.getByTestId('score-blue')).toHaveText('1');
 
     // Verify cards remain matched and face-up
     await expectCardFaceUp(cards.nth(0), true);
@@ -65,9 +66,7 @@ test.describe('Edge Cases and Error States', () => {
       await availableCard.click();
     }
 
-    // Verify game state remained consistent
-    const currentFaceUpCount = await getFaceUpCards(page).count();
-    expect(currentFaceUpCount).toBe(initialFaceUpCount + 1);
+    await expect(getFaceUpCards(page)).toHaveCount(initialFaceUpCount + 1);
 
     // 3. Click cards during checking state
     // Find two more available face-down cards to test checking state
@@ -96,9 +95,6 @@ test.describe('Edge Cases and Error States', () => {
 
     // Verify third card click was ignored
     await expectCardFaceUp(testCard, false);
-
-    // Wait for checking to complete
-    await page.waitForTimeout(1000);
 
     // Verify checking completed normally
     await expect(page.getByText(/Player's Turn/)).toBeVisible();
