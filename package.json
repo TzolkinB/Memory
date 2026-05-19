@@ -32,14 +32,14 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.6.0",
-    "react-router-dom": "^7.15.0"
+    "react-router-dom": "^7.15.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
     "@percy/cli": "^1.31.13",
     "@percy/playwright": "^1.1.0",
     "@playwright/test": "^1.60.0",
-    "@types/node": "^25.7.0",
+    "@types/node": "^25.9.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.7.0",
@@ -51,10 +51,10 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
     "husky": "^9.1.7",
-    "lint-staged": "^17.0.4",
+    "lint-staged": "^17.0.5",
     "prettier": "^3.8.3",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.3",
+    "typescript-eslint": "^8.59.4",
     "vite": "^6.4.1"
   },
   "overrides": {
