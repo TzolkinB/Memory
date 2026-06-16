@@ -28,7 +28,6 @@ for (const vp of viewports) {
       await page.goto('/');
       await page.getByRole('button', { name: /Change Deck/ }).click();
       // Wait for modal to load and animations to complete
-      // await page.waitForLoadState('networkidle');
       await expect(page.getByTestId('deck-selector-modal')).toBeVisible();
       await percySnapshot(page, `${vp.name} — deck selector modal`);
     });
@@ -37,7 +36,6 @@ for (const vp of viewports) {
       await page.goto('/');
       await page.getByRole('button', { name: 'Restart' }).click();
       // Wait for modal to load and animations to complete
-      // await page.waitForLoadState('networkidle');
       await expect(page.getByTestId('restart-modal')).toBeVisible();
       await percySnapshot(page, `${vp.name} — restart modal`);
     });
