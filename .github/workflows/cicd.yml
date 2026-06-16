@@ -85,7 +85,7 @@ jobs:
     name: E2E Tests
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.60.0-jammy
+      image: mcr.microsoft.com/playwright:v1.61.0-jammy
     env:
       HOME: /root
     needs: setup
@@ -93,7 +93,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
+      - name: Restore node_modules from setup job
+        uses: actions/cache@v5
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
       - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Run E2E tests
