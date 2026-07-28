@@ -16,6 +16,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\"",
+    "check:playwright-sync": "node scripts/check-playwright-version-sync.mjs",
     "dossier": "node --experimental-strip-types scripts/summarize-failure-dossier.ts",
     "type-check": "tsc --noEmit",
     "test": "playwright test --project=chromium --project=firefox --project=webkit",

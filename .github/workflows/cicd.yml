@@ -35,6 +35,9 @@ jobs:
           node-version: lts/*
           cache: 'npm'
 
+      - name: Validate Playwright version sync
+        run: npm run check:playwright-sync
+
       # Cache node_modules to avoid reinstalling in every downstream job
       - name: Cache node_modules
         uses: actions/cache@v6
