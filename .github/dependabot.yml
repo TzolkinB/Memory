@@ -6,6 +6,12 @@ updates:
     schedule:
       interval: 'weekly'
       day: 'monday'
+    ignore:
+      - dependency-name: '@playwright/test'
+        update-types:
+          - 'version-update:semver-patch'
+          - 'version-update:semver-minor'
+          - 'version-update:semver-major'
     # Groups define how Dependabot creates PRs for different update types
     groups:
       # minor + patch updates in one PR
