@@ -22,7 +22,7 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
-          
+
   # GitHub Actions - PRs only, no auto-updates
   - package-ecosystem: 'github-actions'
     directory: '/'

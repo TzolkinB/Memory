@@ -17,6 +17,7 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\"",
     "check:playwright-sync": "node scripts/check-playwright-version-sync.mjs",
+    "bump:playwright": "node scripts/bump-playwright-version.mjs",
     "dossier": "node --experimental-strip-types scripts/summarize-failure-dossier.ts",
     "type-check": "tsc --noEmit",
     "test": "playwright test --project=chromium --project=firefox --project=webkit",
