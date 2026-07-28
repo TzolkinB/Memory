@@ -8,11 +8,27 @@ updates:
       day: 'monday'
     # Groups define how Dependabot creates PRs for different update types
     groups:
+      # keep React runtime and types updated together
+      react-core:
+        patterns:
+          - 'react'
+          - 'react-dom'
+          - '@types/react'
+          - '@types/react-dom'
+        update-types:
+          - 'minor'
+          - 'patch'
+
       # minor + patch updates in one PR
       # applies-to is version updated by default so does not need to be specified
       minor-and-patch:
         patterns:
           - '*'
+        exclude-patterns:
+          - 'react'
+          - 'react-dom'
+          - '@types/react'
+          - '@types/react-dom'
         update-types:
           - 'minor'
           - 'patch'
