@@ -61,7 +61,8 @@
   },
   "overrides": {
     "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0"
+    "@types/react-dom": "^19.0.0",
+    "fast-xml-parser": "5.7.0"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
