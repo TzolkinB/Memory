@@ -37,7 +37,7 @@
     "react-router-dom": "^7.18.5"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.2",
+    "@eslint/js": "^10.0.1",
     "@percy/cli": "^1.32.12",
     "@percy/playwright": "^1.1.2",
     "@playwright/test": "^1.62.0",
